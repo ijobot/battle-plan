@@ -4,12 +4,9 @@
   box-sizing: border-box;
 }
 
+ul,
+ol,
 a {
-  color: red;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-ul {
   list-style-type: none;
+  text-decoration: none;
 }
