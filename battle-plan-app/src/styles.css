@@ -1,7 +1,30 @@
+:root {
+  /* background colors */
+  --primary-bg: #320c63;
+  --secondary-bg: #0d051d;
+
+  /* text colors */
+  --primary-text: #1e1f22;
+  --secondary-text: rgb(231, 185, 57);
+
+  /* combatant colors */
+  --player: #328b70;
+  --npc: #5979b6;
+  --monster: #b15959;
+
+  /* padding */
+  --padding-xs: 4px;
+  --padding-s: 8px;
+  --padding-m: 12px;
+  --padding-l: 16px;
+  --padding-xl: 20px;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 ul,
