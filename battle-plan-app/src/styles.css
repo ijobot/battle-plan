@@ -1,3 +1,6 @@
+/* ----------------- */
+/* Custom properties */
+/* ----------------- */
 :root {
   /* background colors */
   --primary-bg: #320c63;
@@ -12,19 +15,29 @@
   --npc: #5979b6;
   --monster: #b15959;
 
-  /* padding */
-  --padding-xs: 4px;
-  --padding-s: 8px;
-  --padding-m: 12px;
-  --padding-l: 16px;
-  --padding-xl: 20px;
+  /* spacing */
+  --spacing-xs: 4px;
+  --spacing-s: 8px;
+  --spacing-m: 12px;
+  --spacing-l: 16px;
+  --spacing-xl: 20px;
 }
 
-* {
+/* --------- */
+/* CSS Reset */
+/* --------- */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
 ul,
@@ -32,4 +45,26 @@ ol,
 a {
   list-style-type: none;
   text-decoration: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---------------- */
+/* Base Page Layout */
+/* ---------------- */
+.page-container {
+  background-color: var(--secondary-bg);
+  color: var(--secondary-text);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
 }
