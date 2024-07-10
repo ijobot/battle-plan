@@ -1,0 +1,11 @@
+.battlefield-container {
+  display: flex;
+  gap: var(--spacing-xl);
+  height: 100%;
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}

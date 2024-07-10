@@ -4,10 +4,13 @@
 :root {
   /* background colors */
   --primary-bg: #320c63;
-  --secondary-bg: #0d051d;
+  --secondary-bg: #5c3aa0;
+
+  /* border colors */
+  --primary-border: rgb(133, 30, 143);
 
   /* text colors */
-  --primary-text: #1e1f22;
+  --primary-text: #e6e6e6;
   --secondary-text: rgb(231, 185, 57);
 
   /* combatant colors */
@@ -23,9 +26,9 @@
   --spacing-xl: 20px;
 }
 
-/* --------- */
-/* CSS Reset */
-/* --------- */
+/* ------------------ */
+/* Baseline CSS Reset */
+/* ------------------ */
 *,
 *::before,
 *::after {
@@ -56,15 +59,20 @@ svg {
   max-width: 100%;
 }
 
-/* ---------------- */
-/* Base Page Layout */
-/* ---------------- */
-.page-container {
+/* --------------- */
+/* Base App Layout */
+/* --------------- */
+body {
+  background-image: url("../src/app/images/20220213_170245.jpg");
+  background-size: cover;
+  background-blend-mode: multiply;
   background-color: var(--secondary-bg);
   color: var(--secondary-text);
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
+  padding: var(--spacing-xl);
+}
+
+.content-container {
+  background-color: var(--primary-bg);
+  border: solid 2px var(--primary-border);
+  padding: var(--spacing-xl);
 }
