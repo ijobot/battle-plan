@@ -1,14 +1,14 @@
-<div class="battlefield-container">
-  <div class="left-column">
+<div class="page-container">
+  <div class="column left">
     <div class="content-container title">Battle Plan</div>
-    <div class="content-container controls">Controls</div>
+    <div class="content-container controls">
+      <div class="start-menu">
+        <button (click)="goToHome()">Home</button>
+        <button (click)="goToAbout()">About</button>
+      </div>
+    </div>
   </div>
-  <div class="right-column">
-    <div class="content-container combatants">Combatants</div>
+  <div class="column right">
+    <div class="content-container combatants"></div>
   </div>
 </div>
-
-<!-- <div class="start-menu">
-  <button (click)="goToHome()">Home</button>
-  <button (click)="goToAbout()">About</button>
-</div> -->

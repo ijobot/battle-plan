@@ -38,8 +38,10 @@
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
+html,
 body {
-  line-height: 1.5;
+  min-height: 100%;
+  min-width: 100%;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -68,6 +70,15 @@ body {
   background-blend-mode: multiply;
   background-color: var(--secondary-bg);
   color: var(--secondary-text);
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.page-container {
+  display: flex;
+  gap: var(--spacing-xl);
+  height: 100%;
+  width: 100%;
   padding: var(--spacing-xl);
 }
 

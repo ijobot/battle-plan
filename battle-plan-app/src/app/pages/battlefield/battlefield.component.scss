@@ -1,0 +1,35 @@
+:host {
+  display: block;
+  height: 100vh;
+
+  .column {
+    display: flex;
+  }
+
+  .left {
+    flex-direction: column;
+    gap: var(--spacing-xl);
+    width: min-content;
+
+    .title {
+      font-size: 3rem;
+      text-align: center;
+    }
+    
+    .controls {
+      height: 100%;
+    }
+  }
+  
+  .right {
+    width: 100%;
+
+    .combatants {
+      min-width: 100%;
+    }
+  }
+}
+
+
+
+

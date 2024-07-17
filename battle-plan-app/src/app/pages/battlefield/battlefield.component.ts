@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [],
   templateUrl: './battlefield.component.html',
-  styleUrl: './battlefield.component.css'
+  styleUrl: './battlefield.component.scss'
 })
 export class BattlefieldComponent {
 
