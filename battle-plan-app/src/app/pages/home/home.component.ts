@@ -1,22 +1,16 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavButtonsComponent } from '../../components/nav-buttons/nav-buttons.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [NavButtonsComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
 
-  constructor(private router: Router) {}
+  constructor() {}
 
-  goToBattleField() {
-    this.router.navigate(['/battlefield'])
-  }
 
-  goToAbout() {
-    this.router.navigate(['/about'])
-  }
 }

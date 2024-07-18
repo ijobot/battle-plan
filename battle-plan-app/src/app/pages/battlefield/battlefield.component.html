@@ -2,13 +2,29 @@
   <div class="column left">
     <div class="content-container title">Battle Plan</div>
     <div class="content-container controls">
-      <div class="start-menu">
-        <button (click)="goToHome()">Home</button>
-        <button (click)="goToAbout()">About</button>
+      <div class="add-combatant-menu">
+        <button class="player">Player</button>
+        <button class="monster">Monster</button>
+        <button class="npc">NPC</button>
       </div>
+      <app-nav-buttons
+        [buttonOneRoute]="'/'"
+        [buttonOneText]="'Home'"
+        [buttonTwoRoute]="'/about'"
+        [buttonTwoText]="'About'"
+      ></app-nav-buttons>
     </div>
   </div>
   <div class="column right">
-    <div class="content-container combatants"></div>
+    <div
+      class="content-container combatants"
+      *ngFor="let combatant of combatants"
+    >
+      <app-combatant-row
+        [name]="combatant.name"
+        [type]="combatant.type"
+        [score]="combatant.score"
+      ></app-combatant-row>
+    </div>
   </div>
 </div>

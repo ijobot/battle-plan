@@ -1,0 +1,7 @@
+.row {
+    display: flex;
+    background-color: var(--player);
+    justify-content: space-around;
+    padding-top: var(--spacing-s);
+    padding-bottom: var(--spacing-s);
+}

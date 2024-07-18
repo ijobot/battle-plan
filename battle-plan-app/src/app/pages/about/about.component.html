@@ -4,8 +4,10 @@
     Here's a little blurb about how Joe Loftus created this application. Jack
     Henry and Ryan Paixao were contributors.
   </p>
-  <div class="start-menu">
-    <button (click)="goToHome()">Home</button>
-    <button (click)="goToBattleField()">Battlefield</button>
-  </div>
+  <app-nav-buttons
+    [buttonOneRoute]="'/'"
+    [buttonOneText]="'Home'"
+    [buttonTwoRoute]="'/battlefield'"
+    [buttonTwoText]="'Battlefield'"
+  ></app-nav-buttons>
 </div>

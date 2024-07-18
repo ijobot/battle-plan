@@ -1,22 +1,24 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { CombatantService } from '../../services/combatant.service';
+import { NavButtonsComponent } from '../../components/nav-buttons/nav-buttons.component';
+import { Combatant } from '../../models/combatant';
+import { CommonModule } from '@angular/common';
+import { CombatantRowComponent } from '../../components/combatant-row/combatant-row.component';
 
 @Component({
   selector: 'app-battlefield',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, NavButtonsComponent, CombatantRowComponent],
   templateUrl: './battlefield.component.html',
   styleUrl: './battlefield.component.scss'
 })
-export class BattlefieldComponent {
+export class BattlefieldComponent implements OnInit {
+  public combatants: Combatant[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private combatantService: CombatantService) {}
 
-  goToHome() {
-    this.router.navigate(['/'])
-  }
-
-  goToAbout() {
-    this.router.navigate(['/about'])
+  ngOnInit(): void {
+    this.combatantService.getCombatants().subscribe(data => this.combatants = data)
+    console.log('hey joe combatants', this.combatants)
   }
 }

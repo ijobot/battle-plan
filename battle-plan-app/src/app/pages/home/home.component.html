@@ -1,8 +1,10 @@
 <div class="page-container">
   <h1>Battle Plan Home Page</h1>
   <p>This is the main page and will display on application load.</p>
-  <div class="start-menu">
-    <button (click)="goToBattleField()">Battlefield</button>
-    <button (click)="goToAbout()">About</button>
-  </div>
+  <app-nav-buttons
+    [buttonOneRoute]="'/battlefield'"
+    [buttonOneText]="'Battlefield'"
+    [buttonTwoRoute]="'/about'"
+    [buttonTwoText]="'About'"
+  ></app-nav-buttons>
 </div>
