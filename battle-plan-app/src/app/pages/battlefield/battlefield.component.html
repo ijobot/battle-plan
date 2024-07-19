@@ -3,7 +3,7 @@
     <div class="content-container title">Battle Plan</div>
     <div class="content-container controls">
       <div class="add-combatant-menu">
-        <button class="player">Player</button>
+        <button class="player" (click)="handleAddPlayer()">Player</button>
         <button class="monster">Monster</button>
         <button class="npc">NPC</button>
       </div>
@@ -16,11 +16,9 @@
     </div>
   </div>
   <div class="column right">
-    <div
-      class="content-container combatants"
-      *ngFor="let combatant of combatants"
-    >
+    <div class="content-container combatants">
       <app-combatant-row
+        *ngFor="let combatant of combatants$ | async"
         [name]="combatant.name"
         [type]="combatant.type"
         [score]="combatant.score"

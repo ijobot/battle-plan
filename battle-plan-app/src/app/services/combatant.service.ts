@@ -8,13 +8,15 @@ const exampleCombatant = {name: 'joe', type: CombatantType.player, score: 15};
   providedIn: 'root'
 })
 export class CombatantService {
-
-  public combatants$: Observable<Combatant[]> = new Observable;
   private _combatants$ = new BehaviorSubject<Combatant[]>([exampleCombatant])
 
   constructor() {}
 
   getCombatants(): Observable<Combatant[]> {
-    return this._combatants$
+    return this._combatants$;
+  }
+
+  addPlayer(): void {
+    this._combatants$.next([...this._combatants$.getValue(), exampleCombatant])
   }
 }
