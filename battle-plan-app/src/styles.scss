@@ -77,8 +77,13 @@ button {
 }
 
 button:hover {
-  filter: brightness(130%);
+  filter: brightness(120%);
   border: 2px solid var(--button-border);
+}
+
+input:hover {
+  cursor: pointer;
+  outline: 4px solid var(--button-border);
 }
 
 /* --------------- */

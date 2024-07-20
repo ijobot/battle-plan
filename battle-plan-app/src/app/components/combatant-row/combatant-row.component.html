@@ -3,8 +3,7 @@
     <input
       type="text"
       name="name"
-      placeholder="Name"
-      [value]="combatant.name"
+      [value]="combatant.name ? combatant.name : 'Name'"
       aria-label="combatant name"
     />
   </div>
@@ -15,12 +14,13 @@
     <input
       type="text"
       name="score"
-      placeholder="Score"
-      [value]="combatant.score"
+      [value]="combatant.score ? combatant.score : 'Score'"
       aria-label="combatant initiative score"
     />
   </div>
   <div class="delete">
-    <button (click)="handleRemoveCombatant(index)">X</button>
+    <button (click)="handleRemoveCombatant(index)">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
 </div>
