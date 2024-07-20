@@ -8,44 +8,23 @@
 
   .left {
     flex-direction: column;
-    gap: var(--spacing-xl);
+    gap: var(--spacing-l);
     width: max-content;
 
     .title {
       color: var(--logo-text);
-      font-size: 3rem;
+      font-size: 4rem;
       text-align: center;
     }
-    
+
     .controls {
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-
-      .add-combatant-menu {
-        display: flex;
-        flex-direction: column;
-        gap: var(--spacing-xl);
-        
-        .player {
-          background-color: var(--player);
-          color: black;
-        }
-
-        .monster {
-          background-color: var(--monster);
-          color: black;
-        }
-
-        .npc {
-          background-color: var(--npc);
-          color: black;
-        }
-      }
     }
   }
-  
+
   .right {
     width: 100%;
 
@@ -53,11 +32,7 @@
       display: flex;
       flex-direction: column;
       min-width: 100%;
-      gap: var(--spacing-xl);
+      gap: var(--spacing-l);
     }
   }
 }
-
-
-
-

@@ -5,11 +5,12 @@ import { Combatant } from '../../models/combatant';
 import { CommonModule } from '@angular/common';
 import { CombatantRowComponent } from '../../components/combatant-row/combatant-row.component';
 import { Observable } from 'rxjs';
+import { CombatantCreationMenuComponent } from "../../components/combatant-creation-menu/combatant-creation-menu.component";
 
 @Component({
   selector: 'app-battlefield',
   standalone: true,
-  imports: [CommonModule, NavButtonsComponent, CombatantRowComponent],
+  imports: [CommonModule, NavButtonsComponent, CombatantRowComponent, CombatantCreationMenuComponent, CombatantCreationMenuComponent],
   templateUrl: './battlefield.component.html',
   styleUrl: './battlefield.component.scss'
 })
@@ -21,11 +22,5 @@ export class BattlefieldComponent implements OnInit {
 
   ngOnInit(): void {
     this.combatants$ = this.combatantService.getCombatants();
-    console.log('hey joe combatants', this.combatants$)
-  }
-
-  handleAddPlayer(): void {
-    this.combatantService.addPlayer();
-    console.log('hey joe', this.combatants$)
   }
 }

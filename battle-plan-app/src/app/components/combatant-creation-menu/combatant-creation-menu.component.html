@@ -1,0 +1,22 @@
+<div class="combatant-creation-menu">
+  <button
+    class="player"
+    (click)="handleAddCombatant(combatantType.player, combatantColor.player)"
+  >
+    Player
+  </button>
+  <button
+    class="monster"
+    (click)="handleAddCombatant(combatantType.monster, combatantColor.monster)"
+  >
+    Monster
+  </button>
+  <button
+    class="npc"
+    (click)="handleAddCombatant(combatantType.npc, combatantColor.npc)"
+  >
+    NPC
+  </button>
+  <div class="line-break"></div>
+  <button class="clear-all" (click)="handleClearAll()">Clear All</button>
+</div>

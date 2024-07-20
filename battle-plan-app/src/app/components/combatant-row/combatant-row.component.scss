@@ -1,7 +1,40 @@
 .row {
-    display: flex;
-    background-color: var(--player);
-    justify-content: space-around;
-    padding-top: var(--spacing-s);
-    padding-bottom: var(--spacing-s);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr min-content;
+  background-color: var(--player);
+  padding: var(--spacing-m);
+  font-size: 2rem;
+  border: 4px solid var(--button-border);
+  justify-content: space-between;
+  align-items: center;
+
+  &:hover {
+    filter: brightness(130%);
+    border: 4px solid var(--button-border);
+  }
+
+  .name,
+  .type,
+  .score {
+    text-align: center;
+  }
+
+  input {
+    border: none;
+    font-size: 2rem;
+    background: none;
+    text-align: center;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  .delete {
+    min-width: max-content;
+
+    button {
+      padding: var(--spacing-s) var(--spacing-m);
+    }
+  }
 }

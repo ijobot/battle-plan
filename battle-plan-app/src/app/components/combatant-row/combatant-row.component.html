@@ -1,5 +1,26 @@
-<div class="row">
-  <p>{{ name }}</p>
-  <p>{{ type }}</p>
-  <p>{{ score }}</p>
+<div class="row" [ngStyle]="{ 'background-color': combatant.color }">
+  <div class="name">
+    <input
+      type="text"
+      name="name"
+      placeholder="Name"
+      [value]="combatant.name"
+      aria-label="combatant name"
+    />
+  </div>
+  <div class="type">
+    <p>{{ combatant.type }}</p>
+  </div>
+  <div class="score">
+    <input
+      type="text"
+      name="score"
+      placeholder="Score"
+      [value]="combatant.score"
+      aria-label="combatant initiative score"
+    />
+  </div>
+  <div class="delete">
+    <button (click)="handleRemoveCombatant(index)">X</button>
+  </div>
 </div>

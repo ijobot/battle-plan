@@ -8,25 +8,24 @@
 
   /* text colors */
   --primary-text: #181717;
-  --logo-text: #bbb829;
+  --logo-text: #dcd929;
 
   /* border colors */
-  --primary-border: #5e1664;
+  --primary-border: #8a1e94;
 
   /* button colors */
-  --primary-button: #b174b9;
+  --button: #c1c1c1;
+  --button-border: rgba(0, 0, 0, 0.4);
 
   /* combatant colors */
-  --player: #328b70;
-  --npc: #5979b6;
-  --monster: #b15959;
+  --player: #2bb78d;
+  --monster: #df5858;
+  --npc: #5986da;
 
   /* spacing */
-  --spacing-xs: 4px;
-  --spacing-s: 8px;
-  --spacing-m: 12px;
-  --spacing-l: 16px;
-  --spacing-xl: 20px;
+  --spacing-s: 5px;
+  --spacing-m: 10px;
+  --spacing-l: 20px;
 }
 
 /* ------------------ */
@@ -43,6 +42,7 @@
 
 html,
 body {
+  font-size: 10px;
   min-height: 100%;
   min-width: 100%;
   -webkit-font-smoothing: antialiased;
@@ -69,16 +69,16 @@ svg {
 /* ----------------------- */
 
 button {
-  padding: var(--spacing-s) var(--spacing-xl);
+  padding: var(--spacing-m) var(--spacing-l);
   color: var(--primary-text);
-  background-color: var(--primary-button);
-  border: 2px solid var(--primary-border);
-  font-size: 1.25rem;
+  background-color: var(--button);
+  border: 2px solid var(--button-border);
+  font-size: 2rem;
 }
 
 button:hover {
   filter: brightness(130%);
-  border: 2px solid var(--secondary-bg);
+  border: 2px solid var(--button-border);
 }
 
 /* --------------- */
@@ -96,16 +96,14 @@ body {
 
 .page-container {
   display: flex;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-l);
   height: 100%;
   width: 100%;
-  padding: var(--spacing-xl);
+  padding: var(--spacing-l);
 }
 
 .content-container {
   background-color: var(--primary-bg);
   border: solid 2px var(--primary-border);
-  padding: var(--spacing-xl);
+  padding: var(--spacing-l);
 }
-
-
