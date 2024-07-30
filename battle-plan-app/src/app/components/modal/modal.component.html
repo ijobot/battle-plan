@@ -1,0 +1,17 @@
+<div class="content-container main-modal">
+  <div class="content-container content">
+    <h1 class="title">Add Combatant</h1>
+    <form [formGroup]="combatantForm">
+      <label for="name"
+        >Name: <input id="name" type="text" formControlName="name" />
+      </label>
+      <label for="name"
+        >Score: <input id="name" type="text" formControlName="score" />
+      </label>
+      <div class="buttons">
+        <button type="submit">Submit</button>
+        <button (click)="handleCloseModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

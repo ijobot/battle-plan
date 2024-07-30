@@ -12,6 +12,7 @@
 
   /* border colors */
   --primary-border: #8a1e94;
+  --modal-border: #2b2b2b;
 
   /* button colors */
   --button: #c1c1c1;
@@ -100,6 +101,7 @@ body {
 }
 
 .page-container {
+  position: relative;
   display: flex;
   gap: var(--spacing-l);
   height: 100%;
@@ -113,4 +115,8 @@ body {
   padding: var(--spacing-l);
 }
 
-// testing email update for commit history on github graph
+.title {
+  color: var(--logo-text);
+  font-size: 4rem;
+  text-align: center;
+}

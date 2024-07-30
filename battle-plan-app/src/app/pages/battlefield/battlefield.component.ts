@@ -5,22 +5,35 @@ import { Combatant } from '../../models/combatant';
 import { CommonModule } from '@angular/common';
 import { CombatantRowComponent } from '../../components/combatant-row/combatant-row.component';
 import { Observable } from 'rxjs';
-import { CombatantCreationMenuComponent } from "../../components/combatant-creation-menu/combatant-creation-menu.component";
+import { CombatantCreationMenuComponent } from '../../components/combatant-creation-menu/combatant-creation-menu.component';
+import { ModalComponent } from '../../components/modal/modal.component';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-battlefield',
   standalone: true,
-  imports: [CommonModule, NavButtonsComponent, CombatantRowComponent, CombatantCreationMenuComponent, CombatantCreationMenuComponent],
+  imports: [
+    CommonModule,
+    NavButtonsComponent,
+    CombatantRowComponent,
+    CombatantCreationMenuComponent,
+    CombatantCreationMenuComponent,
+    ModalComponent,
+  ],
   templateUrl: './battlefield.component.html',
-  styleUrl: './battlefield.component.scss'
+  styleUrl: './battlefield.component.scss',
 })
 export class BattlefieldComponent implements OnInit {
   public combatants$!: Observable<Combatant[]>;
+  public showModal$!: Observable<boolean>;
 
-  constructor(private combatantService: CombatantService) {
-  }
+  constructor(
+    private combatantService: CombatantService,
+    private modalService: ModalService
+  ) {}
 
   ngOnInit(): void {
     this.combatants$ = this.combatantService.getCombatants();
+    this.showModal$ = this.modalService.modalState();
   }
 }
