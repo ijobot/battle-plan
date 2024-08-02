@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CombatantService } from '../../services/combatant.service';
-import { CombatantType, CombatantColor } from '../../models/combatant';
+import { CombatantType, ColorScheme } from '../../models/combatant';
 import { ModalService } from '../../services/modal.service';
 
 @Component({
@@ -12,16 +12,16 @@ import { ModalService } from '../../services/modal.service';
 })
 export class CombatantCreationMenuComponent {
   public combatantType = CombatantType;
-  public combatantColor = CombatantColor;
+  public ColorScheme = ColorScheme;
 
   constructor(
     private combatantService: CombatantService,
     private modalService: ModalService
   ) {}
 
-  handleAddCombatant(type: CombatantType, rowColor: CombatantColor): void {
+  handleAddCombatant(type: CombatantType, color: ColorScheme): void {
+    this.modalService.setModalAppearance(type, color);
     this.modalService.openModal();
-    this.combatantService.addCombatant(type, rowColor);
   }
 
   handleClearAll(): void {

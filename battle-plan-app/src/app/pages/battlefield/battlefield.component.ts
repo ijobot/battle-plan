@@ -24,8 +24,8 @@ import { ModalService } from '../../services/modal.service';
   styleUrl: './battlefield.component.scss',
 })
 export class BattlefieldComponent implements OnInit {
-  public combatants$!: Observable<Combatant[]>;
-  public showModal$!: Observable<boolean>;
+  combatants$!: Observable<Combatant[]>;
+  showModal$!: Observable<boolean>;
 
   constructor(
     private combatantService: CombatantService,

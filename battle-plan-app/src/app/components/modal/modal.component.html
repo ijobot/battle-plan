@@ -1,12 +1,15 @@
 <div class="content-container main-modal">
-  <div class="content-container content">
-    <h1 class="title">Add Combatant</h1>
-    <form [formGroup]="combatantForm">
+  <div
+    class="content-container content"
+    [ngStyle]="{ 'background-color': (modalAppearance$ | async)?.color }"
+  >
+    <h1 class="title">Add {{ (modalAppearance$ | async)?.type }}</h1>
+    <form [formGroup]="combatantForm" (ngSubmit)="onSubmit()">
       <label for="name"
         >Name: <input id="name" type="text" formControlName="name" />
       </label>
       <label for="name"
-        >Score: <input id="name" type="text" formControlName="score" />
+        >Score: <input id="score" type="text" formControlName="score" />
       </label>
       <div class="buttons">
         <button type="submit">Submit</button>
