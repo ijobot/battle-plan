@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ModalService } from '../../services/modal.service';
 import { ModalAppearance } from '../../models/modal';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { CombatantService } from '../../services/combatant.service';
 import { ColorScheme, CombatantType } from '../../models/combatant';
@@ -17,10 +17,11 @@ import { ColorScheme, CombatantType } from '../../models/combatant';
 export class ModalComponent implements OnInit {
   combatantForm = new FormGroup({
     name: new FormControl(''),
-    score: new FormControl('0'),
+    score: new FormControl(''),
   });
 
-  modalAppearance$!: Observable<ModalAppearance>;
+  modalColor!: ColorScheme;
+  combatantType!: CombatantType;
 
   constructor(
     private modalService: ModalService,
@@ -28,14 +29,16 @@ export class ModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.modalAppearance$ = this.modalService.modalAppearance();
+    this.modalService.modalAppearance().subscribe((value) => {
+      this.modalColor = value.color;
+      this.combatantType = value.type;
+    });
   }
 
   onSubmit(): void {
-    console.log(this.combatantForm.value);
     this.combatantService.addCombatant(
-      CombatantType.monster,
-      ColorScheme.monster,
+      this.combatantType,
+      this.modalColor,
       this.combatantForm.value.name as string,
       this.combatantForm.value.score as string
     );

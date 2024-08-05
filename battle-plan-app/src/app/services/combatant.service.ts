@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Combatant, ColorScheme, CombatantType } from '../models/combatant';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root',
@@ -16,17 +17,18 @@ export class CombatantService {
 
   addCombatant(
     type: CombatantType,
-    rowColor: ColorScheme,
+    color: ColorScheme,
     name: string,
     score: string
   ): void {
-    const newCombatant: Combatant = {
-      color: rowColor,
-      name: name,
-      type: type,
-      score: score,
-    };
-    this._combatants$.next([...this._combatants$.getValue(), newCombatant]);
+    const newestCombatant: Combatant = { color, name, type, score };
+    const updatedCombatants = [
+      ...this._combatants$.getValue(),
+      newestCombatant,
+    ];
+    this._combatants$.next(
+      updatedCombatants.sort((a, b) => Number(b.score) - Number(a.score))
+    );
   }
 
   removeCombatant(index: number): void {

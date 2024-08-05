@@ -1,7 +1,7 @@
 .main-modal {
   position: absolute;
-  height: 50%;
-  width: 50%;
+  height: fit-content;
+  width: fit-content;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -11,23 +11,43 @@
   background-blend-mode: multiply;
   background-color: var(--secondary-bg);
   border-color: var(--modal-border);
-  color: yellow;
 
   .content {
-    text-align: center;
     height: 100%;
     display: flex;
     flex-direction: column;
 
+    h1 {
+      text-align: center;
+      margin-bottom: var(--spacing-l);
+    }
+
     form {
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-m);
+      gap: var(--spacing-l);
+      font-size: 2rem;
+
+      .label-input-group {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        label {
+          margin-right: var(--spacing-l);
+        }
+
+        input {
+          height: 30px;
+          min-width: 200px;
+          font-size: 2rem;
+        }
+      }
 
       .buttons {
         display: flex;
-        align-self: center;
-        gap: var(--spacing-m);
+        justify-content: space-between;
+        gap: var(--spacing-l);
       }
 
       button {
