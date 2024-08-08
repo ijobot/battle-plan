@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ModalService } from '../../services/modal.service';
-import { ModalAppearance } from '../../models/modal';
-import { Observable, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { CombatantService } from '../../services/combatant.service';
 import { ColorScheme, CombatantType } from '../../models/combatant';
@@ -15,10 +18,7 @@ import { ColorScheme, CombatantType } from '../../models/combatant';
   styleUrl: './modal.component.scss',
 })
 export class ModalComponent implements OnInit {
-  combatantForm = new FormGroup({
-    name: new FormControl(''),
-    score: new FormControl(''),
-  });
+  combatantForm: FormGroup;
 
   modalColor!: ColorScheme;
   combatantType!: CombatantType;
@@ -26,7 +26,20 @@ export class ModalComponent implements OnInit {
   constructor(
     private modalService: ModalService,
     private combatantService: CombatantService
-  ) {}
+  ) {
+    this.combatantForm = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      score: new FormControl('', [Validators.required]),
+    });
+  }
+
+  get name() {
+    return this.combatantForm.get('name');
+  }
+
+  get score() {
+    return this.combatantForm.get('score');
+  }
 
   ngOnInit(): void {
     this.modalService.modalAppearance().subscribe((value) => {
@@ -36,13 +49,15 @@ export class ModalComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.combatantService.addCombatant(
-      this.combatantType,
-      this.modalColor,
-      this.combatantForm.value.name as string,
-      this.combatantForm.value.score as string
-    );
-    this.modalService.closeModal();
+    if (this.combatantForm.valid) {
+      this.combatantService.addCombatant(
+        this.combatantType,
+        this.modalColor,
+        this.combatantForm.value.name as string,
+        this.combatantForm.value.score as string
+      );
+      this.modalService.closeModal();
+    }
   }
 
   handleCloseModal(): void {

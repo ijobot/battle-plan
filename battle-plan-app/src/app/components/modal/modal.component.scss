@@ -28,10 +28,15 @@
       gap: var(--spacing-l);
       font-size: 2rem;
 
-      .label-input-group {
+      .field {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
+
+        .label-and-input {
+          display: flex;
+          justify-content: space-between;
+        }
 
         label {
           margin-right: var(--spacing-l);
@@ -41,6 +46,11 @@
           height: 30px;
           min-width: 200px;
           font-size: 2rem;
+        }
+
+        .error-message {
+          color: var(--logo-text);
+          align-self: flex-end;
         }
       }
 
@@ -52,6 +62,11 @@
 
       button {
         max-width: fit-content;
+
+        &:disabled {
+          filter: brightness(80%);
+          cursor: not-allowed;
+        }
       }
     }
   }
