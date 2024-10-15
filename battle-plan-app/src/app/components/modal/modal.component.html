@@ -1,44 +1,52 @@
-<div class="content-container main-modal">
-  <div
-    class="content-container content"
-    [ngStyle]="{ 'background-color': modalColor }"
-  >
-    <h1 class="title">Add {{ combatantType }}</h1>
-    <form [formGroup]="combatantForm" (ngSubmit)="onSubmit()">
-      <div class="field">
-        <div class="label-and-input">
-          <label for="name">Combatant Name:</label
-          ><input
-            id="name"
-            type="text"
-            placeholder="Enter name"
-            formControlName="name"
-          />
+<div class="overlay">
+  <div class="content-container main-modal">
+    <div
+      class="content-container content"
+      [ngStyle]="{ 'background-color': modalColor }"
+    >
+      <h1 class="title">Add {{ combatantType }}</h1>
+      <form [formGroup]="combatantForm" (ngSubmit)="onSubmit()">
+        <div class="field">
+          <div class="label-and-input">
+            <label for="name">Combatant Name:</label
+            ><input
+              formFocus
+              id="name"
+              type="text"
+              placeholder="Enter name"
+              formControlName="name"
+            />
+          </div>
+          <div class="error-message" *ngIf="name?.touched && name?.value == ''">
+            Please enter a name
+          </div>
         </div>
-        <div class="error-message" *ngIf="name?.dirty || name?.touched">
-          Please enter a name
-        </div>
-      </div>
 
-      <div class="field">
-        <div class="label-and-input">
-          <label for="name">Initiative Score:</label
-          ><input
-            id="score"
-            type="text"
-            placeholder="Enter score"
-            formControlName="score"
-          />
+        <div class="field">
+          <div class="label-and-input">
+            <label for="name">Initiative Score:</label
+            ><input
+              id="score"
+              type="text"
+              placeholder="Enter score"
+              formControlName="score"
+            />
+          </div>
+          <div
+            class="error-message"
+            *ngIf="score?.touched && score?.value == ''"
+          >
+            Please enter a score
+          </div>
         </div>
-        <div class="error-message" *ngIf="score?.dirty || score?.touched">
-          Please enter a score
-        </div>
-      </div>
 
-      <div class="buttons">
-        <button type="submit" [disabled]="!combatantForm.valid">Submit</button>
-        <button type="button" (click)="handleCloseModal()">Cancel</button>
-      </div>
-    </form>
+        <div class="buttons">
+          <button type="submit" [disabled]="!combatantForm.valid">
+            Submit
+          </button>
+          <button type="button" (click)="handleCloseModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

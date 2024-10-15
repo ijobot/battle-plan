@@ -9,11 +9,12 @@ import { ModalService } from '../../services/modal.service';
 import { CommonModule } from '@angular/common';
 import { CombatantService } from '../../services/combatant.service';
 import { ColorScheme, CombatantType } from '../../models/combatant';
+import { FormFocusDirective } from '../../utils/autofocus.directive';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, FormFocusDirective],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
 })
@@ -53,8 +54,8 @@ export class ModalComponent implements OnInit {
       this.combatantService.addCombatant(
         this.combatantType,
         this.modalColor,
-        this.combatantForm.value.name as string,
-        this.combatantForm.value.score as string
+        this.combatantForm.value.name,
+        this.combatantForm.value.score
       );
       this.modalService.closeModal();
     }

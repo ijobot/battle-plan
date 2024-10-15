@@ -2,7 +2,7 @@ export interface Combatant {
   color: string;
   name: string;
   type: CombatantType;
-  score: number | string;
+  score: number;
 }
 
 export enum CombatantType {

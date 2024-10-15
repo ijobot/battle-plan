@@ -3,7 +3,8 @@
     <input
       type="text"
       name="name"
-      [value]="combatant.name ? combatant.name : 'Name'"
+      [(ngModel)]="combatant.name"
+      (change)="handleUpdateCombatant(index, 'name', combatant.name)"
       aria-label="combatant name"
     />
   </div>
@@ -14,7 +15,8 @@
     <input
       type="text"
       name="score"
-      [value]="combatant.score ? combatant.score : 'Score'"
+      [(ngModel)]="combatant.score"
+      (change)="handleUpdateCombatant(index, 'score', combatant.score)"
       aria-label="combatant initiative score"
     />
   </div>

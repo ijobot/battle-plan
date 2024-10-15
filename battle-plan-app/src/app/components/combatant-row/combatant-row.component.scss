@@ -29,8 +29,12 @@
     min-width: max-content;
 
     button {
+      display: flex;
       padding: var(--spacing-s);
-      line-height: 0;
+
+      mat-icon {
+        font-weight: 900;
+      }
     }
   }
 }
