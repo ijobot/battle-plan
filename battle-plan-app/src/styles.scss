@@ -80,11 +80,22 @@ button {
 button:hover {
   filter: brightness(120%);
   border: 2px solid var(--button-border);
+  cursor: pointer;
 }
 
-input:hover {
-  cursor: pointer;
-  outline: 4px solid var(--button-border);
+input {
+  border-radius: 0;
+  border: none;
+  padding: 0 var(--spacing-s);
+
+  &:hover {
+    cursor: pointer;
+    outline: 4px solid var(--button-border);
+  }
+
+  &:focus {
+    outline: 4px solid var(--button-border);
+  }
 }
 
 /* --------------- */
@@ -115,7 +126,7 @@ body {
   padding: var(--spacing-l);
 }
 
-.title {
+.logo {
   color: var(--logo-text);
   font-size: 4rem;
   text-align: center;

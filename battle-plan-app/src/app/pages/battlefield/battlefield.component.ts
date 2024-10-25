@@ -4,7 +4,7 @@ import { NavButtonsComponent } from '../../components/nav-buttons/nav-buttons.co
 import { Combatant } from '../../models/combatant';
 import { CommonModule } from '@angular/common';
 import { CombatantRowComponent } from '../../components/combatant-row/combatant-row.component';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { CombatantCreationMenuComponent } from '../../components/combatant-creation-menu/combatant-creation-menu.component';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { ModalService } from '../../services/modal.service';
@@ -24,8 +24,8 @@ import { ModalService } from '../../services/modal.service';
   styleUrl: './battlefield.component.scss',
 })
 export class BattlefieldComponent implements OnInit {
-  combatants$!: Observable<Combatant[]>;
-  showModal$!: Observable<boolean>;
+  combatants$: Observable<Combatant[]> = of([]);
+  showModal$: Observable<boolean> = of(false);
 
   constructor(
     private combatantService: CombatantService,
@@ -33,7 +33,7 @@ export class BattlefieldComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.combatants$ = this.combatantService.getCombatants();
-    this.showModal$ = this.modalService.modalState();
+    this.combatants$ = this.combatantService.combatants$;
+    this.showModal$ = this.modalService.modal$;
   }
 }

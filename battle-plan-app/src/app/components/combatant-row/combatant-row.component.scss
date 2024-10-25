@@ -1,24 +1,31 @@
 .row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr min-content;
-  background-color: var(--player);
+  display: flex;
   padding: var(--spacing-m);
   font-size: 2rem;
   border: 4px solid var(--button-border);
-  justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
+  gap: 0.5em;
 
-  .name,
-  .type,
-  .score {
+  .row-item {
+    width: 100%;
     text-align: center;
+
+    button {
+      width: 100%;
+      height: 100%;
+      border: 2px solid transparent;
+      padding: var(--spacing-s) var(--spacing-l);
+
+      &:hover {
+        border: 2px solid var(--button-border);
+      }
+    }
   }
 
   input {
     border: none;
     font-size: 2rem;
     background: none;
-    text-align: center;
 
     &:focus {
       outline: 0;

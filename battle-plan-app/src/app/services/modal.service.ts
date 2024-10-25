@@ -7,20 +7,17 @@ import { ModalAppearance } from '../models/modal';
   providedIn: 'root',
 })
 export class ModalService {
-  private _showModal$ = new BehaviorSubject(false);
+  public modal$ = new Observable<boolean>();
+  public modalAppearance$ = new Observable<ModalAppearance>();
+  private _modal$ = new BehaviorSubject(false);
   private _modalAppearance$ = new BehaviorSubject<ModalAppearance>({
     type: CombatantType.player,
     color: ColorScheme.player,
   });
 
-  constructor() {}
-
-  modalState(): Observable<boolean> {
-    return this._showModal$;
-  }
-
-  modalAppearance(): Observable<ModalAppearance> {
-    return this._modalAppearance$;
+  constructor() {
+    this.modal$ = this._modal$.asObservable();
+    this.modalAppearance$ = this._modalAppearance$.asObservable();
   }
 
   setModalAppearance(type: CombatantType, color: ColorScheme): void {
@@ -28,10 +25,10 @@ export class ModalService {
   }
 
   openModal(): void {
-    this._showModal$.next(true);
+    this._modal$.next(true);
   }
 
   closeModal(): void {
-    this._showModal$.next(false);
+    this._modal$.next(false);
   }
 }

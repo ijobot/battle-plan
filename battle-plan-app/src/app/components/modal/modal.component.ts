@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { CombatantService } from '../../services/combatant.service';
 import { ColorScheme, CombatantType } from '../../models/combatant';
 import { FormFocusDirective } from '../../utils/autofocus.directive';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-modal',
@@ -21,8 +22,8 @@ import { FormFocusDirective } from '../../utils/autofocus.directive';
 export class ModalComponent implements OnInit {
   combatantForm: FormGroup;
 
-  modalColor!: ColorScheme;
-  combatantType!: CombatantType;
+  modalColor: ColorScheme = ColorScheme.default;
+  combatantType: CombatantType = CombatantType.player;
 
   constructor(
     private modalService: ModalService,
@@ -43,10 +44,14 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.modalService.modalAppearance().subscribe((value) => {
-      this.modalColor = value.color;
-      this.combatantType = value.type;
-    });
+    this.modalService.modalAppearance$
+      .pipe(
+        map(({ color, type }) => {
+          this.modalColor = color;
+          this.combatantType = type;
+        })
+      )
+      .subscribe();
   }
 
   onSubmit(): void {

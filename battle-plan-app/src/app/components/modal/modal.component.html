@@ -13,12 +13,13 @@
               formFocus
               id="name"
               type="text"
-              placeholder="Enter name"
+              [placeholder]="
+                name?.dirty && name?.value == ''
+                  ? 'Name required'
+                  : 'Enter name'
+              "
               formControlName="name"
             />
-          </div>
-          <div class="error-message" *ngIf="name?.touched && name?.value == ''">
-            Please enter a name
           </div>
         </div>
 
@@ -28,15 +29,13 @@
             ><input
               id="score"
               type="text"
-              placeholder="Enter score"
+              [placeholder]="
+                score?.dirty && score?.value == ''
+                  ? 'Score required'
+                  : 'Enter score'
+              "
               formControlName="score"
             />
-          </div>
-          <div
-            class="error-message"
-            *ngIf="score?.touched && score?.value == ''"
-          >
-            Please enter a score
           </div>
         </div>
 

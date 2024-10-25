@@ -6,12 +6,11 @@ import { Combatant, ColorScheme, CombatantType } from '../models/combatant';
   providedIn: 'root',
 })
 export class CombatantService {
+  public combatants$ = new Observable<Combatant[]>();
   private _combatants$ = new BehaviorSubject<Combatant[]>([]);
 
-  constructor() {}
-
-  getCombatants(): Observable<Combatant[]> {
-    return this._combatants$;
+  constructor() {
+    this.combatants$ = this._combatants$.asObservable();
   }
 
   addCombatant(

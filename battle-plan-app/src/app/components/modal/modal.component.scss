@@ -24,8 +24,10 @@
       display: flex;
       flex-direction: column;
 
-      h1 {
+      .title {
+        font-size: 4rem;
         text-align: center;
+        line-height: 1;
         margin-bottom: var(--spacing-l);
       }
 
@@ -53,11 +55,6 @@
             height: 30px;
             min-width: 200px;
             font-size: 2rem;
-          }
-
-          .error-message {
-            color: var(--logo-text);
-            align-self: flex-end;
           }
         }
 

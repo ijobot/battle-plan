@@ -15,8 +15,31 @@ import { FormsModule } from '@angular/forms';
 export class CombatantRowComponent {
   @Input() combatant: Combatant = {} as Combatant;
   @Input() index: number = 0;
+  showNameEditor: boolean = false;
+  showTypeEditor: boolean = false;
+  showScoreEditor: boolean = false;
 
   constructor(private combatantService: CombatantService) {}
+
+  getRowAndButtonColor(): Partial<CSSStyleDeclaration> {
+    const bgColor = { 'background-color': this.combatant.color };
+    return bgColor;
+  }
+
+  toggleNameEditor(): void {
+    this.showNameEditor = !this.showNameEditor;
+    console.log('name', this.showNameEditor);
+  }
+
+  toggleTypeEditor(): void {
+    this.showTypeEditor = !this.showTypeEditor;
+    console.log('type', this.showTypeEditor);
+  }
+
+  toggleScoreEditor(): void {
+    this.showScoreEditor = !this.showScoreEditor;
+    console.log('score', this.showScoreEditor);
+  }
 
   handleRemoveCombatant(index: number): void {
     this.combatantService.removeCombatant(index);
