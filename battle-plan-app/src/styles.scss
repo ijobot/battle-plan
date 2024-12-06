@@ -3,20 +3,22 @@
 /* ----------------- */
 :root {
   /* background colors */
-  --primary-bg: #1b0538;
-  --secondary-bg: #695b85;
+  --primary-bg: #04062b;
+  --secondary-bg: #6d6975;
 
   /* text colors */
   --primary-text: #181717;
-  --logo-text: #dcd929;
+  --logo-text: goldenrod;
 
   /* border colors */
-  --primary-border: #8a1e94;
+  --dark-shadow-border: #272323;
+  --light-shadow-border: #675d5d;
   --modal-border: #2b2b2b;
 
   /* button colors */
   --button: #c1c1c1;
-  --button-border: rgba(0, 0, 0, 0.4);
+  --topleft-button-border: rgba(0, 0, 0, 0.2);
+  --bottomright-button-border: rgba(0, 0, 0, 0.6);
 
   /* combatant colors */
   --player: #2bb78d;
@@ -73,19 +75,30 @@ button {
   padding: var(--spacing-m) var(--spacing-l);
   color: var(--primary-text);
   background-color: var(--button);
-  border: 2px solid var(--button-border);
+  border-top: 4px solid var(--topleft-button-border);
+  border-right: 4px solid var(--bottomright-button-border);
+  border-bottom: 4px solid var(--bottomright-button-border);
+  border-left: 4px solid var(--topleft-button-border);
   font-size: 2rem;
 }
 
 button:hover {
-  filter: brightness(120%);
-  border: 2px solid var(--button-border);
+  filter: drop-shadow(2px 2px 1px goldenrod)
+    drop-shadow(-2px -2px 1px goldenrod) drop-shadow(-2px 2px 1px goldenrod)
+    drop-shadow(2px -2px 1px goldenrod) brightness(130%);
+  border-top: 4px solid var(--topleft-button-border);
+  border-right: 4px solid var(--bottomright-button-border);
+  border-bottom: 4px solid var(--bottomright-button-border);
+  border-left: 4px solid var(--topleft-button-border);
   cursor: pointer;
 }
 
 input {
   border-radius: 0;
-  border: none;
+  border-top: solid 4px var(--dark-shadow-border);
+  border-right: solid 4px var(--light-shadow-border);
+  border-bottom: solid 4px var(--light-shadow-border);
+  border-left: solid 4px var(--dark-shadow-border);
   padding: 0 var(--spacing-s);
 
   &:hover {
@@ -122,12 +135,27 @@ body {
 
 .content-container {
   background-color: var(--primary-bg);
-  border: solid 2px var(--primary-border);
+  border-top: solid 8px var(--dark-shadow-border);
+  border-right: solid 8px var(--light-shadow-border);
+  border-bottom: solid 8px var(--light-shadow-border);
+  border-left: solid 8px var(--dark-shadow-border);
   padding: var(--spacing-l);
 }
 
 .logo {
   color: var(--logo-text);
-  font-size: 4rem;
+}
+
+.center-text {
   text-align: center;
+}
+
+.line-break {
+  width: 100%;
+  height: 4px;
+  background-color: var(--light-shadow-border);
+}
+
+.extra-padding {
+  padding: calc(var(--spacing-l) * 2);
 }

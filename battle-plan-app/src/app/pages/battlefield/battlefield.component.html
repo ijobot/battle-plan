@@ -1,6 +1,8 @@
 <div class="page-container">
   <div class="column left">
-    <div class="content-container logo">Battle Plan</div>
+    <div class="content-container">
+      <p class="logo center-text">Battle Plan</p>
+    </div>
     <div class="content-container controls">
       <app-combatant-creation-menu></app-combatant-creation-menu>
       <app-nav-buttons
@@ -20,5 +22,6 @@
       ></app-combatant-row>
     </div>
   </div>
-  <app-modal *ngIf="showModal$ | async"></app-modal>
 </div>
+
+<app-modal *ngIf="showModal$ | async"></app-modal>

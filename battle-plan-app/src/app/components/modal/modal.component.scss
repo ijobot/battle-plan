@@ -1,10 +1,10 @@
 .overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(22, 22, 22, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
 
   .main-modal {
     position: absolute;
@@ -17,7 +17,10 @@
     background-size: cover;
     background-blend-mode: multiply;
     background-color: var(--secondary-bg);
-    border-color: var(--modal-border);
+    border-top: solid 8px var(--light-shadow-border);
+    border-right: solid 8px var(--dark-shadow-border);
+    border-bottom: solid 8px var(--dark-shadow-border);
+    border-left: solid 8px var(--light-shadow-border);
 
     .content {
       height: 100%;
@@ -52,7 +55,7 @@
           }
 
           input {
-            height: 30px;
+            height: 40px;
             min-width: 200px;
             font-size: 2rem;
           }

@@ -1,13 +1,24 @@
 <div class="page-container">
-  <h1>Battle Plan About Page</h1>
-  <p>
-    Here's a little blurb about how Joe Loftus created this application. Jack
-    Henry and Ryan Paixao were contributors.
-  </p>
-  <app-nav-buttons
-    [buttonOneRoute]="'/'"
-    [buttonOneText]="'Home'"
-    [buttonTwoRoute]="'/battlefield'"
-    [buttonTwoText]="'Battlefield'"
-  ></app-nav-buttons>
+  <div class="about-container">
+    <div class="content-container about-text extra-padding">
+      <p class="logo">Designed by:</p>
+      <p>Joe Loftus</p>
+      <div class="line-break"></div>
+      <p class="logo">Programmed by:</p>
+      <p>Joe Loftus</p>
+      <div class="line-break"></div>
+      <p class="logo">Special Thanks:</p>
+      <p>Jack Henry, Programming Partner</p>
+      <p>Ryan Piaxao, Mentor and Friend</p>
+      <p>Juliet Loftus, Supportive Wife</p>
+    </div>
+    <div class="content-container">
+      <app-nav-buttons
+        [buttonOneRoute]="'/'"
+        [buttonOneText]="'Home'"
+        [buttonTwoRoute]="'/battlefield'"
+        [buttonTwoText]="'Battlefield'"
+      ></app-nav-buttons>
+    </div>
+  </div>
 </div>

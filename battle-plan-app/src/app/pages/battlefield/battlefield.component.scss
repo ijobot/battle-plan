@@ -29,4 +29,8 @@
       gap: var(--spacing-l);
     }
   }
+
+  .content-container > p {
+    font-size: 4rem;
+  }
 }
