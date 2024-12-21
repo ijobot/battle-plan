@@ -22,7 +22,9 @@
   <!-- <div class="line-break"></div> -->
   <div>
     <button (click)="handleSaveParty()">Save Party</button>
-    <button (click)="handleLoadSavedParty()">Load Saved Party</button>
+    <button (click)="handleLoadSavedParty()" [disabled]="!savedParty">
+      Load Saved Party
+    </button>
     <button (click)="handleClearAll()">Clear All</button>
   </div>
 </div>

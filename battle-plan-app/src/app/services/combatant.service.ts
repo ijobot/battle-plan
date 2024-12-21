@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Combatant, ColorScheme, CombatantType } from '../models/combatant';
+import { Combatant, ColorScheme, ModalText } from '../models/combatant';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class CombatantService {
   }
 
   addCombatant(
-    type: CombatantType,
+    type: ModalText,
     color: ColorScheme,
     name: string,
     score: number
@@ -59,6 +59,7 @@ export class CombatantService {
 
   saveCurrentCombatants(): void {
     this._savedParty$.next(this._combatants$.getValue());
+    console.log('hey joe from combatantService', this._savedParty$.getValue());
   }
 
   loadSavedCombatants(): void {

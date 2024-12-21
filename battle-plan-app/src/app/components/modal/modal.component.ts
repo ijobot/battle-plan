@@ -8,11 +8,7 @@ import {
 import { ModalService } from '../../services/modal.service';
 import { CommonModule } from '@angular/common';
 import { CombatantService } from '../../services/combatant.service';
-import {
-  ColorScheme,
-  CombatantType,
-  ContentType,
-} from '../../models/combatant';
+import { ColorScheme, ModalText, ModalContent } from '../../models/combatant';
 import { FormFocusDirective } from '../../utils/autofocus.directive';
 import { map } from 'rxjs';
 
@@ -26,9 +22,9 @@ import { map } from 'rxjs';
 export class ModalComponent implements OnInit {
   combatantForm: FormGroup;
 
-  modalColor: ColorScheme = ColorScheme.player;
-  combatantType: CombatantType = CombatantType.player;
-  contents: ContentType = ContentType.addCombatant;
+  modalColor: ColorScheme = ColorScheme.default;
+  combatantType: ModalText = ModalText.clear;
+  contents: ModalContent = ModalContent.clearAll;
 
   constructor(
     private modalService: ModalService,

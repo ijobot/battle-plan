@@ -1,14 +1,14 @@
 export interface Combatant {
   color: string;
   name: string;
-  type: CombatantType;
+  type: ModalText;
   score: number;
 }
 
-export enum CombatantType {
-  player = 'Add Player',
-  monster = 'Add Monster',
-  npc = 'Add NPC',
+export enum ModalText {
+  player = 'Player',
+  monster = 'Monster',
+  npc = 'NPC',
   save = 'Save Current Party?',
   load = 'Load Saved Party?',
   clear = 'Clear All Combatants?',
@@ -21,7 +21,7 @@ export enum ColorScheme {
   default = '#695b85',
 }
 
-export enum ContentType {
+export enum ModalContent {
   addCombatant = 'addCombatant',
   saveParty = 'saveParty',
   loadParty = 'loadParty',

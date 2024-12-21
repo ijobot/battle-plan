@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ColorScheme, CombatantType, ContentType } from '../models/combatant';
+import { ColorScheme, ModalText, ModalContent } from '../models/combatant';
 import { ModalAppearance } from '../models/modal';
 
 @Injectable({
@@ -11,9 +11,9 @@ export class ModalService {
   public modalAppearance$ = new Observable<ModalAppearance>();
   private _modal$ = new BehaviorSubject(false);
   private _modalAppearance$ = new BehaviorSubject<ModalAppearance>({
-    type: CombatantType.player,
+    type: ModalText.player,
     color: ColorScheme.player,
-    contents: ContentType.addCombatant,
+    contents: ModalContent.addCombatant,
   });
 
   constructor() {
@@ -22,9 +22,9 @@ export class ModalService {
   }
 
   setModalAppearance(
-    type: CombatantType,
+    type: ModalText,
     color: ColorScheme,
-    contents: ContentType
+    contents: ModalContent
   ): void {
     // if (color == ColorScheme.default) {
     //   this.

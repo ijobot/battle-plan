@@ -1,52 +1,73 @@
 import { Component } from '@angular/core';
 import {
-  CombatantType,
+  ModalText,
   ColorScheme,
-  ContentType,
+  ModalContent,
+  Combatant,
 } from '../../models/combatant';
 import { ModalService } from '../../services/modal.service';
+import { CombatantService } from '../../services/combatant.service';
+import { CommonModule } from '@angular/common';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-combatant-creation-menu',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './combatant-creation-menu.component.html',
   styleUrl: './combatant-creation-menu.component.scss',
 })
 export class CombatantCreationMenuComponent {
-  public combatantType = CombatantType;
+  public combatantType = ModalText;
   public ColorScheme = ColorScheme;
+  public savedParty: boolean = false;
 
-  constructor(private modalService: ModalService) {}
+  constructor(
+    private modalService: ModalService,
+    private combatantService: CombatantService
+  ) {
+    this.combatantService.savedParty$
+      .pipe(
+        tap((value) => {
+          if (value.length) this.savedParty = true;
+        })
+      )
+      .subscribe();
+  }
 
-  handleAddCombatant(type: CombatantType, color: ColorScheme): void {
-    this.modalService.setModalAppearance(type, color, ContentType.addCombatant);
+  handleAddCombatant(type: ModalText, color: ColorScheme): void {
+    this.modalService.setModalAppearance(
+      type,
+      color,
+      ModalContent.addCombatant
+    );
     this.modalService.openModal();
   }
 
   handleSaveParty(): void {
     this.modalService.setModalAppearance(
-      CombatantType.save,
+      ModalText.save,
       ColorScheme.default,
-      ContentType.saveParty
+      ModalContent.saveParty
     );
     this.modalService.openModal();
   }
 
   handleLoadSavedParty(): void {
+    console.log('hey joe from CCM', this.savedParty);
     this.modalService.setModalAppearance(
-      CombatantType.load,
+      ModalText.load,
       ColorScheme.default,
-      ContentType.loadParty
+      ModalContent.loadParty
     );
     this.modalService.openModal();
   }
 
   handleClearAll(): void {
     this.modalService.setModalAppearance(
-      CombatantType.clear,
+      ModalText.clear,
       ColorScheme.default,
-      ContentType.clearAll
+      ModalContent.clearAll
     );
     this.modalService.openModal();
   }
