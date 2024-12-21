@@ -8,7 +8,11 @@ import {
 import { ModalService } from '../../services/modal.service';
 import { CommonModule } from '@angular/common';
 import { CombatantService } from '../../services/combatant.service';
-import { ColorScheme, CombatantType } from '../../models/combatant';
+import {
+  ColorScheme,
+  CombatantType,
+  ContentType,
+} from '../../models/combatant';
 import { FormFocusDirective } from '../../utils/autofocus.directive';
 import { map } from 'rxjs';
 
@@ -22,8 +26,9 @@ import { map } from 'rxjs';
 export class ModalComponent implements OnInit {
   combatantForm: FormGroup;
 
-  modalColor: ColorScheme = ColorScheme.default;
+  modalColor: ColorScheme = ColorScheme.player;
   combatantType: CombatantType = CombatantType.player;
+  contents: ContentType = ContentType.addCombatant;
 
   constructor(
     private modalService: ModalService,
@@ -46,9 +51,10 @@ export class ModalComponent implements OnInit {
   ngOnInit(): void {
     this.modalService.modalAppearance$
       .pipe(
-        map(({ color, type }) => {
+        map(({ color, type, contents }) => {
           this.modalColor = color;
           this.combatantType = type;
+          this.contents = contents;
         })
       )
       .subscribe();
@@ -67,6 +73,21 @@ export class ModalComponent implements OnInit {
   }
 
   handleCloseModal(): void {
+    this.modalService.closeModal();
+  }
+
+  handleSaveAll(): void {
+    this.combatantService.saveCurrentCombatants();
+    this.modalService.closeModal();
+  }
+
+  handleLoadSavedParty(): void {
+    this.combatantService.loadSavedCombatants();
+    this.modalService.closeModal();
+  }
+
+  handleClearAll(): void {
+    this.combatantService.clearAllCombatants();
     this.modalService.closeModal();
   }
 }

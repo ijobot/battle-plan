@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { CombatantService } from '../../services/combatant.service';
-import { CombatantType, ColorScheme } from '../../models/combatant';
+import {
+  CombatantType,
+  ColorScheme,
+  ContentType,
+} from '../../models/combatant';
 import { ModalService } from '../../services/modal.service';
 
 @Component({
@@ -14,17 +17,37 @@ export class CombatantCreationMenuComponent {
   public combatantType = CombatantType;
   public ColorScheme = ColorScheme;
 
-  constructor(
-    private combatantService: CombatantService,
-    private modalService: ModalService
-  ) {}
+  constructor(private modalService: ModalService) {}
 
   handleAddCombatant(type: CombatantType, color: ColorScheme): void {
-    this.modalService.setModalAppearance(type, color);
+    this.modalService.setModalAppearance(type, color, ContentType.addCombatant);
+    this.modalService.openModal();
+  }
+
+  handleSaveParty(): void {
+    this.modalService.setModalAppearance(
+      CombatantType.save,
+      ColorScheme.default,
+      ContentType.saveParty
+    );
+    this.modalService.openModal();
+  }
+
+  handleLoadSavedParty(): void {
+    this.modalService.setModalAppearance(
+      CombatantType.load,
+      ColorScheme.default,
+      ContentType.loadParty
+    );
     this.modalService.openModal();
   }
 
   handleClearAll(): void {
-    this.combatantService.clearAllCombatants();
+    this.modalService.setModalAppearance(
+      CombatantType.clear,
+      ColorScheme.default,
+      ContentType.clearAll
+    );
+    this.modalService.openModal();
   }
 }

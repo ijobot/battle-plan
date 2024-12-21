@@ -1,16 +1,10 @@
 <div class="page-container">
   <div class="column left">
-    <div class="content-container">
-      <p class="logo center-text">Battle Plan</p>
+    <div class="content-container logo center-text">
+      <a (click)="navigate('/')">Battle Plan</a>
     </div>
     <div class="content-container controls">
       <app-combatant-creation-menu></app-combatant-creation-menu>
-      <app-nav-buttons
-        [buttonOneRoute]="'/'"
-        [buttonOneText]="'Home'"
-        [buttonTwoRoute]="'/about'"
-        [buttonTwoText]="'About'"
-      ></app-nav-buttons>
     </div>
   </div>
   <div class="column right">

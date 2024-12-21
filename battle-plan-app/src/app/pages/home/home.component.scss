@@ -10,13 +10,14 @@
 }
 
 .logo-large {
-  font-size: 12rem;
+  font-size: 8rem;
+  margin-top: -16px;
 }
 
 .home-text {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-l);
-  font-size: 3rem;
+  font-size: 2rem;
   color: #ebebeb;
 }

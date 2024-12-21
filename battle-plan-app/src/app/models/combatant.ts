@@ -6,9 +6,12 @@ export interface Combatant {
 }
 
 export enum CombatantType {
-  player = 'Player',
-  monster = 'Monster',
-  npc = 'NPC',
+  player = 'Add Player',
+  monster = 'Add Monster',
+  npc = 'Add NPC',
+  save = 'Save Current Party?',
+  load = 'Load Saved Party?',
+  clear = 'Clear All Combatants?',
 }
 
 export enum ColorScheme {
@@ -16,4 +19,11 @@ export enum ColorScheme {
   monster = '#df5858',
   npc = '#5986da',
   default = '#695b85',
+}
+
+export enum ContentType {
+  addCombatant = 'addCombatant',
+  saveParty = 'saveParty',
+  loadParty = 'loadParty',
+  clearAll = 'clearAll',
 }

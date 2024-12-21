@@ -7,10 +7,13 @@ import { Combatant, ColorScheme, CombatantType } from '../models/combatant';
 })
 export class CombatantService {
   public combatants$ = new Observable<Combatant[]>();
+  public savedParty$ = new Observable<Combatant[]>();
+  private _savedParty$ = new BehaviorSubject<Combatant[]>([]);
   private _combatants$ = new BehaviorSubject<Combatant[]>([]);
 
   constructor() {
     this.combatants$ = this._combatants$.asObservable();
+    this.savedParty$ = this._savedParty$.asObservable();
   }
 
   addCombatant(
@@ -52,6 +55,14 @@ export class CombatantService {
         .sort((a, b) => Number(b.score) - Number(a.score)),
     ]);
     console.log(this._combatants$.getValue());
+  }
+
+  saveCurrentCombatants(): void {
+    this._savedParty$.next(this._combatants$.getValue());
+  }
+
+  loadSavedCombatants(): void {
+    this._combatants$.next(this._savedParty$.getValue());
   }
 
   clearAllCombatants(): void {

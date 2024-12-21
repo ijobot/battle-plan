@@ -4,8 +4,13 @@
       class="content-container content"
       [ngStyle]="{ 'background-color': modalColor }"
     >
-      <h1 class="title">Add {{ combatantType }}</h1>
-      <form [formGroup]="combatantForm" (ngSubmit)="onSubmit()">
+      <h1 class="title">{{ combatantType }}</h1>
+      <!-- FORM FOR ADDING COMBATANTS -->
+      <form
+        *ngIf="contents == 'addCombatant'"
+        [formGroup]="combatantForm"
+        (ngSubmit)="onSubmit()"
+      >
         <div class="field">
           <div class="label-and-input">
             <label for="name">Combatant Name:</label
@@ -48,6 +53,24 @@
           <button type="button" (click)="handleCloseModal()">Cancel</button>
         </div>
       </form>
+
+      <!-- FORM FOR SAVING A PARTY -->
+      <div class="clear-all-buttons" *ngIf="contents == 'saveParty'">
+        <button (click)="handleSaveAll()">Save</button>
+        <button (click)="handleCloseModal()">Cancel</button>
+      </div>
+
+      <!-- FORM FOR LOADING A PARTY -->
+      <div class="clear-all-buttons" *ngIf="contents == 'loadParty'">
+        <button (click)="handleLoadSavedParty()">Load Group</button>
+        <button (click)="handleCloseModal()">Cancel</button>
+      </div>
+
+      <!-- fORM FOR CONFIRMING A "CLEAR ALL" -->
+      <div class="clear-all-buttons" *ngIf="contents == 'clearAll'">
+        <button (click)="handleClearAll()">Yes</button>
+        <button (click)="handleCloseModal()">No</button>
+      </div>
     </div>
   </div>
 </div>

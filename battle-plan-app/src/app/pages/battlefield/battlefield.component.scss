@@ -11,6 +11,11 @@
     gap: var(--spacing-l);
     width: max-content;
 
+    a:hover {
+      filter: brightness(150%);
+      cursor: pointer;
+    }
+
     .controls {
       height: 100%;
       display: flex;
@@ -30,7 +35,7 @@
     }
   }
 
-  .content-container > p {
+  .content-container > a {
     font-size: 4rem;
   }
 }
