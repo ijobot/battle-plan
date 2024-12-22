@@ -8,9 +8,14 @@ import {
 import { ModalService } from '../../services/modal.service';
 import { CommonModule } from '@angular/common';
 import { CombatantService } from '../../services/combatant.service';
-import { ColorScheme, ModalText, ModalContent } from '../../models/combatant';
+import {
+  ColorScheme,
+  ModalText,
+  ModalContent,
+  Combatant,
+} from '../../models/combatant';
 import { FormFocusDirective } from '../../utils/autofocus.directive';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-modal',
@@ -25,6 +30,8 @@ export class ModalComponent implements OnInit {
   modalColor: ColorScheme = ColorScheme.default;
   combatantType: ModalText = ModalText.clear;
   contents: ModalContent = ModalContent.clearAll;
+  public combatants$: Observable<Combatant[]> =
+    this.combatantService.combatants$;
 
   constructor(
     private modalService: ModalService,

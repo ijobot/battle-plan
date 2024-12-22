@@ -20,22 +20,14 @@ import { Observable, tap } from 'rxjs';
 export class CombatantCreationMenuComponent {
   public combatantType = ModalText;
   public ColorScheme = ColorScheme;
-  public savedParty: boolean = false;
+  public savedParty$ = this.combatantService.savedParty$;
 
   constructor(
     private modalService: ModalService,
     private combatantService: CombatantService
-  ) {
-    this.combatantService.savedParty$
-      .pipe(
-        tap((value) => {
-          if (value.length) this.savedParty = true;
-        })
-      )
-      .subscribe();
-  }
+  ) {}
 
-  handleAddCombatant(type: ModalText, color: ColorScheme): void {
+  handleAddCombatantClick(type: ModalText, color: ColorScheme): void {
     this.modalService.setModalAppearance(
       type,
       color,
@@ -44,7 +36,7 @@ export class CombatantCreationMenuComponent {
     this.modalService.openModal();
   }
 
-  handleSaveParty(): void {
+  handleSavePartyClick(): void {
     this.modalService.setModalAppearance(
       ModalText.save,
       ColorScheme.default,
@@ -53,8 +45,7 @@ export class CombatantCreationMenuComponent {
     this.modalService.openModal();
   }
 
-  handleLoadSavedParty(): void {
-    console.log('hey joe from CCM', this.savedParty);
+  handleLoadSavedPartyClick(): void {
     this.modalService.setModalAppearance(
       ModalText.load,
       ColorScheme.default,
@@ -63,7 +54,7 @@ export class CombatantCreationMenuComponent {
     this.modalService.openModal();
   }
 
-  handleClearAll(): void {
+  handleClearAllClick(): void {
     this.modalService.setModalAppearance(
       ModalText.clear,
       ColorScheme.default,

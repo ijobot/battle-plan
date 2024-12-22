@@ -1,30 +1,39 @@
 <div class="combatant-creation-menu">
+  <!-- PLAYER/MONSTER/NPC BUTTONS -->
   <div>
     <button
       class="player"
-      (click)="handleAddCombatant(combatantType.player, ColorScheme.player)"
+      (click)="
+        handleAddCombatantClick(combatantType.player, ColorScheme.player)
+      "
     >
       Player
     </button>
     <button
       class="monster"
-      (click)="handleAddCombatant(combatantType.monster, ColorScheme.monster)"
+      (click)="
+        handleAddCombatantClick(combatantType.monster, ColorScheme.monster)
+      "
     >
       Monster
     </button>
     <button
       class="npc"
-      (click)="handleAddCombatant(combatantType.npc, ColorScheme.npc)"
+      (click)="handleAddCombatantClick(combatantType.npc, ColorScheme.npc)"
     >
       NPC
     </button>
   </div>
-  <!-- <div class="line-break"></div> -->
+
+  <!-- SAVE/LOAD/CLEAR BUTTONS -->
   <div>
-    <button (click)="handleSaveParty()">Save Party</button>
-    <button (click)="handleLoadSavedParty()" [disabled]="!savedParty">
+    <button (click)="handleSavePartyClick()">Save Party</button>
+    <button
+      (click)="handleLoadSavedPartyClick()"
+      [disabled]="!(savedParty$ | async)?.length"
+    >
       Load Saved Party
     </button>
-    <button (click)="handleClearAll()">Clear All</button>
+    <button (click)="handleClearAllClick()">Clear All</button>
   </div>
 </div>

@@ -1,5 +1,5 @@
 export interface Combatant {
-  color: string;
+  colorScheme: string;
   name: string;
   type: ModalText;
   score: number;

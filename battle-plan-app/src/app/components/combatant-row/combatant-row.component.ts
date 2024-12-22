@@ -22,7 +22,7 @@ export class CombatantRowComponent {
   constructor(private combatantService: CombatantService) {}
 
   getRowAndButtonColor(): Partial<CSSStyleDeclaration> {
-    const bgColor = { 'background-color': this.combatant.color };
+    const bgColor = { 'background-color': this.combatant.colorScheme };
     return bgColor;
   }
 

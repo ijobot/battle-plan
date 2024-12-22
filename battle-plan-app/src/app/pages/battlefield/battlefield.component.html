@@ -1,4 +1,5 @@
 <div class="page-container">
+  <!-- LOGO AND BUTTON MENU -->
   <div class="column left">
     <div class="content-container logo center-text">
       <a (click)="navigate('/')">Battle Plan</a>
@@ -7,6 +8,8 @@
       <app-combatant-creation-menu></app-combatant-creation-menu>
     </div>
   </div>
+
+  <!-- BATTLEFIELD INFORMATION AREA -->
   <div class="column right">
     <div class="content-container combatants">
       <app-combatant-row
@@ -18,4 +21,5 @@
   </div>
 </div>
 
+<!-- DYNAMIC MODAL DISPLAY -->
 <app-modal *ngIf="showModal$ | async"></app-modal>

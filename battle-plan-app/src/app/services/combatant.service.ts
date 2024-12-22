@@ -22,7 +22,12 @@ export class CombatantService {
     name: string,
     score: number
   ): void {
-    const newestCombatant: Combatant = { color, name, type, score };
+    const newestCombatant: Combatant = {
+      colorScheme: color,
+      name,
+      type,
+      score,
+    };
     const updatedCombatants = [
       ...this._combatants$.getValue(),
       newestCombatant,
@@ -58,8 +63,9 @@ export class CombatantService {
   }
 
   saveCurrentCombatants(): void {
-    this._savedParty$.next(this._combatants$.getValue());
-    console.log('hey joe from combatantService', this._savedParty$.getValue());
+    this._combatants$.getValue().length
+      ? this._savedParty$.next(this._combatants$.getValue())
+      : this._savedParty$.next([]);
   }
 
   loadSavedCombatants(): void {

@@ -26,9 +26,6 @@ export class ModalService {
     color: ColorScheme,
     contents: ModalContent
   ): void {
-    // if (color == ColorScheme.default) {
-    //   this.
-    // }
     this._modalAppearance$.next({ type, color, contents });
   }
 

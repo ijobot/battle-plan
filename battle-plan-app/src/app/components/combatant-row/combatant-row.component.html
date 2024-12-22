@@ -1,33 +1,26 @@
 <div class="row" [ngStyle]="getRowAndButtonColor()">
+  <!-- COMBATANT NAME -->
   <div class="row-item">
     <button [ngStyle]="getRowAndButtonColor()" (click)="toggleNameEditor()">
       {{ combatant.name }}
     </button>
-    <!-- <input
-      type="text"
-      name="name"
-      [(ngModel)]="combatant.name"
-      (change)="handleUpdateCombatant(index, 'name', combatant.name)"
-      aria-label="combatant name"
-    /> -->
   </div>
+
+  <!-- COMBATANT TYPE -->
   <div class="row-item">
     <button [ngStyle]="getRowAndButtonColor()" (click)="toggleTypeEditor()">
       {{ combatant.type }}
     </button>
   </div>
+
+  <!-- COMBATANT SCORE -->
   <div class="row-item">
     <button [ngStyle]="getRowAndButtonColor()" (click)="toggleScoreEditor()">
       {{ combatant.score }}
     </button>
-    <!-- <input
-      type="text"
-      name="score"
-      [(ngModel)]="combatant.score"
-      (change)="handleUpdateCombatant(index, 'score', combatant.score)"
-      aria-label="combatant initiative score"
-    /> -->
   </div>
+
+  <!-- DELETE ROW -->
   <div class="delete">
     <button (click)="handleRemoveCombatant(index)">
       <mat-icon>close</mat-icon>

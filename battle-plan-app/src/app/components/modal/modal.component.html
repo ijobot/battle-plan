@@ -5,6 +5,7 @@
       [ngStyle]="{ 'background-color': modalColor }"
     >
       <h1 class="title">{{ combatantType }}</h1>
+
       <!-- FORM FOR ADDING COMBATANTS -->
       <form
         *ngIf="contents == 'addCombatant'"
@@ -50,13 +51,18 @@
           <button type="submit" [disabled]="!combatantForm.valid">
             Submit
           </button>
-          <button type="button" (click)="handleCloseModal()">Cancel</button>
+          <button (click)="handleCloseModal()">Cancel</button>
         </div>
       </form>
 
       <!-- FORM FOR SAVING A PARTY -->
       <div class="clear-all-buttons" *ngIf="contents == 'saveParty'">
-        <button (click)="handleSaveAll()">Save</button>
+        <button
+          (click)="handleSaveAll()"
+          [disabled]="!(combatants$ | async)?.length"
+        >
+          Save
+        </button>
         <button (click)="handleCloseModal()">Cancel</button>
       </div>
 

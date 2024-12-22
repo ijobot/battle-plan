@@ -54,8 +54,15 @@ body {
 ul,
 ol,
 a {
-  list-style-type: none;
   text-decoration: none;
+}
+
+ul {
+  margin-left: var(--spacing-l);
+
+  :not(:last-of-type) {
+    margin-bottom: var(--spacing-s);
+  }
 }
 
 img,
@@ -82,7 +89,7 @@ button {
   font-size: 2rem;
 }
 
-button:hover {
+button:hover:enabled {
   filter: drop-shadow(2px 2px 1px goldenrod)
     drop-shadow(-2px -2px 1px goldenrod) drop-shadow(-2px 2px 1px goldenrod)
     drop-shadow(2px -2px 1px goldenrod) brightness(130%);
@@ -91,6 +98,11 @@ button:hover {
   border-bottom: 4px solid var(--bottomright-button-border);
   border-left: 4px solid var(--topleft-button-border);
   cursor: pointer;
+}
+
+button:disabled {
+  filter: brightness(80%);
+  cursor: not-allowed;
 }
 
 input {
