@@ -27,9 +27,9 @@ import { map, Observable } from 'rxjs';
 export class ModalComponent implements OnInit {
   combatantForm: FormGroup;
 
-  modalColor: ColorScheme = ColorScheme.default;
-  combatantType: ModalText = ModalText.clear;
-  contents: ModalContent = ModalContent.clearAll;
+  colorScheme: ColorScheme = ColorScheme.default;
+  modalText: ModalText = ModalText.clear;
+  modalContent: ModalContent = ModalContent.clearAll;
   public combatants$: Observable<Combatant[]> =
     this.combatantService.combatants$;
 
@@ -54,10 +54,10 @@ export class ModalComponent implements OnInit {
   ngOnInit(): void {
     this.modalService.modalAppearance$
       .pipe(
-        map(({ color, type, contents }) => {
-          this.modalColor = color;
-          this.combatantType = type;
-          this.contents = contents;
+        map(({ colorScheme, modalText, modalContent }) => {
+          this.colorScheme = colorScheme;
+          this.modalText = modalText;
+          this.modalContent = modalContent;
         })
       )
       .subscribe();
@@ -66,8 +66,7 @@ export class ModalComponent implements OnInit {
   onSubmit(): void {
     if (this.combatantForm.valid) {
       this.combatantService.addCombatant(
-        this.combatantType,
-        this.modalColor,
+        this.modalText,
         this.combatantForm.value.name,
         this.combatantForm.value.score
       );

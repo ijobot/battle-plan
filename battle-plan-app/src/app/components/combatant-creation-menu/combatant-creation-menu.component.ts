@@ -1,14 +1,8 @@
 import { Component } from '@angular/core';
-import {
-  ModalText,
-  ColorScheme,
-  ModalContent,
-  Combatant,
-} from '../../models/combatant';
+import { ModalText, ColorScheme, ModalContent } from '../../models/combatant';
 import { ModalService } from '../../services/modal.service';
 import { CombatantService } from '../../services/combatant.service';
 import { CommonModule } from '@angular/common';
-import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-combatant-creation-menu',
@@ -19,7 +13,7 @@ import { Observable, tap } from 'rxjs';
 })
 export class CombatantCreationMenuComponent {
   public combatantType = ModalText;
-  public ColorScheme = ColorScheme;
+  public colorScheme = ColorScheme;
   public savedParty$ = this.combatantService.savedParty$;
 
   constructor(

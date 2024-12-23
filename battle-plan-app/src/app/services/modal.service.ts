@@ -11,9 +11,9 @@ export class ModalService {
   public modalAppearance$ = new Observable<ModalAppearance>();
   private _modal$ = new BehaviorSubject(false);
   private _modalAppearance$ = new BehaviorSubject<ModalAppearance>({
-    type: ModalText.player,
-    color: ColorScheme.player,
-    contents: ModalContent.addCombatant,
+    modalText: ModalText.player,
+    colorScheme: ColorScheme.player,
+    modalContent: ModalContent.addCombatant,
   });
 
   constructor() {
@@ -22,11 +22,15 @@ export class ModalService {
   }
 
   setModalAppearance(
-    type: ModalText,
-    color: ColorScheme,
-    contents: ModalContent
+    modalText: ModalText,
+    colorScheme: ColorScheme,
+    modalContent: ModalContent
   ): void {
-    this._modalAppearance$.next({ type, color, contents });
+    this._modalAppearance$.next({
+      modalText,
+      colorScheme,
+      modalContent,
+    });
   }
 
   openModal(): void {

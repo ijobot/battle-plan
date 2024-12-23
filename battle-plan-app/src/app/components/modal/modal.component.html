@@ -2,13 +2,13 @@
   <div class="content-container main-modal">
     <div
       class="content-container content"
-      [ngStyle]="{ 'background-color': modalColor }"
+      [ngStyle]="{ 'background-color': colorScheme }"
     >
-      <h1 class="title">{{ combatantType }}</h1>
+      <h1 class="title">{{ modalText }}</h1>
 
-      <!-- FORM FOR ADDING COMBATANTS -->
+      <!-- MODAL CONTENTS FOR ADDING COMBATANTS -->
       <form
-        *ngIf="contents == 'addCombatant'"
+        *ngIf="modalContent == 'addCombatant'"
         [formGroup]="combatantForm"
         (ngSubmit)="onSubmit()"
       >
@@ -55,8 +55,8 @@
         </div>
       </form>
 
-      <!-- FORM FOR SAVING A PARTY -->
-      <div class="clear-all-buttons" *ngIf="contents == 'saveParty'">
+      <!-- MODAL CONTENTS FOR SAVING A PARTY -->
+      <div class="clear-all-buttons" *ngIf="modalContent == 'saveParty'">
         <button
           (click)="handleSaveAll()"
           [disabled]="!(combatants$ | async)?.length"
@@ -66,14 +66,14 @@
         <button (click)="handleCloseModal()">Cancel</button>
       </div>
 
-      <!-- FORM FOR LOADING A PARTY -->
-      <div class="clear-all-buttons" *ngIf="contents == 'loadParty'">
+      <!-- MODAL CONTENTS FOR LOADING A PARTY -->
+      <div class="clear-all-buttons" *ngIf="modalContent == 'loadParty'">
         <button (click)="handleLoadSavedParty()">Load Group</button>
         <button (click)="handleCloseModal()">Cancel</button>
       </div>
 
-      <!-- fORM FOR CONFIRMING A "CLEAR ALL" -->
-      <div class="clear-all-buttons" *ngIf="contents == 'clearAll'">
+      <!-- MODAL CONTENTS FOR CONFIRMING A "CLEAR ALL" -->
+      <div class="clear-all-buttons" *ngIf="modalContent == 'clearAll'">
         <button (click)="handleClearAll()">Yes</button>
         <button (click)="handleCloseModal()">No</button>
       </div>

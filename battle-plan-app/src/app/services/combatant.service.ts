@@ -1,37 +1,50 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Combatant, ColorScheme, ModalText } from '../models/combatant';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CombatantService {
-  public combatants$ = new Observable<Combatant[]>();
-  public savedParty$ = new Observable<Combatant[]>();
-  private _savedParty$ = new BehaviorSubject<Combatant[]>([]);
+  combatants$ = new Observable<Combatant[]>();
+  savedParty$ = new Observable<Combatant[]>();
+  private _savedParty$ = new BehaviorSubject<Combatant[]>(
+    this.localStorageService.checkLocalStorage()
+  );
   private _combatants$ = new BehaviorSubject<Combatant[]>([]);
 
-  constructor() {
+  constructor(private localStorageService: LocalStorageService) {
     this.combatants$ = this._combatants$.asObservable();
     this.savedParty$ = this._savedParty$.asObservable();
   }
 
-  addCombatant(
-    type: ModalText,
-    color: ColorScheme,
-    name: string,
-    score: number
-  ): void {
+  addCombatant(type: ModalText, name: string, score: number): void {
+    // Set ColorScheme based on ModalText
+    const colorScheme: ColorScheme =
+      type == 'Player'
+        ? ColorScheme.player
+        : type == 'Monster'
+        ? ColorScheme.monster
+        : type == 'NPC'
+        ? ColorScheme.npc
+        : ColorScheme.default;
+
+    // Create new combatant object
     const newestCombatant: Combatant = {
-      colorScheme: color,
+      colorScheme,
       name,
       type,
       score,
     };
+
+    // Add to combatants array
     const updatedCombatants = [
       ...this._combatants$.getValue(),
       newestCombatant,
     ];
+
+    // Sort list
     this._combatants$.next(
       updatedCombatants.sort((a, b) => Number(b.score) - Number(a.score))
     );
@@ -47,32 +60,44 @@ export class CombatantService {
     updateType: string,
     newValue: number | string
   ): void {
+    // Find combatant by index
     const combatantToChange = this._combatants$.getValue()[index];
+
+    // Update correct property
     if (updateType == 'name') {
       combatantToChange.name = newValue as string;
     }
     if (updateType == 'score') {
       combatantToChange.score = newValue as number;
     }
+
+    // Re-sort list based on changes
     this._combatants$.next([
-      ...this._combatants$
-        .getValue()
-        .sort((a, b) => Number(b.score) - Number(a.score)),
+      ...this._combatants$.getValue().sort((a, b) => b.score - a.score),
     ]);
-    console.log(this._combatants$.getValue());
   }
 
   saveCurrentCombatants(): void {
-    this._combatants$.getValue().length
-      ? this._savedParty$.next(this._combatants$.getValue())
-      : this._savedParty$.next([]);
+    // Save only works if combatants are on the board
+    if (this._combatants$.getValue().length) {
+      this._savedParty$.next(this._combatants$.getValue());
+      this.localStorageService.saveData(
+        'Saved Party',
+        JSON.stringify(this._combatants$.getValue())
+      );
+    }
   }
 
   loadSavedCombatants(): void {
-    this._combatants$.next(this._savedParty$.getValue());
+    // Load only works if previous combatants have been saved
+    const savedParty = this.localStorageService.getData('Saved Party');
+    if (this._savedParty$.getValue().length || savedParty) {
+      this._combatants$.next(this._savedParty$.getValue());
+    }
   }
 
   clearAllCombatants(): void {
+    // Does not affect saved combatants
     this._combatants$.next([]);
   }
 }
