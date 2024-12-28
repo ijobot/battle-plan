@@ -1,0 +1,37 @@
+<form [formGroup]="combatantForm" (ngSubmit)="onSubmit()">
+  <div class="field">
+    <div class="label-and-input">
+      <label for="name">Combatant Name:</label
+      ><input
+        formFocus
+        class="large-field"
+        id="name"
+        type="text"
+        [placeholder]="
+          name?.dirty && name?.value == '' ? 'Name required' : 'Enter name'
+        "
+        formControlName="name"
+      />
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="label-and-input">
+      <label for="name">Initiative Score:</label
+      ><input
+        class="large-field"
+        id="score"
+        type="text"
+        [placeholder]="
+          score?.dirty && score?.value == '' ? 'Score required' : 'Enter score'
+        "
+        formControlName="score"
+      />
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button type="submit" [disabled]="!combatantForm.valid">Submit</button>
+    <button (click)="handleCloseModal()">Cancel</button>
+  </div>
+</form>

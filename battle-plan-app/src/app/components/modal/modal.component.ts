@@ -1,32 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
 import { ModalService } from '../../services/modal.service';
-import { CommonModule } from '@angular/common';
 import { CombatantService } from '../../services/combatant.service';
-import {
-  ColorScheme,
-  ModalText,
-  ModalContent,
-  Combatant,
-} from '../../models/combatant';
-import { FormFocusDirective } from '../../utils/autofocus.directive';
+import { Combatant } from '../../models/combatant';
 import { map, Observable } from 'rxjs';
+import { ColorScheme } from '../../models/color-scheme';
+import { ModalText, ModalContent } from '../../models/modal';
+import { CombatantEntryFormComponent } from '../combatant-entry-form/combatant-entry-form.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormFocusDirective],
+  imports: [CommonModule, CombatantEntryFormComponent],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
 })
 export class ModalComponent implements OnInit {
-  combatantForm: FormGroup;
-
   colorScheme: ColorScheme = ColorScheme.default;
   modalText: ModalText = ModalText.clear;
   modalContent: ModalContent = ModalContent.clearAll;
@@ -36,20 +25,7 @@ export class ModalComponent implements OnInit {
   constructor(
     private modalService: ModalService,
     private combatantService: CombatantService
-  ) {
-    this.combatantForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      score: new FormControl('', [Validators.required]),
-    });
-  }
-
-  get name() {
-    return this.combatantForm.get('name');
-  }
-
-  get score() {
-    return this.combatantForm.get('score');
-  }
+  ) {}
 
   ngOnInit(): void {
     this.modalService.modalAppearance$
@@ -61,17 +37,6 @@ export class ModalComponent implements OnInit {
         })
       )
       .subscribe();
-  }
-
-  onSubmit(): void {
-    if (this.combatantForm.valid) {
-      this.combatantService.addCombatant(
-        this.modalText,
-        this.combatantForm.value.name,
-        this.combatantForm.value.score
-      );
-      this.modalService.closeModal();
-    }
   }
 
   handleCloseModal(): void {

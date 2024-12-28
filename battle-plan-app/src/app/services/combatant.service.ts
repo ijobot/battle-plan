@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Combatant, ColorScheme, ModalText } from '../models/combatant';
+import { Combatant } from '../models/combatant';
 import { LocalStorageService } from './local-storage.service';
+import { ColorScheme } from '../models/color-scheme';
+import { ModalText } from '../models/modal';
 
 @Injectable({
   providedIn: 'root',
@@ -19,22 +21,19 @@ export class CombatantService {
     this.savedParty$ = this._savedParty$.asObservable();
   }
 
-  addCombatant(type: ModalText, name: string, score: number): void {
+  addCombatant(
+    colorScheme: ColorScheme,
+    type: ModalText,
+    name: string,
+    score: number
+  ): void {
     // Set ColorScheme based on ModalText
-    const colorScheme: ColorScheme =
-      type == 'Player'
-        ? ColorScheme.player
-        : type == 'Monster'
-        ? ColorScheme.monster
-        : type == 'NPC'
-        ? ColorScheme.npc
-        : ColorScheme.default;
 
     // Create new combatant object
     const newestCombatant: Combatant = {
       colorScheme,
-      name,
       type,
+      name,
       score,
     };
 

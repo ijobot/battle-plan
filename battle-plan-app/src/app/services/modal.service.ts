@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ColorScheme, ModalText, ModalContent } from '../models/combatant';
-import { ModalAppearance } from '../models/modal';
+import { ModalAppearance, ModalContent, ModalText } from '../models/modal';
+import { ColorScheme } from '../models/color-scheme';
 
 @Injectable({
   providedIn: 'root',

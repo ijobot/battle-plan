@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import { ModalText, ColorScheme, ModalContent } from '../../models/combatant';
 import { ModalService } from '../../services/modal.service';
 import { CombatantService } from '../../services/combatant.service';
 import { CommonModule } from '@angular/common';
+import { ColorScheme } from '../../models/color-scheme';
+import { ModalText, ModalContent } from '../../models/modal';
 
 @Component({
-  selector: 'app-combatant-creation-menu',
+  selector: 'app-battlefield-controls',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './combatant-creation-menu.component.html',
-  styleUrl: './combatant-creation-menu.component.scss',
+  templateUrl: './battlefield-controls.component.html',
+  styleUrl: './battlefield-controls.component.scss',
 })
-export class CombatantCreationMenuComponent {
+export class BattlefieldControlsComponent {
   public combatantType = ModalText;
   public colorScheme = ColorScheme;
   public savedParty$ = this.combatantService.savedParty$;
@@ -21,6 +22,7 @@ export class CombatantCreationMenuComponent {
     private combatantService: CombatantService
   ) {}
 
+  // Adding a combatant
   handleAddCombatantClick(type: ModalText, color: ColorScheme): void {
     this.modalService.setModalAppearance(
       type,
@@ -30,6 +32,7 @@ export class CombatantCreationMenuComponent {
     this.modalService.openModal();
   }
 
+  // Saving a party
   handleSavePartyClick(): void {
     this.modalService.setModalAppearance(
       ModalText.save,
@@ -39,6 +42,7 @@ export class CombatantCreationMenuComponent {
     this.modalService.openModal();
   }
 
+  // Loading a saved party
   handleLoadSavedPartyClick(): void {
     this.modalService.setModalAppearance(
       ModalText.load,
@@ -48,6 +52,7 @@ export class CombatantCreationMenuComponent {
     this.modalService.openModal();
   }
 
+  // Clearing the list
   handleClearAllClick(): void {
     this.modalService.setModalAppearance(
       ModalText.clear,

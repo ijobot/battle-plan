@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-combatant-list',
   standalone: true,
-  imports: [CombatantRowComponent, CommonModule],
+  imports: [CommonModule, CombatantRowComponent],
   templateUrl: './combatant-list.component.html',
   styleUrl: './combatant-list.component.scss',
 })

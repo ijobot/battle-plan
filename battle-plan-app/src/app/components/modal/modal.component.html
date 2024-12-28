@@ -7,53 +7,7 @@
       <h1 class="title">{{ modalText }}</h1>
 
       <!-- MODAL CONTENTS FOR ADDING COMBATANTS -->
-      <form
-        *ngIf="modalContent == 'addCombatant'"
-        [formGroup]="combatantForm"
-        (ngSubmit)="onSubmit()"
-      >
-        <div class="field">
-          <div class="label-and-input">
-            <label for="name">Combatant Name:</label
-            ><input
-              formFocus
-              class="large-field"
-              id="name"
-              type="text"
-              [placeholder]="
-                name?.dirty && name?.value == ''
-                  ? 'Name required'
-                  : 'Enter name'
-              "
-              formControlName="name"
-            />
-          </div>
-        </div>
-
-        <div class="field">
-          <div class="label-and-input">
-            <label for="name">Initiative Score:</label
-            ><input
-              class="large-field"
-              id="score"
-              type="text"
-              [placeholder]="
-                score?.dirty && score?.value == ''
-                  ? 'Score required'
-                  : 'Enter score'
-              "
-              formControlName="score"
-            />
-          </div>
-        </div>
-
-        <div class="buttons">
-          <button type="submit" [disabled]="!combatantForm.valid">
-            Submit
-          </button>
-          <button (click)="handleCloseModal()">Cancel</button>
-        </div>
-      </form>
+      <app-combatant-entry-form></app-combatant-entry-form>
 
       <!-- MODAL CONTENTS FOR SAVING A PARTY -->
       <div class="clear-all-buttons" *ngIf="modalContent == 'saveParty'">

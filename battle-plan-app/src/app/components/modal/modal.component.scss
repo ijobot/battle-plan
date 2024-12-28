@@ -34,49 +34,6 @@
         margin-bottom: var(--spacing-l);
       }
 
-      form {
-        display: flex;
-        flex-direction: column;
-        gap: var(--spacing-l);
-        font-size: 2rem;
-
-        .field {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-
-          .label-and-input {
-            display: flex;
-            justify-content: space-between;
-          }
-
-          label {
-            margin-right: var(--spacing-l);
-          }
-
-          input {
-            height: 40px;
-            min-width: 200px;
-            font-size: 2rem;
-          }
-        }
-
-        .buttons {
-          display: flex;
-          justify-content: space-between;
-          gap: var(--spacing-l);
-        }
-
-        button {
-          max-width: fit-content;
-
-          &:disabled {
-            filter: brightness(80%);
-            cursor: not-allowed;
-          }
-        }
-      }
-
       .clear-all-buttons {
         display: flex;
         justify-content: space-between;
