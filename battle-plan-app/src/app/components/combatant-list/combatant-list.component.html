@@ -1,0 +1,7 @@
+<div class="combatants">
+  <app-combatant-row
+    *ngFor="let combatant of combatants$ | async; index as i"
+    [combatant]="combatant"
+    [index]="i"
+  ></app-combatant-row>
+</div>

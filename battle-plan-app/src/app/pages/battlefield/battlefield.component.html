@@ -12,11 +12,7 @@
   <!-- BATTLEFIELD INFORMATION AREA -->
   <div class="column right">
     <div class="content-container combatants">
-      <app-combatant-row
-        *ngFor="let combatant of combatants$ | async; index as i"
-        [combatant]="combatant"
-        [index]="i"
-      ></app-combatant-row>
+      <app-combatant-list></app-combatant-list>
     </div>
   </div>
 </div>

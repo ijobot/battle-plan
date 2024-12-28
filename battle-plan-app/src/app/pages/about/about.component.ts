@@ -6,9 +6,8 @@ import { NavButtonsComponent } from '../../components/nav-buttons/nav-buttons.co
   standalone: true,
   imports: [NavButtonsComponent],
   templateUrl: './about.component.html',
-  styleUrl: './about.component.scss'
+  styleUrl: './about.component.scss',
 })
 export class AboutComponent {
-
   constructor() {}
 }

@@ -1,21 +1,21 @@
 <div class="row" [ngStyle]="getRowAndButtonColor()">
   <!-- COMBATANT NAME -->
   <div class="row-item">
-    <button [ngStyle]="getRowAndButtonColor()" (click)="toggleNameEditor()">
+    <button [ngStyle]="getRowAndButtonColor()">
       {{ combatant.name }}
     </button>
   </div>
 
   <!-- COMBATANT TYPE -->
   <div class="row-item">
-    <button [ngStyle]="getRowAndButtonColor()" (click)="toggleTypeEditor()">
+    <button [ngStyle]="getRowAndButtonColor()">
       {{ combatant.type }}
     </button>
   </div>
 
   <!-- COMBATANT SCORE -->
   <div class="row-item">
-    <button [ngStyle]="getRowAndButtonColor()" (click)="toggleScoreEditor()">
+    <button [ngStyle]="getRowAndButtonColor()">
       {{ combatant.score }}
     </button>
   </div>
