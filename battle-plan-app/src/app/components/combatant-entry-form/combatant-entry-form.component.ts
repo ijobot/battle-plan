@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -11,6 +11,7 @@ import { CombatantService } from '../../services/combatant.service';
 import { ModalService } from '../../services/modal.service';
 import { ColorScheme } from '../../models/color-scheme';
 import { ModalText } from '../../models/modal';
+import { Combatant, CombatantType } from '../../models/combatant';
 
 @Component({
   selector: 'app-combatant-entry-form',
@@ -20,6 +21,10 @@ import { ModalText } from '../../models/modal';
   styleUrl: './combatant-entry-form.component.scss',
 })
 export class CombatantEntryFormComponent {
+  @Input() colorScheme: ColorScheme = ColorScheme.player;
+  @Input() modalText: ModalText = ModalText.player;
+  @Input() update?: boolean = false;
+  @Input() updateType?: string = '';
   combatantForm: FormGroup;
 
   constructor(
@@ -41,10 +46,18 @@ export class CombatantEntryFormComponent {
   }
 
   onSubmit(): void {
+    // Configure combatantType based on modal's current text
+    let combatantType =
+      this.modalText == 'Add Player'
+        ? CombatantType.player
+        : this.modalText == 'Add Monster'
+        ? CombatantType.monster
+        : CombatantType.npc;
+
     if (this.combatantForm.valid) {
       this.combatantService.addCombatant(
-        ColorScheme.player,
-        ModalText.player,
+        this.colorScheme,
+        combatantType,
         this.combatantForm.value.name,
         this.combatantForm.value.score
       );

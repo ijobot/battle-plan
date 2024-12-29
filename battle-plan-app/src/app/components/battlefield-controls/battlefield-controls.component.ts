@@ -3,7 +3,7 @@ import { ModalService } from '../../services/modal.service';
 import { CombatantService } from '../../services/combatant.service';
 import { CommonModule } from '@angular/common';
 import { ColorScheme } from '../../models/color-scheme';
-import { ModalText, ModalContent } from '../../models/modal';
+import { ModalContent, ModalText } from '../../models/modal';
 
 @Component({
   selector: 'app-battlefield-controls',
@@ -13,8 +13,8 @@ import { ModalText, ModalContent } from '../../models/modal';
   styleUrl: './battlefield-controls.component.scss',
 })
 export class BattlefieldControlsComponent {
-  public combatantType = ModalText;
   public colorScheme = ColorScheme;
+  public modalText = ModalText;
   public savedParty$ = this.combatantService.savedParty$;
 
   constructor(
@@ -23,10 +23,10 @@ export class BattlefieldControlsComponent {
   ) {}
 
   // Adding a combatant
-  handleAddCombatantClick(type: ModalText, color: ColorScheme): void {
+  handleAddCombatantClick(color: ColorScheme, type: ModalText): void {
     this.modalService.setModalAppearance(
-      type,
       color,
+      type,
       ModalContent.addCombatant
     );
     this.modalService.openModal();
@@ -35,8 +35,8 @@ export class BattlefieldControlsComponent {
   // Saving a party
   handleSavePartyClick(): void {
     this.modalService.setModalAppearance(
-      ModalText.save,
       ColorScheme.default,
+      ModalText.save,
       ModalContent.saveParty
     );
     this.modalService.openModal();
@@ -45,8 +45,8 @@ export class BattlefieldControlsComponent {
   // Loading a saved party
   handleLoadSavedPartyClick(): void {
     this.modalService.setModalAppearance(
-      ModalText.load,
       ColorScheme.default,
+      ModalText.load,
       ModalContent.loadParty
     );
     this.modalService.openModal();
@@ -55,8 +55,8 @@ export class BattlefieldControlsComponent {
   // Clearing the list
   handleClearAllClick(): void {
     this.modalService.setModalAppearance(
-      ModalText.clear,
       ColorScheme.default,
+      ModalText.clear,
       ModalContent.clearAll
     );
     this.modalService.openModal();

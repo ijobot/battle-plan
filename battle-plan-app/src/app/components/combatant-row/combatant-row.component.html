@@ -1,21 +1,36 @@
 <div class="row" [ngStyle]="getRowAndButtonColor()">
   <!-- COMBATANT NAME -->
   <div class="row-item">
-    <button [ngStyle]="getRowAndButtonColor()">
+    <button
+      [ngStyle]="getRowAndButtonColor()"
+      (click)="
+        handleUpdateCombatant(modalText.updateName, modalContent.updateName)
+      "
+    >
       {{ combatant.name }}
     </button>
   </div>
 
   <!-- COMBATANT TYPE -->
   <div class="row-item">
-    <button [ngStyle]="getRowAndButtonColor()">
+    <button
+      [ngStyle]="getRowAndButtonColor()"
+      (click)="
+        handleUpdateCombatant(modalText.updateType, modalContent.updateType)
+      "
+    >
       {{ combatant.type }}
     </button>
   </div>
 
   <!-- COMBATANT SCORE -->
   <div class="row-item">
-    <button [ngStyle]="getRowAndButtonColor()">
+    <button
+      [ngStyle]="getRowAndButtonColor()"
+      (click)="
+        handleUpdateCombatant(modalText.updateScore, modalContent.updateScore)
+      "
+    >
       {{ combatant.score }}
     </button>
   </div>

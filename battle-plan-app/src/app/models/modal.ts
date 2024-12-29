@@ -1,18 +1,21 @@
 import { ColorScheme } from './color-scheme';
 
 export interface ModalAppearance {
-  modalText: ModalText;
   colorScheme: ColorScheme;
+  modalText: ModalText;
   modalContent: ModalContent;
 }
 
 export enum ModalText {
-  player = 'Player',
-  monster = 'Monster',
-  npc = 'NPC',
+  player = 'Add Player',
+  monster = 'Add Monster',
+  npc = 'Add NPC',
   save = 'Save Current Party?',
   load = 'Load Saved Party?',
   clear = 'Clear All Combatants?',
+  updateName = 'Update Combatant Name',
+  updateType = 'Update Combatant Type',
+  updateScore = 'Update Combatant Score',
 }
 
 export enum ModalContent {
@@ -20,4 +23,7 @@ export enum ModalContent {
   saveParty = 'saveParty',
   loadParty = 'loadParty',
   clearAll = 'clearAll',
+  updateName = 'updateName',
+  updateType = 'updateType',
+  updateScore = 'updateScore',
 }

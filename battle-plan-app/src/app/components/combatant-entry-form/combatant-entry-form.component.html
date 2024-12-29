@@ -1,34 +1,76 @@
 <form [formGroup]="combatantForm" (ngSubmit)="onSubmit()">
-  <div class="field">
-    <div class="label-and-input">
-      <label for="name">Combatant Name:</label
-      ><input
-        formFocus
-        class="large-field"
-        id="name"
-        type="text"
-        [placeholder]="
-          name?.dirty && name?.value == '' ? 'Name required' : 'Enter name'
-        "
-        formControlName="name"
-      />
+  <ng-content *ngIf="!update; else updateName">
+    <div class="field">
+      <div class="label-and-input">
+        <label for="name">Combatant Name:</label
+        ><input
+          formFocus
+          class="large-field"
+          id="name"
+          type="text"
+          [placeholder]="
+            name?.dirty && name?.value == '' ? 'Name required' : 'Enter name'
+          "
+          formControlName="name"
+        />
+      </div>
     </div>
-  </div>
 
-  <div class="field">
-    <div class="label-and-input">
-      <label for="name">Initiative Score:</label
-      ><input
-        class="large-field"
-        id="score"
-        type="text"
-        [placeholder]="
-          score?.dirty && score?.value == '' ? 'Score required' : 'Enter score'
-        "
-        formControlName="score"
-      />
+    <div class="field">
+      <div class="label-and-input">
+        <label for="name">Initiative Score:</label
+        ><input
+          class="large-field"
+          id="score"
+          type="text"
+          [placeholder]="
+            score?.dirty && score?.value == ''
+              ? 'Score required'
+              : 'Enter score'
+          "
+          formControlName="score"
+        />
+      </div>
     </div>
-  </div>
+  </ng-content>
+
+  <ng-template #updateName>
+    <ng-content *ngIf="updateType == 'name'; else updateScore">
+      <div class="field">
+        <div class="label-and-input">
+          <label for="name">Combatant Name:</label
+          ><input
+            formFocus
+            class="large-field"
+            id="name"
+            type="text"
+            [placeholder]="
+              name?.dirty && name?.value == '' ? 'Name required' : 'Enter name'
+            "
+            formControlName="name"
+          />
+        </div></div
+    ></ng-content>
+  </ng-template>
+
+  <ng-template #updateScore>
+    <div class="field">
+      <div class="label-and-input">
+        <label for="name">Initiative Score:</label
+        ><input
+          class="large-field"
+          id="score"
+          type="text"
+          [placeholder]="
+            score?.dirty && score?.value == ''
+              ? 'Score required'
+              : 'Enter score'
+          "
+          formControlName="score"
+        />
+      </div>
+    </div>
+  </ng-template>
 
   <div class="buttons">
     <button type="submit" [disabled]="!combatantForm.valid">Submit</button>

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Combatant } from '../models/combatant';
+import { Combatant, CombatantType } from '../models/combatant';
 import { LocalStorageService } from './local-storage.service';
 import { ColorScheme } from '../models/color-scheme';
-import { ModalText } from '../models/modal';
 
 @Injectable({
   providedIn: 'root',
@@ -23,12 +22,10 @@ export class CombatantService {
 
   addCombatant(
     colorScheme: ColorScheme,
-    type: ModalText,
+    type: CombatantType,
     name: string,
     score: number
   ): void {
-    // Set ColorScheme based on ModalText
-
     // Create new combatant object
     const newestCombatant: Combatant = {
       colorScheme,
@@ -54,21 +51,17 @@ export class CombatantService {
     this._combatants$.next([...this._combatants$.getValue()]);
   }
 
-  updateCombatant(
-    index: number,
-    updateType: string,
-    newValue: number | string
-  ): void {
+  updateCombatant(index: number, updateType: string): void {
     // Find combatant by index
     const combatantToChange = this._combatants$.getValue()[index];
 
     // Update correct property
-    if (updateType == 'name') {
-      combatantToChange.name = newValue as string;
-    }
-    if (updateType == 'score') {
-      combatantToChange.score = newValue as number;
-    }
+    // if (updateType == 'name') {
+    //   combatantToChange.name = newValue as string;
+    // }
+    // if (updateType == 'score') {
+    //   combatantToChange.score = newValue as number;
+    // }
 
     // Re-sort list based on changes
     this._combatants$.next([
@@ -77,7 +70,7 @@ export class CombatantService {
   }
 
   saveCurrentCombatants(): void {
-    // Save only works if combatants are on the board
+    // Save only works if combatants are on the list
     if (this._combatants$.getValue().length) {
       this._savedParty$.next(this._combatants$.getValue());
       this.localStorageService.saveData(
@@ -96,7 +89,7 @@ export class CombatantService {
   }
 
   clearAllCombatants(): void {
-    // Does not affect saved combatants
+    // Does not affect saved combatants - just clears the list
     this._combatants$.next([]);
   }
 }

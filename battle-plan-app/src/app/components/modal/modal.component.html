@@ -7,7 +7,32 @@
       <h1 class="title">{{ modalText }}</h1>
 
       <!-- MODAL CONTENTS FOR ADDING COMBATANTS -->
-      <app-combatant-entry-form></app-combatant-entry-form>
+      <ng-content *ngIf="modalContent == 'addCombatant'">
+        <app-combatant-entry-form
+          [colorScheme]="colorScheme"
+          [modalText]="modalText"
+        ></app-combatant-entry-form
+      ></ng-content>
+
+      <!-- MODAL CONTENTS FOR UPDATING COMBATANTS -->
+      <ng-content *ngIf="modalContent == 'updateName'">
+        <app-combatant-entry-form
+          [update]="true"
+          [updateType]="'name'"
+          [colorScheme]="colorScheme"
+          [modalText]="modalText"
+        ></app-combatant-entry-form
+      ></ng-content>
+
+      <!-- MODAL CONTENTS FOR UPDATING COMBATANTS -->
+      <ng-content *ngIf="modalContent == 'updateScore'">
+        <app-combatant-entry-form
+          [update]="true"
+          [updateType]="'score'"
+          [colorScheme]="colorScheme"
+          [modalText]="modalText"
+        ></app-combatant-entry-form
+      ></ng-content>
 
       <!-- MODAL CONTENTS FOR SAVING A PARTY -->
       <div class="clear-all-buttons" *ngIf="modalContent == 'saveParty'">
