@@ -32,6 +32,11 @@
         />
       </div>
     </div>
+
+    <div class="buttons">
+      <button type="submit" [disabled]="!combatantForm.valid">Submit</button>
+      <button (click)="handleCloseModal()">Cancel</button>
+    </div>
   </ng-content>
 
   <ng-template #updateName>
@@ -49,8 +54,13 @@
             "
             formControlName="name"
           />
-        </div></div
-    ></ng-content>
+        </div>
+      </div>
+      <div class="buttons">
+        <button type="submit">Submit</button>
+        <button (click)="handleCloseModal()">Cancel</button>
+      </div>
+    </ng-content>
   </ng-template>
 
   <ng-template #updateScore>
@@ -70,10 +80,9 @@
         />
       </div>
     </div>
+    <div class="buttons">
+      <button type="submit">Submit</button>
+      <button (click)="handleCloseModal()">Cancel</button>
+    </div>
   </ng-template>
-
-  <div class="buttons">
-    <button type="submit" [disabled]="!combatantForm.valid">Submit</button>
-    <button (click)="handleCloseModal()">Cancel</button>
-  </div>
 </form>

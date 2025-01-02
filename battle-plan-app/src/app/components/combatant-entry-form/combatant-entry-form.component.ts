@@ -11,7 +11,7 @@ import { CombatantService } from '../../services/combatant.service';
 import { ModalService } from '../../services/modal.service';
 import { ColorScheme } from '../../models/color-scheme';
 import { ModalText } from '../../models/modal';
-import { Combatant, CombatantType } from '../../models/combatant';
+import { CombatantType } from '../../models/combatant';
 
 @Component({
   selector: 'app-combatant-entry-form',
@@ -23,8 +23,9 @@ import { Combatant, CombatantType } from '../../models/combatant';
 export class CombatantEntryFormComponent {
   @Input() colorScheme: ColorScheme = ColorScheme.player;
   @Input() modalText: ModalText = ModalText.player;
-  @Input() update?: boolean = false;
-  @Input() updateType?: string = '';
+  @Input() index?: number;
+  @Input() update?: boolean;
+  @Input() updateType?: string;
   combatantForm: FormGroup;
 
   constructor(
@@ -61,6 +62,24 @@ export class CombatantEntryFormComponent {
         this.combatantForm.value.name,
         this.combatantForm.value.score
       );
+      this.modalService.closeModal();
+    }
+
+    if (
+      this.combatantForm.value.name &&
+      this.update &&
+      this.updateType == 'name'
+    ) {
+      this.combatantService.updateCombatant(0, 'name', this.name?.value);
+      this.modalService.closeModal();
+    }
+
+    if (
+      this.combatantForm.value.score &&
+      this.update &&
+      this.updateType == 'score'
+    ) {
+      this.combatantService.updateCombatant(0, 'score', this.score?.value);
       this.modalService.closeModal();
     }
   }

@@ -51,17 +51,21 @@ export class CombatantService {
     this._combatants$.next([...this._combatants$.getValue()]);
   }
 
-  updateCombatant(index: number, updateType: string): void {
+  updateCombatant(
+    index: number,
+    updateType: string,
+    newValue: string | number
+  ): void {
     // Find combatant by index
     const combatantToChange = this._combatants$.getValue()[index];
 
     // Update correct property
-    // if (updateType == 'name') {
-    //   combatantToChange.name = newValue as string;
-    // }
-    // if (updateType == 'score') {
-    //   combatantToChange.score = newValue as number;
-    // }
+    if (updateType == 'name') {
+      combatantToChange.name = newValue as string;
+    }
+    if (updateType == 'score') {
+      combatantToChange.score = newValue as number;
+    }
 
     // Re-sort list based on changes
     this._combatants$.next([
