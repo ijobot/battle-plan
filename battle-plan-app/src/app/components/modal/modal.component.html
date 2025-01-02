@@ -14,7 +14,7 @@
         ></app-combatant-entry-form
       ></ng-content>
 
-      <!-- MODAL CONTENTS FOR UPDATING COMBATANTS -->
+      <!-- MODAL CONTENTS FOR UPDATING NAMES -->
       <ng-content *ngIf="modalContent == 'updateName'">
         <app-combatant-entry-form
           [update]="true"
@@ -24,7 +24,7 @@
         ></app-combatant-entry-form
       ></ng-content>
 
-      <!-- MODAL CONTENTS FOR UPDATING COMBATANTS -->
+      <!-- MODAL CONTENTS FOR UPDATING SCORES -->
       <ng-content *ngIf="modalContent == 'updateScore'">
         <app-combatant-entry-form
           [update]="true"

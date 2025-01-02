@@ -8,6 +8,4 @@ import { NavButtonsComponent } from '../../components/nav-buttons/nav-buttons.co
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
-  constructor() {}
-}
+export class HomeComponent {}

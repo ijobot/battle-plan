@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ModalService } from '../../services/modal.service';
 import { CombatantService } from '../../services/combatant.service';
 import { CommonModule } from '@angular/common';
@@ -13,14 +13,12 @@ import { ModalContent, ModalText } from '../../models/modal';
   styleUrl: './battlefield-controls.component.scss',
 })
 export class BattlefieldControlsComponent {
-  public colorScheme = ColorScheme;
-  public modalText = ModalText;
-  public savedParty$ = this.combatantService.savedParty$;
+  private modalService = inject(ModalService);
+  private combatantService = inject(CombatantService);
 
-  constructor(
-    private modalService: ModalService,
-    private combatantService: CombatantService
-  ) {}
+  colorScheme = ColorScheme;
+  modalText = ModalText;
+  savedParty$ = this.combatantService.savedParty$;
 
   // Adding a combatant
   handleAddCombatantClick(color: ColorScheme, type: ModalText): void {

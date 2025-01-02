@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { ModalComponent } from '../../components/modal/modal.component';
@@ -20,9 +20,10 @@ import { BattlefieldControlsComponent } from '../../components/battlefield-contr
   styleUrl: './battlefield.component.scss',
 })
 export class BattlefieldComponent {
-  showModal$: Observable<boolean> = this.modalService.modal$;
+  private modalService = inject(ModalService);
+  private router = inject(Router);
 
-  constructor(private modalService: ModalService, private router: Router) {}
+  showModal$: Observable<boolean> = this.modalService.modal$;
 
   navigate(to: string) {
     this.router.navigate([to]);

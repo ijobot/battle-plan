@@ -8,8 +8,6 @@ import { Combatant } from '../models/combatant';
 export class LocalStorageService {
   private readonly platformId = inject(PLATFORM_ID);
 
-  constructor() {}
-
   checkLocalStorage(): Combatant[] {
     const savedParty = this.getData('Saved Party');
     if (savedParty) {

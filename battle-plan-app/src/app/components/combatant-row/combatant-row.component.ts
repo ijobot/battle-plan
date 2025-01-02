@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Combatant } from '../../models/combatant';
 import { CombatantService } from '../../services/combatant.service';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,18 +15,17 @@ import { ModalContent, ModalText } from '../../models/modal';
   styleUrl: './combatant-row.component.scss',
 })
 export class CombatantRowComponent {
+  private combatantService = inject(CombatantService);
+  private modalService = inject(ModalService);
+
   @Input() combatant: Combatant = {} as Combatant;
   @Input() index: number = 0;
+
   modalText = ModalText;
   modalContent = ModalContent;
 
-  constructor(
-    private combatantService: CombatantService,
-    private modalService: ModalService
-  ) {}
-
   getRowAndButtonColor(): Partial<CSSStyleDeclaration> {
-    const bgColor = { 'background-color': this.combatant.colorScheme };
+    const bgColor = { 'background-color': this.combatant.color };
     return bgColor;
   }
 
@@ -41,7 +40,7 @@ export class CombatantRowComponent {
     modalContent: ModalContent
   ): void {
     this.modalService.setModalAppearance(
-      this.combatant.colorScheme,
+      this.combatant.color,
       updateAttribute,
       modalContent
     );

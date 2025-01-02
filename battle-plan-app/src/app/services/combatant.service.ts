@@ -1,34 +1,38 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Combatant, CombatantType } from '../models/combatant';
 import { LocalStorageService } from './local-storage.service';
 import { ColorScheme } from '../models/color-scheme';
+import { STARTING_COMBATANTS } from '../models/mockData';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CombatantService {
-  combatants$ = new Observable<Combatant[]>();
-  savedParty$ = new Observable<Combatant[]>();
+  private localStorageService = inject(LocalStorageService);
+
+  private _combatants$ = new BehaviorSubject<Combatant[]>(STARTING_COMBATANTS);
   private _savedParty$ = new BehaviorSubject<Combatant[]>(
     this.localStorageService.checkLocalStorage()
   );
-  private _combatants$ = new BehaviorSubject<Combatant[]>([]);
 
-  constructor(private localStorageService: LocalStorageService) {
+  combatants$ = new Observable<Combatant[]>();
+  savedParty$ = new Observable<Combatant[]>();
+
+  constructor() {
     this.combatants$ = this._combatants$.asObservable();
     this.savedParty$ = this._savedParty$.asObservable();
   }
 
   addCombatant(
-    colorScheme: ColorScheme,
+    color: ColorScheme,
     type: CombatantType,
     name: string,
     score: number
   ): void {
     // Create new combatant object
     const newestCombatant: Combatant = {
-      colorScheme,
+      color,
       type,
       name,
       score,

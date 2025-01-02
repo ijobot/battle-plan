@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ModalService } from '../../services/modal.service';
 import { CombatantService } from '../../services/combatant.service';
 import { Combatant } from '../../models/combatant';
@@ -16,16 +16,15 @@ import { CommonModule } from '@angular/common';
   styleUrl: './modal.component.scss',
 })
 export class ModalComponent implements OnInit, OnDestroy {
+  private modalService = inject(ModalService);
+  private combatantService = inject(CombatantService);
+
+  private readonly destroy$ = new Subject<boolean>();
+
   colorScheme: ColorScheme = ColorScheme.default;
   modalText: ModalText = ModalText.clear;
   modalContent: ModalContent = ModalContent.clearAll;
   combatants$: Observable<Combatant[]> = this.combatantService.combatants$;
-  private readonly destroy$ = new Subject<boolean>();
-
-  constructor(
-    private modalService: ModalService,
-    private combatantService: CombatantService
-  ) {}
 
   ngOnInit(): void {
     this.modalService.modalAppearance$

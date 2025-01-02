@@ -7,8 +7,9 @@ import { ColorScheme } from '../models/color-scheme';
   providedIn: 'root',
 })
 export class ModalService {
-  public modal$ = new Observable<boolean>();
-  public modalAppearance$ = new Observable<ModalAppearance>();
+  modal$ = new Observable<boolean>();
+  modalAppearance$ = new Observable<ModalAppearance>();
+
   private _modal$ = new BehaviorSubject(false);
   private _modalAppearance$ = new BehaviorSubject<ModalAppearance>({
     colorScheme: ColorScheme.player,

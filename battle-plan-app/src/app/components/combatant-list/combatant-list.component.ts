@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CombatantService } from '../../services/combatant.service';
 import { CombatantRowComponent } from '../combatant-row/combatant-row.component';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './combatant-list.component.scss',
 })
 export class CombatantListComponent {
-  combatants$ = this.combatantService.combatants$;
+  private combatantService = inject(CombatantService);
 
-  constructor(private combatantService: CombatantService) {}
+  combatants$ = this.combatantService.combatants$;
 }
