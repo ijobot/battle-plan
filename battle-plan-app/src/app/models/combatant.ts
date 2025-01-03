@@ -1,7 +1,4 @@
-import { ColorScheme } from './color-scheme';
-
 export interface Combatant {
-  color: ColorScheme;
   type: CombatantType;
   name: string;
   score: number;

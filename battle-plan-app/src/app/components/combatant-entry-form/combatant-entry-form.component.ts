@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -11,7 +11,7 @@ import { CombatantService } from '../../services/combatant.service';
 import { ModalService } from '../../services/modal.service';
 import { ColorScheme } from '../../models/color-scheme';
 import { ModalText } from '../../models/modal';
-import { CombatantType } from '../../models/combatant';
+import { Combatant, CombatantType } from '../../models/combatant';
 
 @Component({
   selector: 'app-combatant-entry-form',
@@ -20,16 +20,16 @@ import { CombatantType } from '../../models/combatant';
   templateUrl: './combatant-entry-form.component.html',
   styleUrl: './combatant-entry-form.component.scss',
 })
-export class CombatantEntryFormComponent {
+export class CombatantEntryFormComponent implements OnInit {
   private modalService = inject(ModalService);
   private combatantService = inject(CombatantService);
 
   @Input() colorScheme: ColorScheme = ColorScheme.player;
   @Input() modalText: ModalText = ModalText.player;
-  @Input() index?: number;
   @Input() update?: boolean;
-  @Input() updateType?: string;
+  @Input() updateAttribute?: string;
 
+  combatant?: Combatant = this.modalService.getCombatantToUpdate();
   combatantCreationForm: FormGroup;
   combatantUpdateForm: FormGroup;
 
@@ -40,6 +40,7 @@ export class CombatantEntryFormComponent {
     });
     this.combatantUpdateForm = new FormGroup({
       updateName: new FormControl(''),
+      updateType: new FormControl(''),
       updateScore: new FormControl(''),
     });
   }
@@ -56,8 +57,21 @@ export class CombatantEntryFormComponent {
     return this.combatantUpdateForm.get('updateName');
   }
 
+  get updateType() {
+    return this.combatantUpdateForm.get('updateType');
+  }
+
   get updateScore() {
     return this.combatantUpdateForm.get('updateScore');
+  }
+
+  ngOnInit(): void {
+    this.combatantUpdateForm.controls['updateName'].setValue(
+      this.combatant?.name
+    );
+    this.combatantUpdateForm.controls['updateScore'].setValue(
+      this.combatant?.score
+    );
   }
 
   onCreationSubmit(): void {
@@ -71,7 +85,6 @@ export class CombatantEntryFormComponent {
 
     if (this.combatantCreationForm.valid) {
       this.combatantService.addCombatant(
-        this.colorScheme,
         combatantType,
         this.combatantCreationForm.value.name,
         this.combatantCreationForm.value.score
@@ -81,26 +94,34 @@ export class CombatantEntryFormComponent {
   }
 
   onUpdateSubmit(): void {
-    if (
-      this.combatantUpdateForm.value.updateName &&
-      this.update &&
-      this.updateType == 'name'
-    ) {
-      this.combatantService.updateCombatant(0, 'name', this.updateName?.value);
-      this.modalService.closeModal();
-    }
+    if (this.combatant) {
+      if (this.updateAttribute == 'name') {
+        this.combatantService.updateCombatant(
+          this.combatant,
+          this.updateAttribute,
+          this.updateName?.value
+        );
+        this.modalService.closeModal();
+      }
 
-    if (
-      this.combatantUpdateForm.value.updateScore &&
-      this.update &&
-      this.updateType == 'score'
-    ) {
-      this.combatantService.updateCombatant(
-        0,
-        'score',
-        this.updateScore?.value
-      );
-      this.modalService.closeModal();
+      if (this.updateAttribute == 'type') {
+        this.combatantService.updateCombatant(
+          this.combatant,
+          this.updateAttribute,
+          this.updateType?.value
+        );
+
+        this.modalService.closeModal();
+      }
+
+      if (this.updateAttribute == 'score') {
+        this.combatantService.updateCombatant(
+          this.combatant,
+          this.updateAttribute,
+          this.updateScore?.value
+        );
+        this.modalService.closeModal();
+      }
     }
   }
 

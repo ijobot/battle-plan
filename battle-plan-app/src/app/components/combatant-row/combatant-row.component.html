@@ -13,7 +13,12 @@
 
   <!-- COMBATANT TYPE -->
   <div class="row-item">
-    <button [ngStyle]="getRowAndButtonColor()">
+    <button
+      [ngStyle]="getRowAndButtonColor()"
+      (click)="
+        handleUpdateCombatant(modalText.updateType, modalContent.updateType)
+      "
+    >
       {{ combatant.type }}
     </button>
   </div>

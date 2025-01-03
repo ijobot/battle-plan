@@ -1,9 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Combatant, CombatantType } from '../models/combatant';
 import { LocalStorageService } from './local-storage.service';
-import { ColorScheme } from '../models/color-scheme';
-import { STARTING_COMBATANTS } from '../models/mockData';
+import { STARTING_COMBATANTS } from '../models/mock-data';
 
 @Injectable({
   providedIn: 'root',
@@ -24,15 +23,9 @@ export class CombatantService {
     this.savedParty$ = this._savedParty$.asObservable();
   }
 
-  addCombatant(
-    color: ColorScheme,
-    type: CombatantType,
-    name: string,
-    score: number
-  ): void {
+  addCombatant(type: CombatantType, name: string, score: number): void {
     // Create new combatant object
     const newestCombatant: Combatant = {
-      color,
       type,
       name,
       score,
@@ -55,20 +48,21 @@ export class CombatantService {
     this._combatants$.next([...this._combatants$.getValue()]);
   }
 
+  // Needs work on updateType functionality
   updateCombatant(
-    index: number,
+    combatant: Combatant,
     updateType: string,
     newValue: string | number
   ): void {
-    // Find combatant by index
-    const combatantToChange = this._combatants$.getValue()[index];
-
     // Update correct property
     if (updateType == 'name') {
-      combatantToChange.name = newValue as string;
+      combatant.name = newValue as string;
+    }
+    if (updateType == 'type') {
+      combatant.type = CombatantType.monster;
     }
     if (updateType == 'score') {
-      combatantToChange.score = newValue as number;
+      combatant.score = newValue as number;
     }
 
     // Re-sort list based on changes

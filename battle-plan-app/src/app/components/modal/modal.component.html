@@ -18,7 +18,17 @@
       <ng-content *ngIf="modalContent == 'updateName'">
         <app-combatant-entry-form
           [update]="true"
-          [updateType]="'name'"
+          [updateAttribute]="'name'"
+          [colorScheme]="colorScheme"
+          [modalText]="modalText"
+        ></app-combatant-entry-form
+      ></ng-content>
+
+      <!-- MODAL CONTENTS FOR UPDATING TYPES -->
+      <ng-content *ngIf="modalContent == 'updateType'">
+        <app-combatant-entry-form
+          [update]="true"
+          [updateAttribute]="'type'"
           [colorScheme]="colorScheme"
           [modalText]="modalText"
         ></app-combatant-entry-form
@@ -28,7 +38,7 @@
       <ng-content *ngIf="modalContent == 'updateScore'">
         <app-combatant-entry-form
           [update]="true"
-          [updateType]="'score'"
+          [updateAttribute]="'score'"
           [colorScheme]="colorScheme"
           [modalText]="modalText"
         ></app-combatant-entry-form

@@ -1,5 +1,5 @@
-<!-- COMBATANT CREATION FORM -->
-<ng-content *ngIf="!update; else NameUpdate">
+<!-- COMBATANT CREATION -->
+<ng-content *ngIf="!update; else Update">
   <form [formGroup]="combatantCreationForm" (ngSubmit)="onCreationSubmit()">
     <div class="field">
       <div class="label-and-input">
@@ -43,10 +43,11 @@
   </form>
 </ng-content>
 
-<!-- NAME UPDATE FORM -->
-<ng-template #NameUpdate>
+<!-- COMBATANT UPDATE -->
+<ng-template #Update>
   <form [formGroup]="combatantUpdateForm" (ngSubmit)="onUpdateSubmit()">
-    <ng-content *ngIf="updateType == 'name'; else ScoreUpdate">
+    <!-- NAME UPDATE FORM -->
+    <ng-content *ngIf="updateAttribute == 'name'">
       <div class="field">
         <div class="label-and-input">
           <label for="updateName">Combatant Name:</label
@@ -55,7 +56,7 @@
             class="large-field"
             id="updateName"
             type="text"
-            [placeholder]="'Enter name'"
+            [placeholder]="combatant ? combatant.name : ''"
             formControlName="updateName"
           />
         </div>
@@ -66,8 +67,26 @@
       </div>
     </ng-content>
 
+    <!-- TYPE UPDATE FORM -->
+    <ng-content *ngIf="updateAttribute == 'type'">
+      <div class="field">
+        <div class="label-and-input">
+          <label for="updateType">Combatant Type:</label
+          ><select>
+            <option value="TEST1">TEST1</option>
+            <option value="TEST2">TEST2</option>
+            <option value="TEST3">TEST3</option>
+          </select>
+        </div>
+      </div>
+      <div class="buttons">
+        <button type="submit">Submit</button>
+        <button (click)="handleCloseModal()">Cancel</button>
+      </div>
+    </ng-content>
+
     <!-- SCORE UPDATE FORM -->
-    <ng-template #ScoreUpdate>
+    <ng-content *ngIf="updateAttribute == 'score'">
       <div class="field">
         <div class="label-and-input">
           <label for="updateScore">Initiative Score:</label
@@ -75,7 +94,7 @@
             class="large-field"
             id="updateScore"
             type="text"
-            [placeholder]="'Enter score'"
+            [placeholder]="combatant ? combatant.score : ''"
             formControlName="updateScore"
           />
         </div>
@@ -84,6 +103,6 @@
         <button type="submit">Submit</button>
         <button (click)="handleCloseModal()">Cancel</button>
       </div>
-    </ng-template>
+    </ng-content>
   </form>
 </ng-template>

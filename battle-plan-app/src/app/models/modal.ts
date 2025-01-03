@@ -1,9 +1,11 @@
 import { ColorScheme } from './color-scheme';
+import { Combatant } from './combatant';
 
 export interface ModalAppearance {
   colorScheme: ColorScheme;
   modalText: ModalText;
   modalContent: ModalContent;
+  combatant?: Combatant;
 }
 
 export enum ModalText {

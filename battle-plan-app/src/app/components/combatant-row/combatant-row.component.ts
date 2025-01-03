@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { ModalService } from '../../services/modal.service';
 import { ModalContent, ModalText } from '../../models/modal';
+import { Utils } from '../../utils/utils';
 
 @Component({
   selector: 'app-combatant-row',
@@ -25,7 +26,9 @@ export class CombatantRowComponent {
   modalContent = ModalContent;
 
   getRowAndButtonColor(): Partial<CSSStyleDeclaration> {
-    const bgColor = { 'background-color': this.combatant.color };
+    const bgColor = {
+      'background-color': Utils.getColorSchemeFromType(this.combatant.type),
+    };
     return bgColor;
   }
 
@@ -39,10 +42,12 @@ export class CombatantRowComponent {
     updateAttribute: ModalText,
     modalContent: ModalContent
   ): void {
+    Utils.getColorSchemeFromType(this.combatant.type);
     this.modalService.setModalAppearance(
-      this.combatant.color,
+      Utils.getColorSchemeFromType(this.combatant.type),
       updateAttribute,
-      modalContent
+      modalContent,
+      this.combatant
     );
     this.modalService.openModal();
   }

@@ -24,16 +24,18 @@ export class ModalComponent implements OnInit, OnDestroy {
   colorScheme: ColorScheme = ColorScheme.default;
   modalText: ModalText = ModalText.clear;
   modalContent: ModalContent = ModalContent.clearAll;
+  combatant?: Combatant;
   combatants$: Observable<Combatant[]> = this.combatantService.combatants$;
 
   ngOnInit(): void {
     this.modalService.modalAppearance$
       .pipe(
         takeUntil(this.destroy$),
-        map(({ colorScheme, modalText, modalContent }) => {
+        map(({ colorScheme, modalText, modalContent, combatant }) => {
           this.colorScheme = colorScheme;
           this.modalText = modalText;
           this.modalContent = modalContent;
+          this.combatant = combatant;
         })
       )
       .subscribe();
