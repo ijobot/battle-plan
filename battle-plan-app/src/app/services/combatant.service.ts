@@ -48,21 +48,21 @@ export class CombatantService {
     this._combatants$.next([...this._combatants$.getValue()]);
   }
 
-  // Needs work on updateType functionality
   updateCombatant(
     combatant: Combatant,
     updateType: string,
-    newValue: string | number
+    newValue: string | number | CombatantType
   ): void {
     // Update correct property
-    if (updateType == 'name') {
-      combatant.name = newValue as string;
-    }
-    if (updateType == 'type') {
-      combatant.type = CombatantType.monster;
-    }
-    if (updateType == 'score') {
-      combatant.score = newValue as number;
+    switch (updateType) {
+      case 'name':
+        combatant.name = newValue as string;
+        break;
+      case 'type':
+        combatant.type = newValue as CombatantType;
+        break;
+      default:
+        combatant.score = newValue as number;
     }
 
     // Re-sort list based on changes

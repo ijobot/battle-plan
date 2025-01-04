@@ -7,7 +7,7 @@
   --secondary-bg: #6d6975;
 
   /* text colors */
-  --primary-text: #181717;
+  --primary-text: #222222;
   --logo-text: goldenrod;
 
   /* border colors */
@@ -17,13 +17,15 @@
 
   /* button colors */
   --button: #c1c1c1;
+  --button-hover: goldenrod;
   --topleft-button-border: rgba(0, 0, 0, 0.2);
   --bottomright-button-border: rgba(0, 0, 0, 0.6);
 
-  /* combatant colors */
+  /* colorScheme */
   --player: #2bb78d;
   --monster: #df5858;
   --npc: #5986da;
+  --default: #9784bb;
 
   /* spacing */
   --spacing-s: 5px;
@@ -89,10 +91,10 @@ button {
   font-size: 2rem;
 }
 
-button:hover:enabled {
+button:hover:enabled:not(:active) {
   filter: drop-shadow(2px 2px 1px goldenrod)
     drop-shadow(-2px -2px 1px goldenrod) drop-shadow(-2px 2px 1px goldenrod)
-    drop-shadow(2px -2px 1px goldenrod) brightness(130%);
+    drop-shadow(2px -2px 1px goldenrod) brightness(120%);
   border-top: 4px solid var(--topleft-button-border);
   border-right: 4px solid var(--bottomright-button-border);
   border-bottom: 4px solid var(--bottomright-button-border);
@@ -101,26 +103,36 @@ button:hover:enabled {
 }
 
 button:disabled {
-  filter: brightness(80%);
+  filter: brightness(70%);
   cursor: not-allowed;
 }
 
-input {
-  border-radius: 0;
+button:active {
+  border-top: 4px solid var(--bottomright-button-border);
+  border-right: 4px solid var(--topleft-button-border);
+  border-bottom: 4px solid var(--topleft-button-border);
+  border-left: 4px solid var(--bottomright-button-border);
+}
+
+input,
+select {
   border-top: solid 4px var(--dark-shadow-border);
   border-right: solid 4px var(--light-shadow-border);
   border-bottom: solid 4px var(--light-shadow-border);
   border-left: solid 4px var(--dark-shadow-border);
   padding: 0 var(--spacing-s);
-
   &:hover {
     cursor: pointer;
-    outline: 4px solid var(--button-border);
+    filter: drop-shadow(2px 2px 1px goldenrod)
+      drop-shadow(-2px -2px 1px goldenrod) drop-shadow(-2px 2px 1px goldenrod)
+      drop-shadow(2px -2px 1px goldenrod) brightness(130%);
   }
+}
 
-  &:focus {
-    outline: 4px solid var(--button-border);
-  }
+select {
+  min-width: 200px;
+  height: 40px;
+  font-size: 2rem;
 }
 
 /* --------------- */

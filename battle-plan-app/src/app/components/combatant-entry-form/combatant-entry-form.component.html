@@ -1,6 +1,10 @@
 <!-- COMBATANT CREATION -->
-<ng-content *ngIf="!update; else Update">
-  <form [formGroup]="combatantCreationForm" (ngSubmit)="onCreationSubmit()">
+<ng-content *ngIf="!updateAttribute; else Update">
+  <form
+    [formGroup]="combatantCreationForm"
+    (ngSubmit)="onCreationSubmit()"
+    cdkTrapFocus
+  >
     <div class="field">
       <div class="label-and-input">
         <label for="name">Combatant Name:</label
@@ -38,14 +42,18 @@
       <button type="submit" [disabled]="!combatantCreationForm.valid">
         Submit
       </button>
-      <button (click)="handleCloseModal()">Cancel</button>
+      <button type="button" (click)="handleCloseModal()">Cancel</button>
     </div>
   </form>
 </ng-content>
 
 <!-- COMBATANT UPDATE -->
 <ng-template #Update>
-  <form [formGroup]="combatantUpdateForm" (ngSubmit)="onUpdateSubmit()">
+  <form
+    [formGroup]="combatantUpdateForm"
+    (ngSubmit)="onUpdateSubmit()"
+    cdkTrapFocus
+  >
     <!-- NAME UPDATE FORM -->
     <ng-content *ngIf="updateAttribute == 'name'">
       <div class="field">
@@ -62,8 +70,8 @@
         </div>
       </div>
       <div class="buttons">
-        <button type="submit">Submit</button>
-        <button (click)="handleCloseModal()">Cancel</button>
+        <button type="submit" [disabled]="!updateName?.dirty">Submit</button>
+        <button type="button" (click)="handleCloseModal()">Cancel</button>
       </div>
     </ng-content>
 
@@ -72,16 +80,18 @@
       <div class="field">
         <div class="label-and-input">
           <label for="updateType">Combatant Type:</label
-          ><select>
-            <option value="TEST1">TEST1</option>
-            <option value="TEST2">TEST2</option>
-            <option value="TEST3">TEST3</option>
+          ><select #options (change)="onSelection(options.value)" formFocus>
+            <option [value]="combatant?.type" selected>
+              {{ combatant?.type }}
+            </option>
+            <option [value]="selectOptions[1]">{{ selectOptions[1] }}</option>
+            <option [value]="selectOptions[2]">{{ selectOptions[2] }}</option>
           </select>
         </div>
       </div>
       <div class="buttons">
-        <button type="submit">Submit</button>
-        <button (click)="handleCloseModal()">Cancel</button>
+        <button type="submit" [disabled]="!selectionMade">Submit</button>
+        <button type="button" (click)="handleCloseModal()">Cancel</button>
       </div>
     </ng-content>
 
@@ -91,6 +101,7 @@
         <div class="label-and-input">
           <label for="updateScore">Initiative Score:</label
           ><input
+            formFocus
             class="large-field"
             id="updateScore"
             type="text"
@@ -100,8 +111,8 @@
         </div>
       </div>
       <div class="buttons">
-        <button type="submit">Submit</button>
-        <button (click)="handleCloseModal()">Cancel</button>
+        <button type="submit" [disabled]="!updateScore?.dirty">Submit</button>
+        <button type="button" (click)="handleCloseModal()">Cancel</button>
       </div>
     </ng-content>
   </form>

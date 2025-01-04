@@ -12,6 +12,7 @@ form {
     .label-and-input {
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
 
     label {
@@ -33,10 +34,5 @@ form {
 
   button {
     max-width: fit-content;
-
-    &:disabled {
-      filter: brightness(80%);
-      cursor: not-allowed;
-    }
   }
 }

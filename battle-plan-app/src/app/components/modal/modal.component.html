@@ -1,51 +1,49 @@
 <div class="overlay">
   <div class="content-container main-modal">
     <div
+      *ngIf="modalAppearance$ | async as modal"
       class="content-container content"
-      [ngStyle]="{ 'background-color': colorScheme }"
+      [ngStyle]="{ 'background-color': modal.colorScheme }"
     >
-      <h1 class="title">{{ modalText }}</h1>
+      <h1 class="title">{{ modal.modalText }}</h1>
 
       <!-- MODAL CONTENTS FOR ADDING COMBATANTS -->
-      <ng-content *ngIf="modalContent == 'addCombatant'">
+      <ng-content *ngIf="modal.modalContent == 'addCombatant'">
         <app-combatant-entry-form
-          [colorScheme]="colorScheme"
-          [modalText]="modalText"
+          [colorScheme]="modal.colorScheme"
+          [modalText]="modal.modalText"
         ></app-combatant-entry-form
       ></ng-content>
 
       <!-- MODAL CONTENTS FOR UPDATING NAMES -->
-      <ng-content *ngIf="modalContent == 'updateName'">
+      <ng-content *ngIf="modal.modalContent == 'updateName'">
         <app-combatant-entry-form
-          [update]="true"
           [updateAttribute]="'name'"
-          [colorScheme]="colorScheme"
-          [modalText]="modalText"
+          [colorScheme]="modal.colorScheme"
+          [modalText]="modal.modalText"
         ></app-combatant-entry-form
       ></ng-content>
 
       <!-- MODAL CONTENTS FOR UPDATING TYPES -->
-      <ng-content *ngIf="modalContent == 'updateType'">
+      <ng-content *ngIf="modal.modalContent == 'updateType'">
         <app-combatant-entry-form
-          [update]="true"
           [updateAttribute]="'type'"
-          [colorScheme]="colorScheme"
-          [modalText]="modalText"
+          [colorScheme]="modal.colorScheme"
+          [modalText]="modal.modalText"
         ></app-combatant-entry-form
       ></ng-content>
 
       <!-- MODAL CONTENTS FOR UPDATING SCORES -->
-      <ng-content *ngIf="modalContent == 'updateScore'">
+      <ng-content *ngIf="modal.modalContent == 'updateScore'">
         <app-combatant-entry-form
-          [update]="true"
           [updateAttribute]="'score'"
-          [colorScheme]="colorScheme"
-          [modalText]="modalText"
+          [colorScheme]="modal.colorScheme"
+          [modalText]="modal.modalText"
         ></app-combatant-entry-form
       ></ng-content>
 
       <!-- MODAL CONTENTS FOR SAVING A PARTY -->
-      <div class="clear-all-buttons" *ngIf="modalContent == 'saveParty'">
+      <div class="clear-all-buttons" *ngIf="modal.modalContent == 'saveParty'">
         <button
           (click)="handleSaveAll()"
           [disabled]="!(combatants$ | async)?.length"
@@ -56,13 +54,13 @@
       </div>
 
       <!-- MODAL CONTENTS FOR LOADING A PARTY -->
-      <div class="clear-all-buttons" *ngIf="modalContent == 'loadParty'">
+      <div class="clear-all-buttons" *ngIf="modal.modalContent == 'loadParty'">
         <button (click)="handleLoadSavedParty()">Load Group</button>
         <button (click)="handleCloseModal()">Cancel</button>
       </div>
 
       <!-- MODAL CONTENTS FOR CONFIRMING A "CLEAR ALL" -->
-      <div class="clear-all-buttons" *ngIf="modalContent == 'clearAll'">
+      <div class="clear-all-buttons" *ngIf="modal.modalContent == 'clearAll'">
         <button (click)="handleClearAll()">Yes</button>
         <button (click)="handleCloseModal()">No</button>
       </div>

@@ -12,11 +12,20 @@ import { ModalService } from '../../services/modal.service';
 import { ColorScheme } from '../../models/color-scheme';
 import { ModalText } from '../../models/modal';
 import { Combatant, CombatantType } from '../../models/combatant';
+import { MatSelectModule } from '@angular/material/select';
+import { Utils } from '../../utils/utils';
+import { A11yModule } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-combatant-entry-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormFocusDirective],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    FormFocusDirective,
+    MatSelectModule,
+    A11yModule,
+  ],
   templateUrl: './combatant-entry-form.component.html',
   styleUrl: './combatant-entry-form.component.scss',
 })
@@ -26,10 +35,17 @@ export class CombatantEntryFormComponent implements OnInit {
 
   @Input() colorScheme: ColorScheme = ColorScheme.player;
   @Input() modalText: ModalText = ModalText.player;
-  @Input() update?: boolean;
   @Input() updateAttribute?: string;
 
-  combatant?: Combatant = this.modalService.getCombatantToUpdate();
+  combatant: Combatant | undefined = this.modalService.getCombatantToUpdate();
+  selectOptions: CombatantType[] = [
+    CombatantType.player,
+    CombatantType.monster,
+    CombatantType.npc,
+  ];
+  selection: CombatantType = CombatantType.player;
+  selectionMade: boolean = false;
+
   combatantCreationForm: FormGroup;
   combatantUpdateForm: FormGroup;
 
@@ -39,9 +55,9 @@ export class CombatantEntryFormComponent implements OnInit {
       score: new FormControl('', [Validators.required]),
     });
     this.combatantUpdateForm = new FormGroup({
-      updateName: new FormControl(''),
-      updateType: new FormControl(''),
-      updateScore: new FormControl(''),
+      updateName: new FormControl<string>(''),
+      updateType: new FormControl<number>(0),
+      updateScore: new FormControl<CombatantType>(CombatantType.player),
     });
   }
 
@@ -57,31 +73,24 @@ export class CombatantEntryFormComponent implements OnInit {
     return this.combatantUpdateForm.get('updateName');
   }
 
-  get updateType() {
-    return this.combatantUpdateForm.get('updateType');
-  }
-
   get updateScore() {
     return this.combatantUpdateForm.get('updateScore');
   }
 
   ngOnInit(): void {
+    // If updating, set the name, type, and score of the combatant
     this.combatantUpdateForm.controls['updateName'].setValue(
-      this.combatant?.name
+      this.combatant ? this.combatant.name : ''
     );
+    this.populateTypeDropdown();
     this.combatantUpdateForm.controls['updateScore'].setValue(
-      this.combatant?.score
+      this.combatant ? this.combatant.score : ''
     );
   }
 
   onCreationSubmit(): void {
     // Configure combatantType based on modal's current text
-    let combatantType =
-      this.modalText == 'Add Player'
-        ? CombatantType.player
-        : this.modalText == 'Add Monster'
-        ? CombatantType.monster
-        : CombatantType.npc;
+    const combatantType = Utils.getTypeFromModalText(this.modalText);
 
     if (this.combatantCreationForm.valid) {
       this.combatantService.addCombatant(
@@ -101,17 +110,14 @@ export class CombatantEntryFormComponent implements OnInit {
           this.updateAttribute,
           this.updateName?.value
         );
-        this.modalService.closeModal();
       }
 
       if (this.updateAttribute == 'type') {
         this.combatantService.updateCombatant(
           this.combatant,
           this.updateAttribute,
-          this.updateType?.value
+          this.selection
         );
-
-        this.modalService.closeModal();
       }
 
       if (this.updateAttribute == 'score') {
@@ -120,9 +126,23 @@ export class CombatantEntryFormComponent implements OnInit {
           this.updateAttribute,
           this.updateScore?.value
         );
-        this.modalService.closeModal();
       }
+      this.modalService.closeModal();
     }
+  }
+
+  populateTypeDropdown(): void {
+    if (this.combatant) {
+      const otherTypes = this.selectOptions.filter(
+        (type) => type != this.combatant?.type
+      );
+      this.selectOptions = [this.combatant.type, otherTypes[0], otherTypes[1]];
+    }
+  }
+
+  onSelection(value: string): void {
+    this.selectionMade = true;
+    this.selection = value as CombatantType;
   }
 
   handleCloseModal(): void {

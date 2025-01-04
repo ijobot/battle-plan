@@ -1,23 +1,23 @@
-<div class="combatant-creation-menu">
+<div class="main-button-menu">
   <!-- PLAYER/MONSTER/NPC BUTTONS -->
   <div>
     <button
       class="player"
       (click)="handleAddCombatantClick(colorScheme.player, modalText.player)"
     >
-      Player
+      Add Player
     </button>
     <button
       class="monster"
       (click)="handleAddCombatantClick(colorScheme.monster, modalText.monster)"
     >
-      Monster
+      Add Monster
     </button>
     <button
       class="npc"
       (click)="handleAddCombatantClick(colorScheme.npc, modalText.npc)"
     >
-      NPC
+      Add NPC
     </button>
   </div>
 
@@ -28,7 +28,7 @@
       (click)="handleLoadSavedPartyClick()"
       [disabled]="!(savedParty$ | async)?.length"
     >
-      Load Saved Party
+      Load Party
     </button>
     <button (click)="handleClearAllClick()">Clear All</button>
   </div>
