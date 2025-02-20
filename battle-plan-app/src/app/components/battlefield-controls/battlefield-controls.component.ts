@@ -4,6 +4,7 @@ import { CombatantService } from '../../services/combatant.service';
 import { CommonModule } from '@angular/common';
 import { ColorScheme } from '../../models/color-scheme';
 import { ModalContent, ModalText } from '../../models/modal';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-battlefield-controls',
@@ -19,6 +20,7 @@ export class BattlefieldControlsComponent {
   colorScheme = ColorScheme;
   modalText = ModalText;
   savedParty$ = this.combatantService.savedParty$;
+  initiative$ = this.combatantService.initiative$;
 
   // Adding a combatant
   handleAddCombatantClick(color: ColorScheme, type: ModalText): void {
@@ -28,6 +30,10 @@ export class BattlefieldControlsComponent {
       ModalContent.addCombatant
     );
     this.modalService.openModal();
+  }
+
+  handleToggleInitiative(): void {
+    this.combatantService.toggleInitiative();
   }
 
   // Saving a party

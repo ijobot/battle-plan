@@ -24,6 +24,7 @@ export class CombatantRowComponent {
 
   modalText = ModalText;
   modalContent = ModalContent;
+  initiative$ = this.combatantService.initiative$;
 
   getRowAndButtonColor(): Partial<CSSStyleDeclaration> {
     const bgColor = {

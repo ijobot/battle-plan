@@ -4,14 +4,14 @@
 :root {
   /* background colors */
   --primary-bg: #04062b;
-  --secondary-bg: #6d6975;
+  --secondary-bg: #897c91;
 
   /* text colors */
   --primary-text: #222222;
   --logo-text: goldenrod;
 
   /* border colors */
-  --dark-shadow-border: #272323;
+  --dark-shadow-border: #3a353c;
   --light-shadow-border: #675d5d;
   --modal-border: #2b2b2b;
 
@@ -19,7 +19,7 @@
   --button: #c1c1c1;
   --button-hover: goldenrod;
   --topleft-button-border: rgba(0, 0, 0, 0.2);
-  --bottomright-button-border: rgba(0, 0, 0, 0.6);
+  --bottomright-button-border: rgba(0, 0, 0, 0.5);
 
   /* colorScheme */
   --player: #2bb78d;
@@ -31,6 +31,7 @@
   --spacing-s: 5px;
   --spacing-m: 10px;
   --spacing-l: 20px;
+  --battlefield-bricks: 30px;
 }
 
 /* ------------------ */
@@ -43,6 +44,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: bold;
 }
 
 html,
@@ -168,6 +170,7 @@ body {
 
 .logo {
   color: var(--logo-text);
+  line-height: 1;
 }
 
 .center-text {

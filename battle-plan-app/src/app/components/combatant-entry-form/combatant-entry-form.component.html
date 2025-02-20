@@ -21,22 +21,24 @@
       </div>
     </div>
 
-    <div class="field">
-      <div class="label-and-input">
-        <label for="score">Initiative Score:</label
-        ><input
-          class="large-field"
-          id="score"
-          type="text"
-          [placeholder]="
-            score?.dirty && score?.value == ''
-              ? 'Score required'
-              : 'Enter score'
-          "
-          formControlName="score"
-        />
+    <ng-content *ngIf="initiative$ | async">
+      <div class="field">
+        <div class="label-and-input">
+          <label for="score">Initiative Score:</label
+          ><input
+            class="large-field"
+            id="score"
+            type="text"
+            [placeholder]="
+              score?.dirty && score?.value == ''
+                ? 'Score required'
+                : 'Enter score'
+            "
+            formControlName="score"
+          />
+        </div>
       </div>
-    </div>
+    </ng-content>
 
     <div class="buttons">
       <button type="submit" [disabled]="!combatantCreationForm.valid">

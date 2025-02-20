@@ -14,13 +14,20 @@ export class CombatantService {
   private _savedParty$ = new BehaviorSubject<Combatant[]>(
     this.localStorageService.checkLocalStorage()
   );
+  private _initiative$ = new BehaviorSubject<boolean>(true);
 
   combatants$ = new Observable<Combatant[]>();
   savedParty$ = new Observable<Combatant[]>();
+  initiative$ = new Observable<boolean>();
 
   constructor() {
     this.combatants$ = this._combatants$.asObservable();
     this.savedParty$ = this._savedParty$.asObservable();
+    this.initiative$ = this._initiative$.asObservable();
+  }
+
+  toggleInitiative(): void {
+    this._initiative$.next(!this._initiative$.getValue());
   }
 
   addCombatant(type: CombatantType, name: string, score: number): void {
@@ -38,9 +45,7 @@ export class CombatantService {
     ];
 
     // Sort list
-    this._combatants$.next(
-      updatedCombatants.sort((a, b) => Number(b.score) - Number(a.score))
-    );
+    this.sortCombatants(updatedCombatants);
   }
 
   removeCombatant(index: number): void {
@@ -48,7 +53,7 @@ export class CombatantService {
     this._combatants$.next([...this._combatants$.getValue()]);
   }
 
-  updateCombatant(
+  editCombatant(
     combatant: Combatant,
     updateType: string,
     newValue: string | number | CombatantType
@@ -66,9 +71,25 @@ export class CombatantService {
     }
 
     // Re-sort list based on changes
-    this._combatants$.next([
-      ...this._combatants$.getValue().sort((a, b) => b.score - a.score),
-    ]);
+    this.sortCombatants();
+  }
+
+  sortCombatants(updatedCombatants?: Combatant[]): void {
+    // Check if argument is passed, and if not, just sort current list
+    if (!updatedCombatants) {
+      this._combatants$.next([
+        ...this._combatants$.getValue().sort((a, b) => b.score - a.score),
+      ]);
+    } else {
+      // Check if initiative is turned off, and if so, just display the list unsorted
+      if (this._initiative$.getValue() == false) {
+        this._combatants$.next(updatedCombatants);
+      }
+      // Otherwise, sort the list with the newly added combatant
+      this._combatants$.next(
+        updatedCombatants.sort((a, b) => Number(b.score) - Number(a.score))
+      );
+    }
   }
 
   saveCurrentCombatants(): void {
@@ -91,7 +112,7 @@ export class CombatantService {
   }
 
   clearAllCombatants(): void {
-    // Does not affect saved combatants - just clears the list
+    // Does not affect combatants saved in localStorage - just clears the list
     this._combatants$.next([]);
   }
 }

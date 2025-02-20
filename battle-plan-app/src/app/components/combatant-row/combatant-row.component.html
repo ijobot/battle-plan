@@ -24,7 +24,7 @@
   </div>
 
   <!-- COMBATANT SCORE -->
-  <div class="row-item">
+  <div class="row-item" *ngIf="initiative$ | async">
     <button
       [ngStyle]="getRowAndButtonColor()"
       (click)="

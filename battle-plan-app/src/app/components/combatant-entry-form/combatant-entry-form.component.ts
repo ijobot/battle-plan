@@ -37,6 +37,7 @@ export class CombatantEntryFormComponent implements OnInit {
   @Input() modalText: ModalText = ModalText.player;
   @Input() updateAttribute?: string;
 
+  initiative$ = this.combatantService.initiative$;
   combatant: Combatant | undefined = this.modalService.getCombatantToUpdate();
   selectOptions: CombatantType[] = [
     CombatantType.player,
@@ -52,7 +53,7 @@ export class CombatantEntryFormComponent implements OnInit {
   constructor() {
     this.combatantCreationForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      score: new FormControl('', [Validators.required]),
+      score: new FormControl('0', [Validators.required]),
     });
     this.combatantUpdateForm = new FormGroup({
       updateName: new FormControl<string>(''),
@@ -105,7 +106,7 @@ export class CombatantEntryFormComponent implements OnInit {
   onUpdateSubmit(): void {
     if (this.combatant) {
       if (this.updateAttribute == 'name') {
-        this.combatantService.updateCombatant(
+        this.combatantService.editCombatant(
           this.combatant,
           this.updateAttribute,
           this.updateName?.value
@@ -113,7 +114,7 @@ export class CombatantEntryFormComponent implements OnInit {
       }
 
       if (this.updateAttribute == 'type') {
-        this.combatantService.updateCombatant(
+        this.combatantService.editCombatant(
           this.combatant,
           this.updateAttribute,
           this.selection
@@ -121,7 +122,7 @@ export class CombatantEntryFormComponent implements OnInit {
       }
 
       if (this.updateAttribute == 'score') {
-        this.combatantService.updateCombatant(
+        this.combatantService.editCombatant(
           this.combatant,
           this.updateAttribute,
           this.updateScore?.value
@@ -136,7 +137,7 @@ export class CombatantEntryFormComponent implements OnInit {
       const otherTypes = this.selectOptions.filter(
         (type) => type != this.combatant?.type
       );
-      this.selectOptions = [this.combatant.type, otherTypes[0], otherTypes[1]];
+      this.selectOptions = [this.combatant.type, ...otherTypes];
     }
   }
 

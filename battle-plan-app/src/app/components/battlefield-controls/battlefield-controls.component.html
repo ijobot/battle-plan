@@ -23,6 +23,9 @@
 
   <!-- SAVE/LOAD/CLEAR BUTTONS -->
   <div>
+    <button (click)="handleToggleInitiative()">
+      Initiative {{ (initiative$ | async) ? "Off" : "On" }}
+    </button>
     <button (click)="handleSavePartyClick()">Save Party</button>
     <button
       (click)="handleLoadSavedPartyClick()"
