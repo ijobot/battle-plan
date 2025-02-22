@@ -9,7 +9,6 @@ import {
 import { FormFocusDirective } from '../../utils/autofocus.directive';
 import { CombatantService } from '../../services/combatant.service';
 import { ModalService } from '../../services/modal.service';
-import { ColorScheme } from '../../models/color-scheme';
 import { ModalText } from '../../models/modal';
 import { Combatant, CombatantType } from '../../models/combatant';
 import { MatSelectModule } from '@angular/material/select';
@@ -33,7 +32,7 @@ export class CombatantEntryFormComponent implements OnInit {
   private modalService = inject(ModalService);
   private combatantService = inject(CombatantService);
 
-  @Input() colorScheme: ColorScheme = ColorScheme.player;
+  @Input() combatantType: CombatantType = CombatantType.player;
   @Input() modalText: ModalText = ModalText.player;
   @Input() updateAttribute?: string;
 

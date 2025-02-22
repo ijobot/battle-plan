@@ -1,8 +1,8 @@
-<div class="row" [ngStyle]="getRowAndButtonColor()">
+<div class="row" [ngClass]="combatant.type.toLowerCase()">
   <!-- COMBATANT NAME -->
   <div class="row-item">
     <button
-      [ngStyle]="getRowAndButtonColor()"
+      [ngClass]="combatant.type.toLowerCase()"
       (click)="
         handleUpdateCombatant(modalText.updateName, modalContent.updateName)
       "
@@ -14,7 +14,7 @@
   <!-- COMBATANT TYPE -->
   <div class="row-item">
     <button
-      [ngStyle]="getRowAndButtonColor()"
+      [ngClass]="combatant.type.toLowerCase()"
       (click)="
         handleUpdateCombatant(modalText.updateType, modalContent.updateType)
       "
@@ -26,7 +26,7 @@
   <!-- COMBATANT SCORE -->
   <div class="row-item" *ngIf="initiative$ | async">
     <button
-      [ngStyle]="getRowAndButtonColor()"
+      [ngClass]="combatant.type.toLowerCase()"
       (click)="
         handleUpdateCombatant(modalText.updateScore, modalContent.updateScore)
       "

@@ -1,3 +1,5 @@
+@import "../../../styles.scss";
+
 :host {
   height: 100%;
 }
@@ -18,17 +20,5 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-m);
-  }
-
-  .player {
-    background-color: var(--player);
-  }
-
-  .monster {
-    background-color: var(--monster);
-  }
-
-  .npc {
-    background-color: var(--npc);
   }
 }

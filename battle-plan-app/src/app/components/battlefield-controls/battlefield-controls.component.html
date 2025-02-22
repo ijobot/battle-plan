@@ -3,19 +3,21 @@
   <div>
     <button
       class="player"
-      (click)="handleAddCombatantClick(colorScheme.player, modalText.player)"
+      (click)="handleAddCombatantClick(combatantType.player, modalText.player)"
     >
       Add Player
     </button>
     <button
       class="monster"
-      (click)="handleAddCombatantClick(colorScheme.monster, modalText.monster)"
+      (click)="
+        handleAddCombatantClick(combatantType.monster, modalText.monster)
+      "
     >
       Add Monster
     </button>
     <button
       class="npc"
-      (click)="handleAddCombatantClick(colorScheme.npc, modalText.npc)"
+      (click)="handleAddCombatantClick(combatantType.npc, modalText.npc)"
     >
       Add NPC
     </button>

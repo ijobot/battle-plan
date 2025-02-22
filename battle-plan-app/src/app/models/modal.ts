@@ -1,8 +1,7 @@
-import { ColorScheme } from './color-scheme';
-import { Combatant } from './combatant';
+import { Combatant, CombatantType } from './combatant';
 
 export interface ModalAppearance {
-  colorScheme: ColorScheme;
+  combatantType: CombatantType;
   modalText: ModalText;
   modalContent: ModalContent;
   combatant?: Combatant;

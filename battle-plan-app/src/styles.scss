@@ -25,7 +25,6 @@
   --player: #2bb78d;
   --monster: #df5858;
   --npc: #5986da;
-  --default: #9784bb;
 
   /* spacing */
   --spacing-s: 5px;
@@ -33,6 +32,27 @@
   --spacing-l: 20px;
   --battlefield-bricks: 30px;
 }
+
+/* Testing mixins */
+$f-player: #2bb78d;
+$f-monster: #df5858;
+$f-npc: #5986da;
+
+$cp-player: #c3c543;
+$cp-monster: #b63fc5;
+$cp-npc: #35d3cb;
+
+$gd-player: #133505;
+$gd-monster: #500707;
+$gd-npc: #07103f;
+
+@mixin update-background-color($color) {
+  background-color: $color;
+}
+
+// .theme-cyberpunk-player {
+//   @include color-change($cp-player);
+// }
 
 /* ------------------ */
 /* Baseline CSS Reset */
@@ -140,7 +160,8 @@ select {
 /* --------------- */
 /* Base App Layout */
 /* --------------- */
-body {
+
+.page-container {
   background-image: url("../src/app/images/20220213_170245.jpg");
   background-size: cover;
   background-blend-mode: multiply;
@@ -148,9 +169,6 @@ body {
   color: var(--primary-text);
   min-height: 100vh;
   min-width: 100vw;
-}
-
-.page-container {
   position: relative;
   display: flex;
   gap: var(--spacing-l);
@@ -187,6 +205,95 @@ body {
   padding: calc(var(--spacing-l) * 2);
 }
 
-// * {
-//   outline: 2px red solid;
-// }
+/* ---------- */
+/* CSS Themes */
+/* ---------- */
+
+/* Fantasy Theme */
+
+.fantasy {
+  .player {
+    @include update-background-color($f-player);
+  }
+
+  .monster {
+    @include update-background-color($f-monster);
+  }
+
+  .npc {
+    @include update-background-color($f-npc);
+  }
+}
+
+/* Cyberpunk Theme */
+
+.cyberpunk {
+  .player {
+    @include update-background-color($cp-player);
+  }
+
+  .monster {
+    @include update-background-color($cp-monster);
+  }
+
+  .npc {
+    @include update-background-color($cp-npc);
+  }
+
+  .page-container {
+    background-image: none;
+    background-color: rgb(77, 83, 146);
+  }
+
+  .content-container {
+    border-top: solid 8px #272b58;
+    border-right: solid 8px #6a6783;
+    border-bottom: solid 8px #6a6783;
+    border-left: solid 8px #272b58;
+  }
+
+  .logo {
+    color: rgb(38, 175, 38);
+  }
+
+  .about-text,
+  .home-text {
+    color: rgb(38, 175, 38);
+  }
+
+  .line-break {
+    background-color: var(--light-shadow-border);
+  }
+
+  .main-modal {
+    background-image: none !important;
+    background-color: rgb(77, 83, 146) !important;
+  }
+
+  button {
+    padding: var(--spacing-m) var(--spacing-l);
+    color: var(--primary-text);
+    background-color: var(--button);
+    border-top: 4px solid var(--topleft-button-border);
+    border-right: 4px solid var(--bottomright-button-border);
+    border-bottom: 4px solid var(--bottomright-button-border);
+    border-left: 4px solid var(--topleft-button-border);
+    font-size: 2rem;
+  }
+}
+
+/* Grimdark Theme */
+
+.grimdark {
+  .player {
+    @include update-background-color($gd-player);
+  }
+
+  .monster {
+    @include update-background-color($gd-monster);
+  }
+
+  .npc {
+    @include update-background-color($gd-npc);
+  }
+}

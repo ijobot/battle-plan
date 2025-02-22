@@ -1,9 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { ModalService } from '../../services/modal.service';
 import { CombatantService } from '../../services/combatant.service';
-import { Combatant } from '../../models/combatant';
+import { Combatant, CombatantType } from '../../models/combatant';
 import { Observable } from 'rxjs';
-import { ColorScheme } from '../../models/color-scheme';
 import { ModalText, ModalContent } from '../../models/modal';
 import { CombatantEntryFormComponent } from '../combatant-entry-form/combatant-entry-form.component';
 import { CommonModule } from '@angular/common';
@@ -20,7 +19,7 @@ export class ModalComponent {
   private combatantService = inject(CombatantService);
 
   modalAppearance$ = this.modalService.modalAppearance$;
-  colorScheme: ColorScheme = ColorScheme.default;
+  combatantType: CombatantType = CombatantType.player;
   modalText: ModalText = ModalText.clear;
   modalContent: ModalContent = ModalContent.clearAll;
   combatant?: Combatant;

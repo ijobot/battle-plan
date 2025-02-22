@@ -26,12 +26,12 @@ export class CombatantRowComponent {
   modalContent = ModalContent;
   initiative$ = this.combatantService.initiative$;
 
-  getRowAndButtonColor(): Partial<CSSStyleDeclaration> {
-    const bgColor = {
-      'background-color': Utils.getColorSchemeFromType(this.combatant.type),
-    };
-    return bgColor;
-  }
+  // getRowAndButtonColor(): Partial<CSSStyleDeclaration> {
+  //   const bgColor = {
+  //     'background-color': Utils.getColorSchemeFromType(this.combatant.type),
+  //   };
+  //   return bgColor;
+  // }
 
   // Clicking the X button on a row
   handleRemoveCombatant(index: number): void {
@@ -43,9 +43,8 @@ export class CombatantRowComponent {
     updateAttribute: ModalText,
     modalContent: ModalContent
   ): void {
-    Utils.getColorSchemeFromType(this.combatant.type);
     this.modalService.setModalAppearance(
-      Utils.getColorSchemeFromType(this.combatant.type),
+      this.combatant.type,
       updateAttribute,
       modalContent,
       this.combatant

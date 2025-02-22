@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ModalAppearance, ModalContent, ModalText } from '../models/modal';
-import { ColorScheme } from '../models/color-scheme';
-import { Combatant } from '../models/combatant';
+import { Combatant, CombatantType } from '../models/combatant';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +13,7 @@ export class ModalService {
 
   private _modal$ = new BehaviorSubject(false);
   private _modalAppearance$ = new BehaviorSubject<ModalAppearance>({
-    colorScheme: ColorScheme.player,
+    combatantType: CombatantType.player,
     modalText: ModalText.player,
     modalContent: ModalContent.addCombatant,
   });
@@ -26,7 +25,7 @@ export class ModalService {
 
   // Needs work
   setModalAppearance(
-    colorScheme: ColorScheme,
+    combatantType: CombatantType,
     modalText: ModalText,
     modalContent: ModalContent,
     combatant?: Combatant
@@ -35,7 +34,7 @@ export class ModalService {
       this.combatantToUpdate = combatant;
     }
     this._modalAppearance$.next({
-      colorScheme,
+      combatantType,
       modalText,
       modalContent,
       ...(combatant ? combatant : undefined),

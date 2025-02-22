@@ -2,9 +2,8 @@ import { Component, inject } from '@angular/core';
 import { ModalService } from '../../services/modal.service';
 import { CombatantService } from '../../services/combatant.service';
 import { CommonModule } from '@angular/common';
-import { ColorScheme } from '../../models/color-scheme';
 import { ModalContent, ModalText } from '../../models/modal';
-import { Observable } from 'rxjs';
+import { CombatantType } from '../../models/combatant';
 
 @Component({
   selector: 'app-battlefield-controls',
@@ -17,16 +16,16 @@ export class BattlefieldControlsComponent {
   private modalService = inject(ModalService);
   private combatantService = inject(CombatantService);
 
-  colorScheme = ColorScheme;
+  combatantType = CombatantType;
   modalText = ModalText;
   savedParty$ = this.combatantService.savedParty$;
   initiative$ = this.combatantService.initiative$;
 
   // Adding a combatant
-  handleAddCombatantClick(color: ColorScheme, type: ModalText): void {
+  handleAddCombatantClick(type: CombatantType, modalText: ModalText): void {
     this.modalService.setModalAppearance(
-      color,
       type,
+      modalText,
       ModalContent.addCombatant
     );
     this.modalService.openModal();
@@ -39,7 +38,7 @@ export class BattlefieldControlsComponent {
   // Saving a party
   handleSavePartyClick(): void {
     this.modalService.setModalAppearance(
-      ColorScheme.default,
+      CombatantType.player,
       ModalText.save,
       ModalContent.saveParty
     );
@@ -49,7 +48,7 @@ export class BattlefieldControlsComponent {
   // Loading a saved party
   handleLoadSavedPartyClick(): void {
     this.modalService.setModalAppearance(
-      ColorScheme.default,
+      CombatantType.player,
       ModalText.load,
       ModalContent.loadParty
     );
@@ -59,7 +58,7 @@ export class BattlefieldControlsComponent {
   // Clearing the list
   handleClearAllClick(): void {
     this.modalService.setModalAppearance(
-      ColorScheme.default,
+      CombatantType.player,
       ModalText.clear,
       ModalContent.clearAll
     );

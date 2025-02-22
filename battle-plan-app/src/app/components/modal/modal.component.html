@@ -3,14 +3,14 @@
     <div
       *ngIf="modalAppearance$ | async as modal"
       class="content-container content"
-      [ngStyle]="{ 'background-color': modal.colorScheme }"
+      [ngClass]="modal.combatantType.toLowerCase()"
     >
       <h1 class="title">{{ modal.modalText }}</h1>
 
       <!-- MODAL CONTENTS FOR ADDING COMBATANTS -->
       <ng-content *ngIf="modal.modalContent == 'addCombatant'">
         <app-combatant-entry-form
-          [colorScheme]="modal.colorScheme"
+          [combatantType]="combatantType"
           [modalText]="modal.modalText"
         ></app-combatant-entry-form
       ></ng-content>
@@ -19,7 +19,7 @@
       <ng-content *ngIf="modal.modalContent == 'updateName'">
         <app-combatant-entry-form
           [updateAttribute]="'name'"
-          [colorScheme]="modal.colorScheme"
+          [combatantType]="combatantType"
           [modalText]="modal.modalText"
         ></app-combatant-entry-form
       ></ng-content>
@@ -28,7 +28,7 @@
       <ng-content *ngIf="modal.modalContent == 'updateType'">
         <app-combatant-entry-form
           [updateAttribute]="'type'"
-          [colorScheme]="modal.colorScheme"
+          [combatantType]="combatantType"
           [modalText]="modal.modalText"
         ></app-combatant-entry-form
       ></ng-content>
@@ -37,7 +37,7 @@
       <ng-content *ngIf="modal.modalContent == 'updateScore'">
         <app-combatant-entry-form
           [updateAttribute]="'score'"
-          [colorScheme]="modal.colorScheme"
+          [combatantType]="combatantType"
           [modalText]="modal.modalText"
         ></app-combatant-entry-form
       ></ng-content>
