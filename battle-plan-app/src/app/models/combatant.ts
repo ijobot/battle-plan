@@ -8,4 +8,5 @@ export enum CombatantType {
   player = 'Player',
   monster = 'Monster',
   npc = 'NPC',
+  default = 'Default',
 }

@@ -2,57 +2,89 @@
 /* Custom properties */
 /* ----------------- */
 :root {
-  /* background colors */
-  --primary-bg: #04062b;
-  --secondary-bg: #897c91;
-
-  /* text colors */
-  --primary-text: #222222;
-  --logo-text: goldenrod;
-
-  /* border colors */
-  --dark-shadow-border: #3a353c;
-  --light-shadow-border: #675d5d;
-  --modal-border: #2b2b2b;
-
-  /* button colors */
-  --button: #c1c1c1;
-  --button-hover: goldenrod;
-  --topleft-button-border: rgba(0, 0, 0, 0.2);
-  --bottomright-button-border: rgba(0, 0, 0, 0.5);
-
-  /* colorScheme */
-  --player: #2bb78d;
-  --monster: #df5858;
-  --npc: #5986da;
-
   /* spacing */
   --spacing-s: 5px;
   --spacing-m: 10px;
   --spacing-l: 20px;
-  --battlefield-bricks: 30px;
+  --spacing-xl: 30px;
 }
 
-/* Testing mixins */
-$f-player: #2bb78d;
-$f-monster: #df5858;
-$f-npc: #5986da;
+/* ----------- */
+/* Base Mixins */
+/* ----------- */
+// Combatant, Modal, and Row Colors
+$default-player: #34eb10;
+$default-monster: #f51212;
+$default-npc: #0f30eb;
+$default-modal-bg: #766d7c;
+$default-inner-modal: #a8a8a8;
+// Container Colors
 
-$cp-player: #c3c543;
-$cp-monster: #b63fc5;
-$cp-npc: #35d3cb;
+$default-page-bg: #444444;
+$default-container-bg: #202020;
+// Text Colors
+$default-text: #292929;
+$default-logo-and-hover: #dfdfdf;
+// Button Colors
+$button-bg: #c9c9c9;
 
-$gd-player: #133505;
-$gd-monster: #500707;
-$gd-npc: #07103f;
+/* -------------- */
+/* Fantasy Mixins */
+/* -------------- */
+
+// Combatant, Modal, and Row Colors
+$f-player: #86adb0;
+$f-monster: #c07da8;
+$f-npc: #5a7ba6;
+$f-modal-bg: #766d7c;
+$f-inner-modal: #a8a8a8;
+// Container Colors
+$f-container-bg: #875991;
+// Text Colors
+$f-logo-and-hover: #e6c614;
+
+/* ---------------- */
+/* Cyberpunk Mixins */
+/* ---------------- */
+
+// Combatant, Modal, and Row Colors
+$cp-player: #f3f719;
+$cp-monster: #f320c5;
+$cp-npc: #14fafa;
+$cp-modal-bg: #766d7c;
+$cp-inner-modal: #a8a8a8;
+// Container Colors
+$cp-container-bg: #000000;
+// Text Colors
+$cp-logo-and-hover: #00ff00;
+
+/* --------------- */
+/* Grimdark Mixins */
+/* --------------- */
+
+// Combatant, Modal, and Row Colors
+$gd-player: #588680;
+$gd-monster: #694343;
+$gd-npc: #42476f;
+$gd-modal-bg: #272536;
+$gd-inner-modal: #a8a8a8;
+// Container Colors
+$gd-container-bg: #dcdddc;
+// Text Colors
+$gd-logo-and-hover: #de252f;
+$gd-text-white: #dedede;
 
 @mixin update-background-color($color) {
-  background-color: $color;
+  background-color: $color !important;
 }
 
-// .theme-cyberpunk-player {
-//   @include color-change($cp-player);
-// }
+@mixin update-text-color($color) {
+  color: $color;
+}
+
+@mixin update-outline-color($color) {
+  outline: 2px solid $color;
+}
 
 /* ------------------ */
 /* Baseline CSS Reset */
@@ -98,75 +130,64 @@ svg {
   max-width: 100%;
 }
 
-/* ----------------------- */
-/* Base Component Stylings */
-/* ----------------------- */
+/* ------------------------- */
+/* Button and Input Stylings */
+/* ------------------------- */
 
 button {
+  @include update-background-color($button-bg);
+  @include update-text-color($default-text);
   padding: var(--spacing-m) var(--spacing-l);
-  color: var(--primary-text);
-  background-color: var(--button);
-  border-top: 4px solid var(--topleft-button-border);
-  border-right: 4px solid var(--bottomright-button-border);
-  border-bottom: 4px solid var(--bottomright-button-border);
-  border-left: 4px solid var(--topleft-button-border);
+  border-top: 4px solid rgba(0, 0, 0, 0.2);
+  border-right: 4px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 4px solid rgba(0, 0, 0, 0.5);
+  border-left: 4px solid rgba(0, 0, 0, 0.2);
   font-size: 2rem;
-}
 
-button:hover:enabled:not(:active) {
-  filter: drop-shadow(2px 2px 1px goldenrod)
-    drop-shadow(-2px -2px 1px goldenrod) drop-shadow(-2px 2px 1px goldenrod)
-    drop-shadow(2px -2px 1px goldenrod) brightness(120%);
-  border-top: 4px solid var(--topleft-button-border);
-  border-right: 4px solid var(--bottomright-button-border);
-  border-bottom: 4px solid var(--bottomright-button-border);
-  border-left: 4px solid var(--topleft-button-border);
-  cursor: pointer;
-}
+  &:active {
+    border-top: 4px solid rgba(0, 0, 0, 0.5);
+    border-right: 4px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 4px solid rgba(0, 0, 0, 0.2);
+    border-left: 4px solid rgba(0, 0, 0, 0.5);
+  }
 
-button:disabled {
-  filter: brightness(70%);
-  cursor: not-allowed;
-}
+  &:hover:enabled:not(:active) {
+    cursor: pointer;
+  }
 
-button:active {
-  border-top: 4px solid var(--bottomright-button-border);
-  border-right: 4px solid var(--topleft-button-border);
-  border-bottom: 4px solid var(--topleft-button-border);
-  border-left: 4px solid var(--bottomright-button-border);
+  &:disabled {
+    filter: brightness(70%);
+    cursor: not-allowed;
+  }
 }
 
 input,
 select {
-  border-top: solid 4px var(--dark-shadow-border);
-  border-right: solid 4px var(--light-shadow-border);
-  border-bottom: solid 4px var(--light-shadow-border);
-  border-left: solid 4px var(--dark-shadow-border);
-  padding: 0 var(--spacing-s);
-  &:hover {
-    cursor: pointer;
-    filter: drop-shadow(2px 2px 1px goldenrod)
-      drop-shadow(-2px -2px 1px goldenrod) drop-shadow(-2px 2px 1px goldenrod)
-      drop-shadow(2px -2px 1px goldenrod) brightness(130%);
-  }
-}
-
-select {
   min-width: 200px;
   height: 40px;
   font-size: 2rem;
+  border-top: solid 4px rgb(50, 50, 50);
+  border-right: solid 4px rgb(120, 120, 120);
+  border-bottom: solid 4px rgb(120, 120, 120);
+  border-left: solid 4px rgb(50, 50, 50);
+  padding: 0 var(--spacing-s);
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
-/* --------------- */
-/* Base App Layout */
-/* --------------- */
+input:focus:enabled:not(:active),
+select:focus:enabled {
+  @include update-outline-color($default-logo-and-hover);
+}
+
+/* -------------------------------------- */
+/* Base Page, Container, and Modal Layout */
+/* -------------------------------------- */
 
 .page-container {
-  background-image: url("../src/app/images/20220213_170245.jpg");
-  background-size: cover;
-  background-blend-mode: multiply;
-  background-color: var(--secondary-bg);
-  color: var(--primary-text);
+  @include update-background-color($default-page-bg);
   min-height: 100vh;
   min-width: 100vw;
   position: relative;
@@ -178,17 +199,28 @@ select {
 }
 
 .content-container {
-  background-color: var(--primary-bg);
-  border-top: solid 8px var(--dark-shadow-border);
-  border-right: solid 8px var(--light-shadow-border);
-  border-bottom: solid 8px var(--light-shadow-border);
-  border-left: solid 8px var(--dark-shadow-border);
+  background-color: black;
+  border-top: solid 8px rgb(50, 50, 50);
+  border-right: solid 8px rgb(120, 120, 120);
+  border-bottom: solid 8px rgb(120, 120, 120);
+  border-left: solid 8px rgb(50, 50, 50);
   padding: var(--spacing-l);
 }
 
 .logo {
-  color: var(--logo-text);
+  @include update-text-color($default-logo-and-hover);
   line-height: 1;
+}
+
+.row {
+  display: flex;
+  padding: var(--spacing-m);
+  border-top: 4px solid rgba(0, 0, 0, 0.2);
+  border-right: 4px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 4px solid rgba(0, 0, 0, 0.5);
+  border-left: 4px solid rgba(0, 0, 0, 0.2);
+  align-items: stretch;
+  gap: 0.5em;
 }
 
 .center-text {
@@ -198,18 +230,74 @@ select {
 .line-break {
   width: 100%;
   height: 4px;
-  background-color: var(--light-shadow-border);
+  background-color: rgb(50, 50, 50);
 }
 
 .extra-padding {
   padding: calc(var(--spacing-l) * 2);
 }
 
-/* ---------- */
-/* CSS Themes */
-/* ---------- */
+.home-text,
+.about-text {
+  @include update-text-color($default-logo-and-hover);
+}
 
+/* ------------- */
+/* Default Theme */
+/* ------------- */
+
+.default {
+  .player {
+    @include update-background-color($default-player);
+  }
+
+  .monster {
+    @include update-background-color($default-monster);
+  }
+
+  .npc {
+    @include update-background-color($default-npc);
+  }
+
+  .default {
+    @include update-background-color($default-inner-modal);
+  }
+
+  button:hover:enabled:not(:active) {
+    @include update-outline-color($default-logo-and-hover);
+    cursor: pointer;
+  }
+
+  button:disabled {
+    filter: brightness(70%);
+    cursor: not-allowed;
+  }
+
+  button:active {
+    outline: 2px solid var($default-logo-and-hover) !important;
+  }
+
+  button:focus {
+    outline: 2px solid var($default-logo-and-hover) !important;
+  }
+
+  input:focus:enabled:not(:active),
+  select:focus:enabled {
+    outline: 2px solid var($default-logo-and-hover) !important;
+  }
+
+  .content-container {
+    @include update-background-color($default-container-bg);
+  }
+
+  .row:hover {
+    @include update-outline-color($default-logo-and-hover);
+  }
+}
+
+/* ------------- */
 /* Fantasy Theme */
+/* ------------- */
 
 .fantasy {
   .player {
@@ -222,6 +310,68 @@ select {
 
   .npc {
     @include update-background-color($f-npc);
+  }
+
+  .default {
+    @include update-background-color($f-inner-modal);
+  }
+
+  *:not(mat-icon) {
+    font-family: "Charm", cursive;
+  }
+
+  button,
+  p,
+  a,
+  h1,
+  ul,
+  li {
+    line-height: 1;
+    margin-bottom: -2px;
+  }
+
+  button:hover:enabled:not(:active) {
+    @include update-outline-color($f-logo-and-hover);
+    cursor: pointer;
+  }
+
+  button:disabled {
+    filter: brightness(70%);
+    cursor: not-allowed;
+  }
+
+  button:active {
+    outline: 2px solid var($f-logo-and-hover) !important;
+  }
+
+  button:focus {
+    outline: 2px solid var($f-logo-and-hover) !important;
+  }
+
+  input:focus:enabled:not(:active),
+  select:focus:enabled {
+    outline: 2px solid var($f-logo-and-hover) !important;
+  }
+
+  .content-container:not(.player, .monster, .npc, .default) {
+    @include update-background-color($f-container-bg);
+  }
+
+  .page-container,
+  .main-modal {
+    background-image: url("../src/app/images/bricks.jpg");
+    background-size: cover;
+    background-blend-mode: multiply;
+    @include update-background-color($f-modal-bg);
+  }
+
+  .logo {
+    @include update-text-color($f-logo-and-hover);
+    line-height: 1;
+  }
+
+  .row:hover {
+    @include update-outline-color($f-logo-and-hover);
   }
 }
 
@@ -240,45 +390,63 @@ select {
     @include update-background-color($cp-npc);
   }
 
-  .page-container {
-    background-image: none;
-    background-color: rgb(77, 83, 146);
+  .default {
+    @include update-background-color($cp-inner-modal);
   }
 
-  .content-container {
-    border-top: solid 8px #272b58;
-    border-right: solid 8px #6a6783;
-    border-bottom: solid 8px #6a6783;
-    border-left: solid 8px #272b58;
+  *:not(mat-icon) {
+    font-family: "Orbitron", sans-serif;
   }
 
-  .logo {
-    color: rgb(38, 175, 38);
+  button:hover:enabled:not(:active) {
+    @include update-outline-color($cp-logo-and-hover);
+    cursor: pointer;
   }
 
-  .about-text,
-  .home-text {
-    color: rgb(38, 175, 38);
+  button:disabled {
+    filter: brightness(70%);
+    cursor: not-allowed;
   }
 
-  .line-break {
-    background-color: var(--light-shadow-border);
+  button:active {
+    outline: 2px solid var($cp-logo-and-hover) !important;
+  }
+
+  button:focus {
+    outline: 2px solid var($cp-logo-and-hover) !important;
+  }
+
+  input:focus:enabled:not(:active),
+  select:focus:enabled {
+    outline: 2px solid var($cp-logo-and-hover) !important;
+  }
+
+  .content-container:not(.player, .monster, .npc, .default) {
+    @include update-background-color($cp-container-bg);
+    border-top: solid 8px rgb(131, 0, 120);
+    border-right: solid 8px rgb(235, 1, 215);
+    border-bottom: solid 8px rgb(235, 1, 215);
+    border-left: solid 8px rgb(131, 0, 120);
+  }
+
+  .page-container,
+  .main-modal {
+    background-image: url("../src/app/images/neon.jpg");
+    background-size: contain;
+    @include update-background-color($cp-modal-bg);
   }
 
   .main-modal {
-    background-image: none !important;
-    background-color: rgb(77, 83, 146) !important;
+    background-size: auto;
   }
 
-  button {
-    padding: var(--spacing-m) var(--spacing-l);
-    color: var(--primary-text);
-    background-color: var(--button);
-    border-top: 4px solid var(--topleft-button-border);
-    border-right: 4px solid var(--bottomright-button-border);
-    border-bottom: 4px solid var(--bottomright-button-border);
-    border-left: 4px solid var(--topleft-button-border);
-    font-size: 2rem;
+  .logo {
+    @include update-text-color($cp-logo-and-hover);
+    line-height: 1;
+  }
+
+  .row:hover {
+    @include update-outline-color($cp-logo-and-hover);
   }
 }
 
@@ -295,5 +463,74 @@ select {
 
   .npc {
     @include update-background-color($gd-npc);
+  }
+
+  .default {
+    @include update-background-color($gd-inner-modal);
+  }
+
+  *:not(mat-icon) {
+    font-family: "Texturina", serif;
+  }
+
+  button,
+  p,
+  a,
+  h1,
+  ul,
+  li {
+    line-height: 1;
+  }
+
+  button:hover:enabled:not(:active) {
+    @include update-outline-color($gd-logo-and-hover);
+    cursor: pointer;
+  }
+
+  button:disabled {
+    filter: brightness(70%);
+    cursor: not-allowed;
+  }
+
+  button:active {
+    outline: 2px solid var($gd-logo-and-hover) !important;
+  }
+
+  button:focus {
+    outline: 2px solid var($gd-logo-and-hover) !important;
+  }
+
+  .light {
+    @include update-text-color($gd-text-white);
+  }
+
+  input:focus:enabled:not(:active),
+  select:focus:enabled {
+    outline: 2px solid var($gd-logo-and-hover) !important;
+  }
+
+  .content-container:not(.player, .monster, .npc, .default) {
+    @include update-background-color($gd-container-bg);
+  }
+
+  .page-container,
+  .main-modal {
+    background-image: url("../src/app/images/spiderweb.JPG");
+    background-size: cover;
+    @include update-background-color($gd-modal-bg);
+  }
+
+  .logo {
+    @include update-text-color($gd-logo-and-hover);
+    line-height: 1;
+  }
+
+  .row:hover {
+    @include update-outline-color($gd-logo-and-hover);
+  }
+
+  .home-text,
+  .about-text {
+    @include update-text-color($default-text);
   }
 }

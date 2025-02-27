@@ -19,7 +19,7 @@ export class ModalComponent {
   private combatantService = inject(CombatantService);
 
   modalAppearance$ = this.modalService.modalAppearance$;
-  combatantType: CombatantType = CombatantType.player;
+  combatantType: CombatantType = CombatantType.default;
   modalText: ModalText = ModalText.clear;
   modalContent: ModalContent = ModalContent.clearAll;
   combatant?: Combatant;

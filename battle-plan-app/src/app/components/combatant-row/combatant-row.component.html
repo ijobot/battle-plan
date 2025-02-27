@@ -3,6 +3,7 @@
   <div class="row-item">
     <button
       [ngClass]="combatant.type.toLowerCase()"
+      class="light"
       (click)="
         handleUpdateCombatant(modalText.updateName, modalContent.updateName)
       "
@@ -15,6 +16,7 @@
   <div class="row-item">
     <button
       [ngClass]="combatant.type.toLowerCase()"
+      class="light"
       (click)="
         handleUpdateCombatant(modalText.updateType, modalContent.updateType)
       "
@@ -27,6 +29,7 @@
   <div class="row-item" *ngIf="initiative$ | async">
     <button
       [ngClass]="combatant.type.toLowerCase()"
+      class="light"
       (click)="
         handleUpdateCombatant(modalText.updateScore, modalContent.updateScore)
       "
@@ -37,7 +40,10 @@
 
   <!-- DELETE ROW -->
   <div class="delete">
-    <button (click)="handleRemoveCombatant(index)">
+    <button
+      (click)="handleRemoveCombatant(index)"
+      aria-label="remove combatant from list"
+    >
       <mat-icon>close</mat-icon>
     </button>
   </div>

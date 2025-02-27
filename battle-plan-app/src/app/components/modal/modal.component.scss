@@ -6,6 +6,13 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
 
+  .content-container {
+    border-top: solid 8px rgb(120, 120, 120);
+    border-right: solid 8px rgb(50, 50, 50);
+    border-bottom: solid 8px rgb(50, 50, 50);
+    border-left: solid 8px rgb(120, 120, 120);
+  }
+
   .main-modal {
     position: absolute;
     height: fit-content;
@@ -13,15 +20,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-image: url("../../images/20220213_170245.jpg");
-    background-size: cover;
-    background-blend-mode: multiply;
-    background-color: var(--secondary-bg);
-    border-top: solid 8px var(--light-shadow-border);
-    border-right: solid 8px var(--dark-shadow-border);
-    border-bottom: solid 8px var(--dark-shadow-border);
-    border-left: solid 8px var(--light-shadow-border);
 
+    .content-container {
+      border-top: solid 8px rgb(50, 50, 50);
+      border-right: solid 8px rgb(120, 120, 120);
+      border-bottom: solid 8px rgb(120, 120, 120);
+      border-left: solid 8px rgb(50, 50, 50);
+    }
     .content {
       height: 100%;
       display: flex;

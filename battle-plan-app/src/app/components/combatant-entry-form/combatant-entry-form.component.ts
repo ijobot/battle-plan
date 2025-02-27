@@ -32,7 +32,7 @@ export class CombatantEntryFormComponent implements OnInit {
   private modalService = inject(ModalService);
   private combatantService = inject(CombatantService);
 
-  @Input() combatantType: CombatantType = CombatantType.player;
+  @Input() combatantType: CombatantType = CombatantType.default;
   @Input() modalText: ModalText = ModalText.player;
   @Input() updateAttribute?: string;
 
@@ -56,8 +56,8 @@ export class CombatantEntryFormComponent implements OnInit {
     });
     this.combatantUpdateForm = new FormGroup({
       updateName: new FormControl<string>(''),
-      updateType: new FormControl<number>(0),
-      updateScore: new FormControl<CombatantType>(CombatantType.player),
+      updateScore: new FormControl<number>(0),
+      updateType: new FormControl<CombatantType>(CombatantType.player),
     });
   }
 
@@ -89,7 +89,7 @@ export class CombatantEntryFormComponent implements OnInit {
   }
 
   onCreationSubmit(): void {
-    // Configure combatantType based on modal's current text
+    // Since we don't have a combatant yet, configure combatantType based on modal's text
     const combatantType = Utils.getTypeFromModalText(this.modalText);
 
     if (this.combatantCreationForm.valid) {

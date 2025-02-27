@@ -38,7 +38,7 @@ export class BattlefieldControlsComponent {
   // Saving a party
   handleSavePartyClick(): void {
     this.modalService.setModalAppearance(
-      CombatantType.player,
+      CombatantType.default,
       ModalText.save,
       ModalContent.saveParty
     );
@@ -48,7 +48,7 @@ export class BattlefieldControlsComponent {
   // Loading a saved party
   handleLoadSavedPartyClick(): void {
     this.modalService.setModalAppearance(
-      CombatantType.player,
+      CombatantType.default,
       ModalText.load,
       ModalContent.loadParty
     );
@@ -58,7 +58,7 @@ export class BattlefieldControlsComponent {
   // Clearing the list
   handleClearAllClick(): void {
     this.modalService.setModalAppearance(
-      CombatantType.player,
+      CombatantType.default,
       ModalText.clear,
       ModalContent.clearAll
     );
