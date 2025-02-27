@@ -1,12 +1,6 @@
+<app-navbar></app-navbar>
 <div class="page-container">
   <div class="home-container">
-    <!-- WELCOME SCREEN -->
-    <div class="content-container">
-      <div>
-        <p class="logo logo-large center-text">Battle Plan</p>
-      </div>
-    </div>
-
     <div class="content-container home-text extra-padding">
       <p>Easily track your turn order for any tabletop role playing game!</p>
       <ul>
@@ -16,20 +10,6 @@
         <li>Save your party's information for quick-load feature.</li>
         <li>Clear the entire list to get ready for a new battle.</li>
       </ul>
-    </div>
-
-    <!-- NAVIGATION BUTTONS TO ABOUT AND BATTLEFIELD -->
-    <div class="content-container">
-      <app-nav-buttons
-        [buttonOneRoute]="'/about'"
-        [buttonOneText]="'About'"
-        [buttonTwoRoute]="'/battlefield'"
-        [buttonTwoText]="'Battlefield'"
-      ></app-nav-buttons>
-    </div>
-
-    <div class="content-container">
-      <app-theme-buttons></app-theme-buttons>
     </div>
   </div>
 </div>

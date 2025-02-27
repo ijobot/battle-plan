@@ -3,13 +3,13 @@ import { CSSTheme } from '../../models/css-themes';
 import { ThemeService } from '../../services/theme.service';
 
 @Component({
-  selector: 'app-theme-buttons',
+  selector: 'app-theme-selection',
   standalone: true,
   imports: [],
-  templateUrl: './theme-buttons.component.html',
-  styleUrl: './theme-buttons.component.scss',
+  templateUrl: './theme-selection.component.html',
+  styleUrl: './theme-selection.component.scss',
 })
-export class ThemeButtonsComponent {
+export class ThemeSelectionComponent {
   private themeService = inject(ThemeService);
 
   theme = CSSTheme;

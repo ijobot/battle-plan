@@ -83,7 +83,7 @@ $gd-text-white: #dedede;
 }
 
 @mixin update-outline-color($color) {
-  outline: 2px solid $color;
+  outline: 4px solid $color;
 }
 
 /* ------------------ */
@@ -188,12 +188,11 @@ select:focus:enabled {
 
 .page-container {
   @include update-background-color($default-page-bg);
-  min-height: 100vh;
+  height: calc(100vh - 64px);
   min-width: 100vw;
   position: relative;
   display: flex;
   gap: var(--spacing-l);
-  height: 100%;
   width: 100%;
   padding: var(--spacing-l);
 }
@@ -273,17 +272,15 @@ select:focus:enabled {
     cursor: not-allowed;
   }
 
-  button:active {
-    outline: 2px solid var($default-logo-and-hover) !important;
-  }
-
-  button:focus {
-    outline: 2px solid var($default-logo-and-hover) !important;
+  button:active,
+  button:focus,
+  button:focus-visible {
+    @include update-outline-color($default-logo-and-hover);
   }
 
   input:focus:enabled:not(:active),
   select:focus:enabled {
-    outline: 2px solid var($default-logo-and-hover) !important;
+    @include update-outline-color($default-logo-and-hover);
   }
 
   .content-container {
@@ -340,17 +337,15 @@ select:focus:enabled {
     cursor: not-allowed;
   }
 
-  button:active {
-    outline: 2px solid var($f-logo-and-hover) !important;
-  }
-
-  button:focus {
-    outline: 2px solid var($f-logo-and-hover) !important;
+  button:active,
+  button:focus,
+  button:focus-visible {
+    @include update-outline-color($f-logo-and-hover);
   }
 
   input:focus:enabled:not(:active),
   select:focus:enabled {
-    outline: 2px solid var($f-logo-and-hover) !important;
+    @include update-outline-color($f-logo-and-hover);
   }
 
   .content-container:not(.player, .monster, .npc, .default) {
@@ -408,17 +403,15 @@ select:focus:enabled {
     cursor: not-allowed;
   }
 
-  button:active {
-    outline: 2px solid var($cp-logo-and-hover) !important;
-  }
-
-  button:focus {
-    outline: 2px solid var($cp-logo-and-hover) !important;
+  button:active,
+  button:focus,
+  button:focus-visible {
+    @include update-outline-color($cp-logo-and-hover);
   }
 
   input:focus:enabled:not(:active),
   select:focus:enabled {
-    outline: 2px solid var($cp-logo-and-hover) !important;
+    @include update-outline-color($cp-logo-and-hover);
   }
 
   .content-container:not(.player, .monster, .npc, .default) {
@@ -482,6 +475,15 @@ select:focus:enabled {
     line-height: 1;
   }
 
+  .main-nav {
+    @include update-background-color($gd-modal-bg);
+    @include update-text-color($gd-logo-and-hover);
+
+    .logo {
+      @include update-text-color($gd-logo-and-hover);
+    }
+  }
+
   button:hover:enabled:not(:active) {
     @include update-outline-color($gd-logo-and-hover);
     cursor: pointer;
@@ -492,21 +494,19 @@ select:focus:enabled {
     cursor: not-allowed;
   }
 
-  button:active {
-    outline: 2px solid var($gd-logo-and-hover) !important;
-  }
-
-  button:focus {
-    outline: 2px solid var($gd-logo-and-hover) !important;
-  }
-
-  .light {
-    @include update-text-color($gd-text-white);
+  button:active,
+  button:focus,
+  button:focus-visible {
+    @include update-outline-color($gd-logo-and-hover);
   }
 
   input:focus:enabled:not(:active),
   select:focus:enabled {
-    outline: 2px solid var($gd-logo-and-hover) !important;
+    @include update-outline-color($gd-logo-and-hover);
+  }
+
+  .light {
+    @include update-text-color($gd-text-white);
   }
 
   .content-container:not(.player, .monster, .npc, .default) {
@@ -518,11 +518,6 @@ select:focus:enabled {
     background-image: url("../src/app/images/spiderweb.JPG");
     background-size: cover;
     @include update-background-color($gd-modal-bg);
-  }
-
-  .logo {
-    @include update-text-color($gd-logo-and-hover);
-    line-height: 1;
   }
 
   .row:hover {

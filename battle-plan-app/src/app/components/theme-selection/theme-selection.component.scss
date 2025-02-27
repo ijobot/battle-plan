@@ -1,0 +1,17 @@
+@import "../../../styles.scss";
+
+.theme-menu {
+  display: flex;
+  gap: var(--spacing-xl);
+  padding: 0 var(--spacing-xl);
+
+  a {
+    font-size: 2rem;
+    cursor: pointer;
+
+    &:hover {
+      @include update-text-color($default-logo-and-hover);
+      text-decoration: underline;
+    }
+  }
+}

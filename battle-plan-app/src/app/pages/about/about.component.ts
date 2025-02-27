@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NavButtonsComponent } from '../../components/nav-buttons/nav-buttons.component';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [NavButtonsComponent],
+  imports: [NavbarComponent, NavbarComponent],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',
 })

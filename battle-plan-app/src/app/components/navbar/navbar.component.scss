@@ -1,0 +1,31 @@
+@import "../../../styles.scss";
+
+.main-nav {
+  display: flex;
+  height: 60px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-xl);
+
+  .logo {
+    font-size: 3rem;
+    height: 40px;
+    margin-bottom: -10px;
+  }
+
+  .nav-menu {
+    display: flex;
+    gap: var(--spacing-xl);
+    padding: 0 var(--spacing-xl);
+
+    a {
+      font-size: 2rem;
+      cursor: pointer;
+
+      &:hover {
+        @include update-text-color($default-logo-and-hover);
+        text-decoration: underline;
+      }
+    }
+  }
+}
