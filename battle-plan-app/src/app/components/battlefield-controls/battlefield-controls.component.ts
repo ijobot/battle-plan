@@ -4,11 +4,12 @@ import { CombatantService } from '../../services/combatant.service';
 import { CommonModule } from '@angular/common';
 import { ModalContent, ModalText } from '../../models/modal';
 import { CombatantType } from '../../models/combatant';
+import { BlurAfterClickDirective } from '../../utils/blur-after-click.directive';
 
 @Component({
   selector: 'app-battlefield-controls',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, BlurAfterClickDirective],
   templateUrl: './battlefield-controls.component.html',
   styleUrl: './battlefield-controls.component.scss',
 })

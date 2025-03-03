@@ -1,17 +1,20 @@
 @import "../../../styles.scss";
 
-.theme-menu {
-  display: flex;
-  gap: var(--spacing-xl);
-  padding: 0 var(--spacing-xl);
+.content-container {
+  position: relative;
+  border-bottom: solid 8px rgb(50, 50, 50);
+  border-left: solid 8px rgb(120, 120, 120);
+  border-top: solid 8px rgb(120, 120, 120);
+  border-right: solid 8px rgb(50, 50, 50);
 
-  a {
-    font-size: 2rem;
-    cursor: pointer;
+  .theme-menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
 
-    &:hover {
-      @include update-text-color($default-logo-and-hover);
-      text-decoration: underline;
+    a {
+      font-size: 2rem;
+      cursor: pointer;
     }
   }
 }

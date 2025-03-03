@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ThemeSelectionComponent as ThemeSelectionComponent } from './theme-selection.component';
 
 describe('ThemeSelectionComponent', () => {

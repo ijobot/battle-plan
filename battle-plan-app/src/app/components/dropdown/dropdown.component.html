@@ -1,0 +1,13 @@
+<div class="dropdown-container">
+  <a
+    class="themes-link"
+    (click)="toggleDropdown()"
+    onclick="this.blur()"
+    (clickOutside)="closeDropdown()"
+  >
+    Theme
+  </a>
+  <div class="dropdown-menu" *ngIf="this.isOpen">
+    <app-theme-selection></app-theme-selection>
+  </div>
+</div>

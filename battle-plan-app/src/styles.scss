@@ -23,8 +23,9 @@ $default-inner-modal: #a8a8a8;
 $default-page-bg: #444444;
 $default-container-bg: #202020;
 // Text Colors
-$default-text: #292929;
-$default-logo-and-hover: #dfdfdf;
+$default-dark-text: #292929;
+$default-light-text: #f3f3f3;
+$default-logo-and-hover: #33bee9;
 // Button Colors
 $button-bg: #c9c9c9;
 
@@ -66,10 +67,9 @@ $cp-logo-and-hover: #00ff00;
 $gd-player: #588680;
 $gd-monster: #694343;
 $gd-npc: #42476f;
-$gd-modal-bg: #272536;
 $gd-inner-modal: #a8a8a8;
 // Container Colors
-$gd-container-bg: #dcdddc;
+$gd-container-bg: #0d0e0d;
 // Text Colors
 $gd-logo-and-hover: #de252f;
 $gd-text-white: #dedede;
@@ -136,7 +136,7 @@ svg {
 
 button {
   @include update-background-color($button-bg);
-  @include update-text-color($default-text);
+  @include update-text-color($default-dark-text);
   padding: var(--spacing-m) var(--spacing-l);
   border-top: 4px solid rgba(0, 0, 0, 0.2);
   border-right: 4px solid rgba(0, 0, 0, 0.5);
@@ -188,7 +188,7 @@ select:focus:enabled {
 
 .page-container {
   @include update-background-color($default-page-bg);
-  height: calc(100vh - 64px);
+  height: calc(100vh - 60px);
   min-width: 100vw;
   position: relative;
   display: flex;
@@ -206,8 +206,51 @@ select:focus:enabled {
   padding: var(--spacing-l);
 }
 
+.main-nav {
+  display: flex;
+  height: 60px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-xl);
+  border-bottom: solid 2px rgb(120, 120, 120);
+
+  .nav-menu {
+    display: flex;
+    gap: var(--spacing-xl);
+    padding: 0 var(--spacing-xl);
+
+    a {
+      font-size: 2rem;
+      cursor: pointer;
+
+      &:hover {
+        @include update-text-color($gd-text-white);
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.dropdown-container {
+  .themes-link {
+    font-size: 2rem;
+    cursor: pointer;
+
+    &:hover {
+      @include update-text-color($gd-text-white);
+      text-decoration: underline;
+    }
+  }
+}
+
+.theme-menu > a:hover {
+  @include update-text-color($gd-text-white);
+  text-decoration: underline;
+}
+
 .logo {
   @include update-text-color($default-logo-and-hover);
+  font-size: 3rem;
   line-height: 1;
 }
 
@@ -228,7 +271,7 @@ select:focus:enabled {
 
 .line-break {
   width: 100%;
-  height: 4px;
+  height: 8px;
   background-color: rgb(50, 50, 50);
 }
 
@@ -239,6 +282,11 @@ select:focus:enabled {
 .home-text,
 .about-text {
   @include update-text-color($default-logo-and-hover);
+}
+
+.home-text > h1 {
+  font-size: 6rem;
+  margin-top: -20px;
 }
 
 /* ------------- */
@@ -368,6 +416,10 @@ select:focus:enabled {
   .row:hover {
     @include update-outline-color($f-logo-and-hover);
   }
+
+  .highlight-text {
+    @include update-text-color($f-logo-and-hover);
+  }
 }
 
 /* Cyberpunk Theme */
@@ -441,6 +493,10 @@ select:focus:enabled {
   .row:hover {
     @include update-outline-color($cp-logo-and-hover);
   }
+
+  .highlight-text {
+    @include update-text-color($cp-logo-and-hover);
+  }
 }
 
 /* Grimdark Theme */
@@ -463,20 +519,22 @@ select:focus:enabled {
   }
 
   *:not(mat-icon) {
-    font-family: "Texturina", serif;
-  }
-
-  button,
-  p,
-  a,
-  h1,
-  ul,
-  li {
+    font-family: "New Rocker", system-ui;
+    font-optical-sizing: auto;
+    font-style: normal;
     line-height: 1;
   }
 
+  // button,
+  // p,
+  // a,
+  // h1,
+  // ul,
+  // li {
+  // }
+
   .main-nav {
-    @include update-background-color($gd-modal-bg);
+    @include update-background-color($gd-container-bg);
     @include update-text-color($gd-logo-and-hover);
 
     .logo {
@@ -517,7 +575,7 @@ select:focus:enabled {
   .main-modal {
     background-image: url("../src/app/images/spiderweb.JPG");
     background-size: cover;
-    @include update-background-color($gd-modal-bg);
+    @include update-background-color($gd-container-bg);
   }
 
   .row:hover {
@@ -526,6 +584,10 @@ select:focus:enabled {
 
   .home-text,
   .about-text {
-    @include update-text-color($default-text);
+    @include update-text-color($default-light-text);
+  }
+
+  .highlight-text {
+    @include update-text-color($gd-logo-and-hover);
   }
 }

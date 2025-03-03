@@ -25,16 +25,17 @@
 
   <!-- SAVE/LOAD/CLEAR BUTTONS -->
   <div>
-    <button (click)="handleToggleInitiative()">
+    <button blurAfterClick (click)="handleToggleInitiative()">
       Initiative {{ (initiative$ | async) ? "Off" : "On" }}
     </button>
-    <button (click)="handleSavePartyClick()">Save Party</button>
+    <button blurAfterClick (click)="handleSavePartyClick()">Save Party</button>
     <button
+      blurAfterClick
       (click)="handleLoadSavedPartyClick()"
       [disabled]="!(savedParty$ | async)?.length"
     >
       Load Party
     </button>
-    <button (click)="handleClearAllClick()">Clear All</button>
+    <button blurAfterClick (click)="handleClearAllClick()">Clear All</button>
   </div>
 </div>

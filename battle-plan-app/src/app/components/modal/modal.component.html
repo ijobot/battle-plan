@@ -43,7 +43,10 @@
       ></ng-content>
 
       <!-- MODAL CONTENTS FOR SAVING A PARTY -->
-      <div class="clear-all-buttons" *ngIf="modal.modalContent == 'saveParty'">
+      <div
+        class="party-function-buttons"
+        *ngIf="modal.modalContent == 'saveParty'"
+      >
         <button
           (click)="handleSaveAll()"
           [disabled]="!(combatants$ | async)?.length"
@@ -54,13 +57,19 @@
       </div>
 
       <!-- MODAL CONTENTS FOR LOADING A PARTY -->
-      <div class="clear-all-buttons" *ngIf="modal.modalContent == 'loadParty'">
+      <div
+        class="party-function-buttons"
+        *ngIf="modal.modalContent == 'loadParty'"
+      >
         <button (click)="handleLoadSavedParty()">Load Group</button>
         <button (click)="handleCloseModal()">Cancel</button>
       </div>
 
       <!-- MODAL CONTENTS FOR CONFIRMING A "CLEAR ALL" -->
-      <div class="clear-all-buttons" *ngIf="modal.modalContent == 'clearAll'">
+      <div
+        class="party-function-buttons"
+        *ngIf="modal.modalContent == 'clearAll'"
+      >
         <button (click)="handleClearAll()">Yes</button>
         <button (click)="handleCloseModal()">No</button>
       </div>
