@@ -9,25 +9,30 @@
   --spacing-xl: 30px;
 }
 
-/* -------------- */
-/* Default Mixins */
-/* -------------- */
-// Combatant, Modal, and Row Colors
-$default-player-and-link-hover: #f2d492;
-$default-monster: #d5573b;
-$default-npc: #9e987a;
-// Container Colors
-$default-page-bg-nav-text-and-outline: #6f9fc1;
-$default-container-bg: #110b69;
+/* ----------- */
+/* Base Mixins */
+/* ----------- */
 // Text Colors
 $default-text-dark: #292929;
 $default-text-light: #e4e4e4;
 // Button Colors
 $default-button-bg: #c9c9c9;
 
-/* -------------- */
-/* Fantasy Mixins */
-/* -------------- */
+/* -------------------- */
+/* Default Theme Mixins */
+/* -------------------- */
+// Combatant, Modal, and Row Colors
+$default-player-and-link-hover: #56c4aa;
+$default-monster: #cf7044;
+$default-npc: #946ede;
+// Container Colors
+$default-page-bg-nav-text-and-outline: #d7dfce;
+$default-container-bg: #007991;
+
+/* -------------------- */
+/* Fantasy Theme Mixins */
+/* -------------------- */
+// Combatant, Modal, and Row Colors
 $fantasy-player-and-link-hover: #86adb0;
 $fantasy-monster: #c07da8;
 $fantasy-npc: #5a7ba6;
@@ -35,32 +40,26 @@ $fantasy-npc: #5a7ba6;
 $fantasy-page-bg-nav-text-and-outline: #ebd61a;
 $fantasy-container-bg: #875991;
 
-/* ---------------- */
-/* Cyberpunk Mixins */
-/* ---------------- */
+/* ---------------------- */
+/* Cyberpunk Theme Mixins */
+/* ---------------------- */
 // Combatant, Modal, and Row Colors
-$cp-player: #f3f719;
-$cp-monster: #f320c5;
-$cp-npc: #14fafa;
-$cp-modal-bg: #766d7c;
-$cp-inner-modal: #a8a8a8;
+$cyberpunk-player-and-link-hover: #f3f719;
+$cyberpunk-monster: #f320c5;
+$cyberpunk-npc: #14fafa;
 // Container Colors
-$cp-container-bg: #000000;
-// Text Colors
-$cp-nav-text: #00ff00;
+$cyberpunk-page-bg-nav-text-and-outline: #00ff00;
+$cyberpunk-container-bg: #000000;
 
-/* --------------- */
-/* Grimdark Mixins */
-/* --------------- */
-// Combatant, Modal, and Row Colors
-$gd-player: #588680;
-$gd-monster: #694343;
-$gd-npc: #42476f;
-$gd-inner-modal: #a8a8a8;
+/* --------------------- */
+/* Grimdark Theme Mixins */
+/* --------------------- */
+$grimdark-player-and-link-hover: #588680;
+$grimdark-monster: #694343;
+$grimdark-npc: #42476f;
 // Container Colors
-$gd-container-bg: #0d0e0d;
-// Text Colors
-$gd-nav-text: #de252f;
+$grimdark-page-bg-nav-text-and-outline: #de252f;
+$grimdark-container-bg: #0d0e0d;
 
 /* --------------- */
 /* Mixin Functions */
@@ -75,11 +74,6 @@ $gd-nav-text: #de252f;
 
 @mixin update-outline-color($color) {
   outline: 4px solid $color;
-}
-
-@mixin update-outline-color($color) {
-  outline: 4px solid $color;
-  filter: brightness(120%);
 }
 
 /* ------------------ */
@@ -257,6 +251,10 @@ app-theme-selection a:hover {
   line-height: 1;
 }
 
+.highlight-text {
+  @include update-text-color($default-page-bg-nav-text-and-outline);
+}
+
 .row {
   display: flex;
   padding: var(--spacing-m);
@@ -275,7 +273,7 @@ app-theme-selection a:hover {
 .line-break {
   width: 100%;
   height: 4px;
-  @include update-background-color($default-page-bg-nav-text-and-outline);
+  @include update-background-color($default-text-light);
 }
 
 .extra-padding {
@@ -326,16 +324,12 @@ app-theme-selection a:hover {
     @include update-background-color($default-page-bg-nav-text-and-outline);
   }
 
-  .content-container {
+  .content-container:not(.player, .monster, .npc) {
     @include update-background-color($default-container-bg);
   }
 
   .row:hover {
     @include update-outline-color($default-page-bg-nav-text-and-outline);
-  }
-
-  .highlight-text {
-    @include update-text-color($default-player-and-link-hover);
   }
 
   .player {
@@ -447,6 +441,7 @@ app-theme-selection a:hover {
 
   .default {
     @include update-background-color($fantasy-container-bg);
+    @include update-text-color($fantasy-page-bg-nav-text-and-outline);
   }
 }
 
@@ -463,16 +458,16 @@ app-theme-selection a:hover {
   }
 
   .main-nav {
-    @include update-background-color($cp-container-bg);
-    @include update-text-color($cp-nav-text);
+    @include update-background-color($cyberpunk-container-bg);
+    @include update-text-color($cyberpunk-page-bg-nav-text-and-outline);
 
     .logo {
-      @include update-text-color($cp-nav-text);
+      @include update-text-color($cyberpunk-page-bg-nav-text-and-outline);
     }
 
     .nav-menu {
       a:hover {
-        @include update-text-color($cp-player);
+        @include update-text-color($cyberpunk-player-and-link-hover);
         text-decoration: underline;
       }
     }
@@ -480,16 +475,24 @@ app-theme-selection a:hover {
 
   .dropdown-container {
     .themes-link:hover {
-      @include update-text-color($cp-player);
+      @include update-text-color($cyberpunk-player-and-link-hover);
     }
   }
 
   app-theme-selection a:hover {
-    @include update-text-color($cp-player);
+    @include update-text-color($cyberpunk-player-and-link-hover);
+  }
+
+  .page-container,
+  .main-modal {
+    background-image: url("../src/app/images/neon.jpg");
+    background-size: cover;
+    background-position: center bottom;
+    @include update-background-color($cyberpunk-container-bg);
   }
 
   button:hover:enabled:not(:active) {
-    @include update-outline-color($cp-nav-text);
+    @include update-outline-color($cyberpunk-page-bg-nav-text-and-outline);
     cursor: pointer;
   }
 
@@ -501,53 +504,41 @@ app-theme-selection a:hover {
   button:active,
   button:focus,
   button:focus-visible {
-    @include update-outline-color($cp-nav-text);
+    @include update-outline-color($cyberpunk-page-bg-nav-text-and-outline);
   }
 
   input:focus:enabled:not(:active),
   select:focus:enabled {
-    @include update-outline-color($cp-nav-text);
+    @include update-outline-color($cyberpunk-page-bg-nav-text-and-outline);
   }
 
-  .content-container:not(.player, .monster, .npc, .default) {
-    @include update-background-color($cp-container-bg);
-  }
-
-  .page-container,
-  .main-modal {
-    background-image: url("../src/app/images/neon.jpg");
-    background-size: cover;
-    background-position: center bottom;
-    @include update-background-color($cp-container-bg);
+  .content-container:not(.player, .monster, .npc) {
+    @include update-background-color($cyberpunk-container-bg);
   }
 
   .row:hover {
-    @include update-outline-color($cp-nav-text);
-  }
-
-  .home-text,
-  .about-text {
-    @include update-text-color($default-page-bg-nav-text-and-outline);
+    @include update-outline-color($cyberpunk-page-bg-nav-text-and-outline);
   }
 
   .highlight-text {
-    @include update-text-color($cp-nav-text);
+    @include update-text-color($cyberpunk-page-bg-nav-text-and-outline);
   }
 
   .player {
-    @include update-background-color($cp-player);
+    @include update-background-color($cyberpunk-player-and-link-hover);
   }
 
   .monster {
-    @include update-background-color($cp-monster);
+    @include update-background-color($cyberpunk-monster);
   }
 
   .npc {
-    @include update-background-color($cp-npc);
+    @include update-background-color($cyberpunk-npc);
   }
 
   .default {
-    @include update-background-color($cp-inner-modal);
+    @include update-background-color($cyberpunk-container-bg);
+    @include update-text-color($cyberpunk-page-bg-nav-text-and-outline);
   }
 }
 
@@ -564,16 +555,16 @@ app-theme-selection a:hover {
   }
 
   .main-nav {
-    @include update-background-color($gd-container-bg);
-    @include update-text-color($gd-nav-text);
+    @include update-background-color($grimdark-container-bg);
+    @include update-text-color($grimdark-page-bg-nav-text-and-outline);
 
     .logo {
-      @include update-text-color($gd-nav-text);
+      @include update-text-color($grimdark-page-bg-nav-text-and-outline);
     }
 
     .nav-menu {
       a:hover {
-        @include update-text-color($gd-player);
+        @include update-text-color($grimdark-player-and-link-hover);
         text-decoration: underline;
       }
     }
@@ -581,16 +572,25 @@ app-theme-selection a:hover {
 
   .dropdown-container {
     .themes-link:hover {
-      @include update-text-color($gd-player);
+      @include update-text-color($grimdark-player-and-link-hover);
     }
   }
 
   app-theme-selection a:hover {
-    @include update-text-color($gd-player);
+    @include update-text-color($grimdark-player-and-link-hover);
+  }
+
+  .page-container,
+  .main-modal {
+    background-image: url("../src/app/images/spiderweb.jpg");
+    background-size: cover;
+    background-position: center;
+
+    @include update-background-color($grimdark-container-bg);
   }
 
   button:hover:enabled:not(:active) {
-    @include update-outline-color($gd-nav-text);
+    @include update-outline-color($grimdark-page-bg-nav-text-and-outline);
     cursor: pointer;
   }
 
@@ -602,55 +602,43 @@ app-theme-selection a:hover {
   button:active,
   button:focus,
   button:focus-visible {
-    @include update-outline-color($gd-nav-text);
+    @include update-outline-color($grimdark-page-bg-nav-text-and-outline);
   }
 
   input:focus:enabled:not(:active),
   select:focus:enabled {
-    @include update-outline-color($gd-nav-text);
+    @include update-outline-color($grimdark-page-bg-nav-text-and-outline);
   }
 
-  .light {
-    @include update-text-color($default-page-bg-nav-text-and-outline);
-  }
-
-  .content-container:not(.player, .monster, .npc, .default) {
-    @include update-background-color($gd-container-bg);
-  }
-
-  .page-container,
-  .main-modal {
-    background-image: url("../src/app/images/spiderweb.JPG");
-    background-size: cover;
-    @include update-background-color($gd-container-bg);
+  .content-container:not(.player, .monster, .npc) {
+    @include update-background-color($grimdark-container-bg);
   }
 
   .row:hover {
-    @include update-outline-color($gd-nav-text);
-  }
-
-  .home-text,
-  .about-text {
-    @include update-text-color($default-page-bg-nav-text-and-outline);
+    @include update-outline-color($grimdark-page-bg-nav-text-and-outline);
   }
 
   .highlight-text {
-    @include update-text-color($gd-nav-text);
+    @include update-text-color($grimdark-page-bg-nav-text-and-outline);
   }
 
   .player {
-    @include update-background-color($gd-player);
+    @include update-background-color($grimdark-player-and-link-hover);
+    @include update-text-color($default-text-light);
   }
 
   .monster {
-    @include update-background-color($gd-monster);
+    @include update-background-color($grimdark-monster);
+    @include update-text-color($default-text-light);
   }
 
   .npc {
-    @include update-background-color($gd-npc);
+    @include update-background-color($grimdark-npc);
+    @include update-text-color($default-text-light);
   }
 
   .default {
-    @include update-background-color($gd-inner-modal);
+    @include update-background-color($grimdark-container-bg);
+    @include update-text-color($grimdark-page-bg-nav-text-and-outline);
   }
 }
