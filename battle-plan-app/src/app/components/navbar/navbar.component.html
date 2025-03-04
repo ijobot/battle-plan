@@ -1,16 +1,22 @@
-<div class="main-nav">
-  <!-- Logo -->
-  <p class="logo">Battle Plan</p>
+<div class="nav-wrapper">
+  <div class="main-nav">
+    <!-- Logo -->
+    <div class="column">
+      <p class="logo">Battle Plan</p>
+    </div>
 
-  <!-- Home and About Navigation -->
-  <div class="nav-menu">
-    <a (click)="navigate('/')">Home</a>
-    <a (click)="navigate('/battlefield')">Battlefield</a>
-    <a (click)="navigate('/about')">About</a>
-  </div>
+    <!-- Home and About Navigation -->
+    <div class="column">
+      <div class="nav-menu">
+        <a (click)="navigate('/')">Home</a>
+        <a (click)="navigate('/battlefield')">Battlefield</a>
+        <a (click)="navigate('/about')">About</a>
+      </div>
+    </div>
 
-  <!-- Theme Selections -->
-  <div>
-    <app-dropdown></app-dropdown>
+    <!-- Theme Selections -->
+    <div class="column">
+      <app-dropdown></app-dropdown>
+    </div>
   </div>
 </div>

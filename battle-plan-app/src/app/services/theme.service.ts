@@ -18,14 +18,17 @@ export class ThemeService {
   }
 
   setTheme(theme: CSSTheme): void {
-    this.document
-      .getElementById('app-root')
-      ?.classList.remove(
+    const mainHTML = this.document.getElementById('app-root');
+
+    if (mainHTML) {
+      mainHTML.classList.remove(
+        CSSTheme.default,
         CSSTheme.fantasy,
         CSSTheme.cyberpunk,
         CSSTheme.grimdark
       );
-    this.document.getElementById('app-root')?.classList.add(theme);
-    this._currentTheme$.next(theme);
+      mainHTML.classList.add(theme);
+      this._currentTheme$.next(theme);
+    }
   }
 }

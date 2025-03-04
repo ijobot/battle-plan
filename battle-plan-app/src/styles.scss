@@ -9,45 +9,35 @@
   --spacing-xl: 30px;
 }
 
-/* ----------- */
-/* Base Mixins */
-/* ----------- */
+/* -------------- */
+/* Default Mixins */
+/* -------------- */
 // Combatant, Modal, and Row Colors
-$default-player: #34eb10;
-$default-monster: #f51212;
-$default-npc: #0f30eb;
-$default-modal-bg: #766d7c;
-$default-inner-modal: #a8a8a8;
+$default-player-and-link-hover: #f2d492;
+$default-monster: #d5573b;
+$default-npc: #9e987a;
 // Container Colors
-
-$default-page-bg: #444444;
-$default-container-bg: #202020;
+$default-page-bg-nav-text-and-outline: #6f9fc1;
+$default-container-bg: #110b69;
 // Text Colors
-$default-dark-text: #292929;
-$default-light-text: #f3f3f3;
-$default-logo-and-hover: #33bee9;
+$default-text-dark: #292929;
+$default-text-light: #e4e4e4;
 // Button Colors
-$button-bg: #c9c9c9;
+$default-button-bg: #c9c9c9;
 
 /* -------------- */
 /* Fantasy Mixins */
 /* -------------- */
-
-// Combatant, Modal, and Row Colors
-$f-player: #86adb0;
-$f-monster: #c07da8;
-$f-npc: #5a7ba6;
-$f-modal-bg: #766d7c;
-$f-inner-modal: #a8a8a8;
+$fantasy-player-and-link-hover: #86adb0;
+$fantasy-monster: #c07da8;
+$fantasy-npc: #5a7ba6;
 // Container Colors
-$f-container-bg: #875991;
-// Text Colors
-$f-logo-and-hover: #e6c614;
+$fantasy-page-bg-nav-text-and-outline: #ebd61a;
+$fantasy-container-bg: #875991;
 
 /* ---------------- */
 /* Cyberpunk Mixins */
 /* ---------------- */
-
 // Combatant, Modal, and Row Colors
 $cp-player: #f3f719;
 $cp-monster: #f320c5;
@@ -57,12 +47,11 @@ $cp-inner-modal: #a8a8a8;
 // Container Colors
 $cp-container-bg: #000000;
 // Text Colors
-$cp-logo-and-hover: #00ff00;
+$cp-nav-text: #00ff00;
 
 /* --------------- */
 /* Grimdark Mixins */
 /* --------------- */
-
 // Combatant, Modal, and Row Colors
 $gd-player: #588680;
 $gd-monster: #694343;
@@ -71,11 +60,13 @@ $gd-inner-modal: #a8a8a8;
 // Container Colors
 $gd-container-bg: #0d0e0d;
 // Text Colors
-$gd-logo-and-hover: #de252f;
-$gd-text-white: #dedede;
+$gd-nav-text: #de252f;
 
+/* --------------- */
+/* Mixin Functions */
+/* --------------- */
 @mixin update-background-color($color) {
-  background-color: $color !important;
+  background-color: $color;
 }
 
 @mixin update-text-color($color) {
@@ -84,6 +75,11 @@ $gd-text-white: #dedede;
 
 @mixin update-outline-color($color) {
   outline: 4px solid $color;
+}
+
+@mixin update-outline-color($color) {
+  outline: 4px solid $color;
+  filter: brightness(120%);
 }
 
 /* ------------------ */
@@ -135,8 +131,8 @@ svg {
 /* ------------------------- */
 
 button {
-  @include update-background-color($button-bg);
-  @include update-text-color($default-dark-text);
+  @include update-background-color($default-button-bg);
+  @include update-text-color($default-text-dark);
   padding: var(--spacing-m) var(--spacing-l);
   border-top: 4px solid rgba(0, 0, 0, 0.2);
   border-right: 4px solid rgba(0, 0, 0, 0.5);
@@ -179,7 +175,7 @@ select {
 
 input:focus:enabled:not(:active),
 select:focus:enabled {
-  @include update-outline-color($default-logo-and-hover);
+  @include update-outline-color($default-page-bg-nav-text-and-outline);
 }
 
 /* -------------------------------------- */
@@ -187,8 +183,8 @@ select:focus:enabled {
 /* -------------------------------------- */
 
 .page-container {
-  @include update-background-color($default-page-bg);
-  height: calc(100vh - 60px);
+  @include update-background-color($default-page-bg-nav-text-and-outline);
+  height: calc(100vh - 50px);
   min-width: 100vw;
   position: relative;
   display: flex;
@@ -199,32 +195,38 @@ select:focus:enabled {
 
 .content-container {
   background-color: black;
-  border-top: solid 8px rgb(50, 50, 50);
+  border-top: solid 8px rgb(75, 75, 75);
   border-right: solid 8px rgb(120, 120, 120);
   border-bottom: solid 8px rgb(120, 120, 120);
-  border-left: solid 8px rgb(50, 50, 50);
+  border-left: solid 8px rgb(75, 75, 75);
   padding: var(--spacing-l);
 }
 
 .main-nav {
+  @include update-background-color($default-container-bg);
+  @include update-text-color($default-page-bg-nav-text-and-outline);
   display: flex;
-  height: 60px;
+  height: 50px;
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--spacing-xl);
-  border-bottom: solid 2px rgb(120, 120, 120);
+  border-bottom: solid 4px rgb(120, 120, 120);
+
+  .column {
+    width: 100%;
+  }
 
   .nav-menu {
     display: flex;
     gap: var(--spacing-xl);
-    padding: 0 var(--spacing-xl);
+    justify-content: center;
 
     a {
       font-size: 2rem;
       cursor: pointer;
 
       &:hover {
-        @include update-text-color($gd-text-white);
+        @include update-text-color($default-player-and-link-hover);
         text-decoration: underline;
       }
     }
@@ -232,24 +234,25 @@ select:focus:enabled {
 }
 
 .dropdown-container {
+  text-align: end;
+
   .themes-link {
     font-size: 2rem;
     cursor: pointer;
 
     &:hover {
-      @include update-text-color($gd-text-white);
+      @include update-text-color($default-player-and-link-hover);
       text-decoration: underline;
     }
   }
 }
 
-.theme-menu > a:hover {
-  @include update-text-color($gd-text-white);
+app-theme-selection a:hover {
   text-decoration: underline;
 }
 
 .logo {
-  @include update-text-color($default-logo-and-hover);
+  @include update-text-color($default-page-bg-nav-text-and-outline);
   font-size: 3rem;
   line-height: 1;
 }
@@ -271,8 +274,8 @@ select:focus:enabled {
 
 .line-break {
   width: 100%;
-  height: 8px;
-  background-color: rgb(50, 50, 50);
+  height: 4px;
+  @include update-background-color($default-page-bg-nav-text-and-outline);
 }
 
 .extra-padding {
@@ -281,7 +284,7 @@ select:focus:enabled {
 
 .home-text,
 .about-text {
-  @include update-text-color($default-logo-and-hover);
+  @include update-text-color($default-text-light);
 }
 
 .home-text > h1 {
@@ -293,9 +296,50 @@ select:focus:enabled {
 /* Default Theme */
 /* ------------- */
 
-.default {
+.default-theme {
+  button:hover:enabled:not(:active) {
+    @include update-outline-color($default-page-bg-nav-text-and-outline);
+    cursor: pointer;
+  }
+
+  button:disabled {
+    filter: brightness(70%);
+    cursor: not-allowed;
+  }
+
+  button:active,
+  button:focus,
+  button:focus-visible {
+    @include update-outline-color($default-page-bg-nav-text-and-outline);
+  }
+
+  input:focus:enabled:not(:active),
+  select:focus:enabled {
+    @include update-outline-color($default-page-bg-nav-text-and-outline);
+  }
+
+  app-theme-selection a:hover {
+    @include update-text-color($default-player-and-link-hover);
+  }
+
+  .main-modal {
+    @include update-background-color($default-page-bg-nav-text-and-outline);
+  }
+
+  .content-container {
+    @include update-background-color($default-container-bg);
+  }
+
+  .row:hover {
+    @include update-outline-color($default-page-bg-nav-text-and-outline);
+  }
+
+  .highlight-text {
+    @include update-text-color($default-player-and-link-hover);
+  }
+
   .player {
-    @include update-background-color($default-player);
+    @include update-background-color($default-player-and-link-hover);
   }
 
   .monster {
@@ -307,36 +351,7 @@ select:focus:enabled {
   }
 
   .default {
-    @include update-background-color($default-inner-modal);
-  }
-
-  button:hover:enabled:not(:active) {
-    @include update-outline-color($default-logo-and-hover);
-    cursor: pointer;
-  }
-
-  button:disabled {
-    filter: brightness(70%);
-    cursor: not-allowed;
-  }
-
-  button:active,
-  button:focus,
-  button:focus-visible {
-    @include update-outline-color($default-logo-and-hover);
-  }
-
-  input:focus:enabled:not(:active),
-  select:focus:enabled {
-    @include update-outline-color($default-logo-and-hover);
-  }
-
-  .content-container {
-    @include update-background-color($default-container-bg);
-  }
-
-  .row:hover {
-    @include update-outline-color($default-logo-and-hover);
+    @include update-text-color($default-text-light);
   }
 }
 
@@ -344,39 +359,49 @@ select:focus:enabled {
 /* Fantasy Theme */
 /* ------------- */
 
-.fantasy {
-  .player {
-    @include update-background-color($f-player);
-  }
-
-  .monster {
-    @include update-background-color($f-monster);
-  }
-
-  .npc {
-    @include update-background-color($f-npc);
-  }
-
-  .default {
-    @include update-background-color($f-inner-modal);
-  }
-
+.fantasy-theme {
   *:not(mat-icon) {
-    font-family: "Charm", cursive;
+    font-family: "Felipa", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
   }
 
-  button,
-  p,
-  a,
-  h1,
-  ul,
-  li {
-    line-height: 1;
-    margin-bottom: -2px;
+  .main-nav {
+    @include update-background-color($fantasy-container-bg);
+    @include update-text-color($fantasy-page-bg-nav-text-and-outline);
+
+    .logo {
+      @include update-text-color($fantasy-page-bg-nav-text-and-outline);
+    }
+
+    .nav-menu {
+      a:hover {
+        @include update-text-color($fantasy-player-and-link-hover);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .dropdown-container {
+    .themes-link:hover {
+      @include update-text-color($fantasy-player-and-link-hover);
+    }
+  }
+
+  app-theme-selection a:hover {
+    @include update-text-color($fantasy-player-and-link-hover);
+  }
+
+  .page-container,
+  .main-modal {
+    background-image: url("../src/app/images/bricks.jpg");
+    background-size: cover;
+    background-blend-mode: multiply;
+    @include update-background-color(#d3d5d8);
   }
 
   button:hover:enabled:not(:active) {
-    @include update-outline-color($f-logo-and-hover);
+    @include update-outline-color($fantasy-page-bg-nav-text-and-outline);
     cursor: pointer;
   }
 
@@ -388,43 +413,127 @@ select:focus:enabled {
   button:active,
   button:focus,
   button:focus-visible {
-    @include update-outline-color($f-logo-and-hover);
+    @include update-outline-color($fantasy-page-bg-nav-text-and-outline);
   }
 
   input:focus:enabled:not(:active),
   select:focus:enabled {
-    @include update-outline-color($f-logo-and-hover);
+    @include update-outline-color($fantasy-page-bg-nav-text-and-outline);
+  }
+
+  .content-container:not(.player, .monster, .npc) {
+    @include update-background-color($fantasy-container-bg);
+  }
+
+  .row:hover {
+    @include update-outline-color($fantasy-page-bg-nav-text-and-outline);
+  }
+
+  .highlight-text {
+    @include update-text-color($fantasy-page-bg-nav-text-and-outline);
+  }
+
+  .player {
+    @include update-background-color($fantasy-player-and-link-hover);
+  }
+
+  .monster {
+    @include update-background-color($fantasy-monster);
+  }
+
+  .npc {
+    @include update-background-color($fantasy-npc);
+  }
+
+  .default {
+    @include update-background-color($fantasy-container-bg);
+  }
+}
+
+/* --------------- */
+/* Cyberpunk Theme */
+/* --------------- */
+
+.cyberpunk-theme {
+  *:not(mat-icon) {
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    line-height: 1;
+  }
+
+  .main-nav {
+    @include update-background-color($cp-container-bg);
+    @include update-text-color($cp-nav-text);
+
+    .logo {
+      @include update-text-color($cp-nav-text);
+    }
+
+    .nav-menu {
+      a:hover {
+        @include update-text-color($cp-player);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .dropdown-container {
+    .themes-link:hover {
+      @include update-text-color($cp-player);
+    }
+  }
+
+  app-theme-selection a:hover {
+    @include update-text-color($cp-player);
+  }
+
+  button:hover:enabled:not(:active) {
+    @include update-outline-color($cp-nav-text);
+    cursor: pointer;
+  }
+
+  button:disabled {
+    filter: brightness(70%);
+    cursor: not-allowed;
+  }
+
+  button:active,
+  button:focus,
+  button:focus-visible {
+    @include update-outline-color($cp-nav-text);
+  }
+
+  input:focus:enabled:not(:active),
+  select:focus:enabled {
+    @include update-outline-color($cp-nav-text);
   }
 
   .content-container:not(.player, .monster, .npc, .default) {
-    @include update-background-color($f-container-bg);
+    @include update-background-color($cp-container-bg);
   }
 
   .page-container,
   .main-modal {
-    background-image: url("../src/app/images/bricks.jpg");
+    background-image: url("../src/app/images/neon.jpg");
     background-size: cover;
-    background-blend-mode: multiply;
-    @include update-background-color($f-modal-bg);
-  }
-
-  .logo {
-    @include update-text-color($f-logo-and-hover);
-    line-height: 1;
+    background-position: center bottom;
+    @include update-background-color($cp-container-bg);
   }
 
   .row:hover {
-    @include update-outline-color($f-logo-and-hover);
+    @include update-outline-color($cp-nav-text);
+  }
+
+  .home-text,
+  .about-text {
+    @include update-text-color($default-page-bg-nav-text-and-outline);
   }
 
   .highlight-text {
-    @include update-text-color($f-logo-and-hover);
+    @include update-text-color($cp-nav-text);
   }
-}
 
-/* Cyberpunk Theme */
-
-.cyberpunk {
   .player {
     @include update-background-color($cp-player);
   }
@@ -440,84 +549,13 @@ select:focus:enabled {
   .default {
     @include update-background-color($cp-inner-modal);
   }
-
-  *:not(mat-icon) {
-    font-family: "Orbitron", sans-serif;
-  }
-
-  button:hover:enabled:not(:active) {
-    @include update-outline-color($cp-logo-and-hover);
-    cursor: pointer;
-  }
-
-  button:disabled {
-    filter: brightness(70%);
-    cursor: not-allowed;
-  }
-
-  button:active,
-  button:focus,
-  button:focus-visible {
-    @include update-outline-color($cp-logo-and-hover);
-  }
-
-  input:focus:enabled:not(:active),
-  select:focus:enabled {
-    @include update-outline-color($cp-logo-and-hover);
-  }
-
-  .content-container:not(.player, .monster, .npc, .default) {
-    @include update-background-color($cp-container-bg);
-    border-top: solid 8px rgb(131, 0, 120);
-    border-right: solid 8px rgb(235, 1, 215);
-    border-bottom: solid 8px rgb(235, 1, 215);
-    border-left: solid 8px rgb(131, 0, 120);
-  }
-
-  .page-container,
-  .main-modal {
-    background-image: url("../src/app/images/neon.jpg");
-    background-size: contain;
-    @include update-background-color($cp-modal-bg);
-  }
-
-  .main-modal {
-    background-size: auto;
-  }
-
-  .logo {
-    @include update-text-color($cp-logo-and-hover);
-    line-height: 1;
-  }
-
-  .row:hover {
-    @include update-outline-color($cp-logo-and-hover);
-  }
-
-  .highlight-text {
-    @include update-text-color($cp-logo-and-hover);
-  }
 }
 
+/* -------------- */
 /* Grimdark Theme */
+/* -------------- */
 
-.grimdark {
-  .player {
-    @include update-background-color($gd-player);
-  }
-
-  .monster {
-    @include update-background-color($gd-monster);
-  }
-
-  .npc {
-    @include update-background-color($gd-npc);
-  }
-
-  .default {
-    @include update-background-color($gd-inner-modal);
-  }
-
+.grimdark-theme {
   *:not(mat-icon) {
     font-family: "New Rocker", system-ui;
     font-optical-sizing: auto;
@@ -525,25 +563,34 @@ select:focus:enabled {
     line-height: 1;
   }
 
-  // button,
-  // p,
-  // a,
-  // h1,
-  // ul,
-  // li {
-  // }
-
   .main-nav {
     @include update-background-color($gd-container-bg);
-    @include update-text-color($gd-logo-and-hover);
+    @include update-text-color($gd-nav-text);
 
     .logo {
-      @include update-text-color($gd-logo-and-hover);
+      @include update-text-color($gd-nav-text);
+    }
+
+    .nav-menu {
+      a:hover {
+        @include update-text-color($gd-player);
+        text-decoration: underline;
+      }
     }
   }
 
+  .dropdown-container {
+    .themes-link:hover {
+      @include update-text-color($gd-player);
+    }
+  }
+
+  app-theme-selection a:hover {
+    @include update-text-color($gd-player);
+  }
+
   button:hover:enabled:not(:active) {
-    @include update-outline-color($gd-logo-and-hover);
+    @include update-outline-color($gd-nav-text);
     cursor: pointer;
   }
 
@@ -555,16 +602,16 @@ select:focus:enabled {
   button:active,
   button:focus,
   button:focus-visible {
-    @include update-outline-color($gd-logo-and-hover);
+    @include update-outline-color($gd-nav-text);
   }
 
   input:focus:enabled:not(:active),
   select:focus:enabled {
-    @include update-outline-color($gd-logo-and-hover);
+    @include update-outline-color($gd-nav-text);
   }
 
   .light {
-    @include update-text-color($gd-text-white);
+    @include update-text-color($default-page-bg-nav-text-and-outline);
   }
 
   .content-container:not(.player, .monster, .npc, .default) {
@@ -579,15 +626,31 @@ select:focus:enabled {
   }
 
   .row:hover {
-    @include update-outline-color($gd-logo-and-hover);
+    @include update-outline-color($gd-nav-text);
   }
 
   .home-text,
   .about-text {
-    @include update-text-color($default-light-text);
+    @include update-text-color($default-page-bg-nav-text-and-outline);
   }
 
   .highlight-text {
-    @include update-text-color($gd-logo-and-hover);
+    @include update-text-color($gd-nav-text);
+  }
+
+  .player {
+    @include update-background-color($gd-player);
+  }
+
+  .monster {
+    @include update-background-color($gd-monster);
+  }
+
+  .npc {
+    @include update-background-color($gd-npc);
+  }
+
+  .default {
+    @include update-background-color($gd-inner-modal);
   }
 }

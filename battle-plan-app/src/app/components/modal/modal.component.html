@@ -1,5 +1,5 @@
 <div class="overlay">
-  <div class="content-container main-modal">
+  <div class="main-modal" (clickOutside)="handleCloseModal()">
     <div
       *ngIf="modalAppearance$ | async as modal"
       class="content-container content"

@@ -6,11 +6,12 @@ import { Observable } from 'rxjs';
 import { ModalText, ModalContent } from '../../models/modal';
 import { CombatantEntryFormComponent } from '../combatant-entry-form/combatant-entry-form.component';
 import { CommonModule } from '@angular/common';
+import { ClickOutsideDirective } from '../../utils/clickoutside.directive';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [CommonModule, CombatantEntryFormComponent],
+  imports: [CommonModule, CombatantEntryFormComponent, ClickOutsideDirective],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
 })

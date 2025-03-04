@@ -1,7 +1,8 @@
 export enum CSSTheme {
-  fantasy = 'fantasy',
-  cyberpunk = 'cyberpunk',
-  grimdark = 'grimdark',
+  default = 'default-theme',
+  fantasy = 'fantasy-theme',
+  cyberpunk = 'cyberpunk-theme',
+  grimdark = 'grimdark-theme',
 }
 
 export enum cyberpunkTheme {
