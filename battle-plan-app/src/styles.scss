@@ -1,19 +1,20 @@
 /* ----------------- */
 /* Custom properties */
 /* ----------------- */
+
 :root {
   /* spacing */
   --spacing-s: 5px;
   --spacing-m: 10px;
   --spacing-l: 20px;
-  --spacing-xl: 30px;
 }
 
 /* ----------- */
 /* Base Mixins */
 /* ----------- */
+
 // Text Colors
-$default-text-dark: #292929;
+$default-text-dark: #1a1919;
 $default-text-light: #e4e4e4;
 // Button Colors
 $default-button-bg: #c9c9c9;
@@ -21,49 +22,66 @@ $default-button-bg: #c9c9c9;
 /* -------------------- */
 /* Default Theme Mixins */
 /* -------------------- */
+
 // Combatant, Modal, and Row Colors
-$default-player-and-link-hover: #56c4aa;
-$default-monster: #cf7044;
-$default-npc: #946ede;
+$default-player-and-link-hover: #fcbc1b;
+$default-monster: #219ebc;
+$default-npc: #fb6400;
 // Container Colors
-$default-page-bg-nav-text-and-outline: #d7dfce;
-$default-container-bg: #007991;
+$default-page-bg-nav-text-and-outline: #e6eeff;
+$default-container-bg: #023047;
+// Border Colors
+$default-topleft: #7a7a7a;
+$default-bottomright: #dadada;
 
 /* -------------------- */
 /* Fantasy Theme Mixins */
 /* -------------------- */
+
 // Combatant, Modal, and Row Colors
-$fantasy-player-and-link-hover: #86adb0;
-$fantasy-monster: #c07da8;
-$fantasy-npc: #5a7ba6;
+$fantasy-player-and-link-hover: #63ce54;
+$fantasy-monster: #d38773;
+$fantasy-npc: #b3996c;
 // Container Colors
-$fantasy-page-bg-nav-text-and-outline: #ebd61a;
-$fantasy-container-bg: #875991;
+$fantasy-page-bg-nav-text-and-outline: #aee698;
+$fantasy-container-bg: #1b3022;
+// Border Colors
+$fantasy-topleft: #4b3f30;
+$fantasy-bottomright: #8b7f68;
 
 /* ---------------------- */
 /* Cyberpunk Theme Mixins */
 /* ---------------------- */
+
 // Combatant, Modal, and Row Colors
-$cyberpunk-player-and-link-hover: #f3f719;
+$cyberpunk-player-and-link-hover: #15dfdf;
 $cyberpunk-monster: #f320c5;
-$cyberpunk-npc: #14fafa;
+$cyberpunk-npc: #f3f719;
 // Container Colors
 $cyberpunk-page-bg-nav-text-and-outline: #00ff00;
-$cyberpunk-container-bg: #000000;
+$cyberpunk-container-bg: #060b24;
+// Border Colors
+$cyberpunk-topleft: #661369;
+$cyberpunk-bottomright: #b911b1;
 
 /* --------------------- */
 /* Grimdark Theme Mixins */
 /* --------------------- */
-$grimdark-player-and-link-hover: #588680;
-$grimdark-monster: #694343;
-$grimdark-npc: #42476f;
+
+$grimdark-player-and-link-hover: #e47474;
+$grimdark-monster: #d42929;
+$grimdark-npc: #9e6b6b;
 // Container Colors
 $grimdark-page-bg-nav-text-and-outline: #de252f;
-$grimdark-container-bg: #0d0e0d;
+$grimdark-container-bg: #0e0101;
+// Border Colors
+$grimdark-topleft: #584141;
+$grimdark-bottomright: #aa7373;
 
 /* --------------- */
 /* Mixin Functions */
 /* --------------- */
+
 @mixin update-background-color($color) {
   background-color: $color;
 }
@@ -76,9 +94,17 @@ $grimdark-container-bg: #0d0e0d;
   outline: 4px solid $color;
 }
 
+@mixin update-border-colors($size, $topleft, $bottomright) {
+  border-top: solid $size $topleft;
+  border-right: solid $size $bottomright;
+  border-bottom: solid $size $bottomright;
+  border-left: solid $size $topleft;
+}
+
 /* ------------------ */
 /* Baseline CSS Reset */
 /* ------------------ */
+
 *,
 *::before,
 *::after {
@@ -156,11 +182,8 @@ select {
   min-width: 200px;
   height: 40px;
   font-size: 2rem;
-  border-top: solid 4px rgb(50, 50, 50);
-  border-right: solid 4px rgb(120, 120, 120);
-  border-bottom: solid 4px rgb(120, 120, 120);
-  border-left: solid 4px rgb(50, 50, 50);
   padding: 0 var(--spacing-s);
+  @include update-border-colors(4px, $default-topleft, $default-bottomright);
 
   &:hover {
     cursor: pointer;
@@ -189,11 +212,22 @@ select:focus:enabled {
 
 .content-container {
   background-color: black;
-  border-top: solid 8px rgb(75, 75, 75);
-  border-right: solid 8px rgb(120, 120, 120);
-  border-bottom: solid 8px rgb(120, 120, 120);
-  border-left: solid 8px rgb(75, 75, 75);
   padding: var(--spacing-l);
+  @include update-border-colors(4px, $default-topleft, $default-bottomright);
+}
+
+.home-container {
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+
+  .home-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-l);
+  }
 }
 
 .main-nav {
@@ -203,31 +237,38 @@ select:focus:enabled {
   height: 50px;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--spacing-xl);
-  border-bottom: solid 4px rgb(120, 120, 120);
+  padding: 0 calc(var(--spacing-l) + 4px);
+  // border-bottom: solid 4px rgb(120, 120, 120);
 
-  .column {
+  .nav-column {
     width: 100%;
   }
 
   .nav-menu {
     display: flex;
-    gap: var(--spacing-xl);
+    gap: var(--spacing-l);
     justify-content: center;
 
     a {
       font-size: 2rem;
       cursor: pointer;
+      @include update-text-color($default-page-bg-nav-text-and-outline);
+    }
 
-      &:hover {
-        @include update-text-color($default-player-and-link-hover);
-        text-decoration: underline;
-      }
+    a:hover {
+      @include update-text-color($default-player-and-link-hover);
+      text-decoration: underline;
+    }
+
+    .active-link {
+      @include update-text-color($default-player-and-link-hover);
+      text-decoration: underline;
     }
   }
 }
 
 .dropdown-container {
+  position: relative;
   text-align: end;
 
   .themes-link {
@@ -238,6 +279,16 @@ select:focus:enabled {
       @include update-text-color($default-player-and-link-hover);
       text-decoration: underline;
     }
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    z-index: 100;
+    right: -1px;
+    top: 30px;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -283,11 +334,118 @@ app-theme-selection a:hover {
 .home-text,
 .about-text {
   @include update-text-color($default-text-light);
+  font-size: 2.5rem;
 }
 
 .home-text > h1 {
   font-size: 6rem;
-  margin-top: -20px;
+  margin-top: -10px;
+}
+
+.home-text {
+  .player-text {
+    @include update-text-color($default-player-and-link-hover);
+  }
+  .monster-text {
+    @include update-text-color($default-monster);
+  }
+  .npc-text {
+    @include update-text-color($default-npc);
+  }
+  .function-text {
+    @include update-text-color($default-button-bg);
+    filter: brightness(80%);
+  }
+}
+
+/* -------------- */
+/* Responsiveness */
+/* -------------- */
+
+@media only screen and (max-width: 900px) {
+  .home-container {
+    h1 {
+      font-size: 5rem;
+    }
+
+    .home-text {
+      font-size: 2.25rem;
+    }
+  }
+
+  .extra-padding {
+    padding: calc(var(--spacing-l) * 1.5);
+  }
+
+  .main-nav {
+    .nav-column {
+      .logo {
+        font-size: 2.5rem;
+      }
+
+      .nav-menu {
+        a {
+          font-size: 1.75rem;
+        }
+      }
+    }
+  }
+
+  .dropdown-container .themes-link {
+    font-size: 1.75rem;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .home-container {
+    h1 {
+      font-size: 4rem;
+    }
+
+    .home-text {
+      font-size: 2rem;
+    }
+  }
+
+  .extra-padding {
+    padding: calc(var(--spacing-l) * 1.25);
+  }
+
+  .main-nav {
+    .nav-column {
+      .logo {
+        font-size: 2.25rem;
+      }
+
+      .nav-menu {
+        gap: var(--spacing-m);
+        justify-content: flex-start;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .home-container {
+    h1 {
+      font-size: 4rem;
+    }
+
+    .home-text {
+      font-size: 1.75rem;
+      gap: var(--spacing-m);
+    }
+  }
+
+  .extra-padding {
+    padding: calc(var(--spacing-l) * 1);
+  }
+
+  .main-nav {
+    .nav-column:first-of-type {
+      display: none;
+    }
+  }
 }
 
 /* ------------- */
@@ -355,7 +513,7 @@ app-theme-selection a:hover {
 
 .fantasy-theme {
   *:not(mat-icon) {
-    font-family: "Felipa", serif;
+    font-family: "Alice", serif;
     font-optical-sizing: auto;
     font-style: normal;
   }
@@ -369,7 +527,16 @@ app-theme-selection a:hover {
     }
 
     .nav-menu {
+      a {
+        @include update-text-color($fantasy-page-bg-nav-text-and-outline);
+      }
+
       a:hover {
+        @include update-text-color($fantasy-player-and-link-hover);
+        text-decoration: underline;
+      }
+
+      .active-link {
         @include update-text-color($fantasy-player-and-link-hover);
         text-decoration: underline;
       }
@@ -391,7 +558,25 @@ app-theme-selection a:hover {
     background-image: url("../src/app/images/bricks.jpg");
     background-size: cover;
     background-blend-mode: multiply;
-    @include update-background-color(#d3d5d8);
+    @include update-background-color(#a79780);
+    padding: calc(var(--spacing-l) * 1.5);
+    gap: calc(var(--spacing-l) * 1.5);
+  }
+
+  .main-modal {
+    @include update-border-colors(8px, $fantasy-bottomright, $fantasy-topleft);
+
+    .content-container {
+      @include update-border-colors(
+        8px,
+        $fantasy-topleft,
+        $fantasy-bottomright
+      );
+    }
+  }
+
+  .content-container {
+    @include update-border-colors(8px, $fantasy-topleft, $fantasy-bottomright);
   }
 
   button:hover:enabled:not(:active) {
@@ -443,6 +628,18 @@ app-theme-selection a:hover {
     @include update-background-color($fantasy-container-bg);
     @include update-text-color($fantasy-page-bg-nav-text-and-outline);
   }
+
+  .home-text {
+    .player-text {
+      @include update-text-color($fantasy-player-and-link-hover);
+    }
+    .monster-text {
+      @include update-text-color($fantasy-monster);
+    }
+    .npc-text {
+      @include update-text-color($fantasy-npc);
+    }
+  }
 }
 
 /* --------------- */
@@ -466,7 +663,16 @@ app-theme-selection a:hover {
     }
 
     .nav-menu {
+      a {
+        @include update-text-color($cyberpunk-page-bg-nav-text-and-outline);
+      }
+
       a:hover {
+        @include update-text-color($cyberpunk-player-and-link-hover);
+        text-decoration: underline;
+      }
+
+      .active-link {
         @include update-text-color($cyberpunk-player-and-link-hover);
         text-decoration: underline;
       }
@@ -489,6 +695,32 @@ app-theme-selection a:hover {
     background-size: cover;
     background-position: center bottom;
     @include update-background-color($cyberpunk-container-bg);
+    padding: calc(var(--spacing-l) * 1.5);
+    gap: calc(var(--spacing-l) * 1.5);
+  }
+
+  .main-modal {
+    @include update-border-colors(
+      8px,
+      $cyberpunk-bottomright,
+      $cyberpunk-topleft
+    );
+
+    .content-container {
+      @include update-border-colors(
+        8px,
+        $cyberpunk-topleft,
+        $cyberpunk-bottomright
+      );
+    }
+  }
+
+  .content-container {
+    @include update-border-colors(
+      8px,
+      $cyberpunk-topleft,
+      $cyberpunk-bottomright
+    );
   }
 
   button:hover:enabled:not(:active) {
@@ -540,6 +772,18 @@ app-theme-selection a:hover {
     @include update-background-color($cyberpunk-container-bg);
     @include update-text-color($cyberpunk-page-bg-nav-text-and-outline);
   }
+
+  .home-text {
+    .player-text {
+      @include update-text-color($cyberpunk-player-and-link-hover);
+    }
+    .monster-text {
+      @include update-text-color($cyberpunk-monster);
+    }
+    .npc-text {
+      @include update-text-color($cyberpunk-npc);
+    }
+  }
 }
 
 /* -------------- */
@@ -563,7 +807,16 @@ app-theme-selection a:hover {
     }
 
     .nav-menu {
+      a {
+        @include update-text-color($grimdark-page-bg-nav-text-and-outline);
+      }
+
       a:hover {
+        @include update-text-color($grimdark-player-and-link-hover);
+        text-decoration: underline;
+      }
+
+      .active-link {
         @include update-text-color($grimdark-player-and-link-hover);
         text-decoration: underline;
       }
@@ -585,8 +838,33 @@ app-theme-selection a:hover {
     background-image: url("../src/app/images/spiderweb.jpg");
     background-size: cover;
     background-position: center;
-
     @include update-background-color($grimdark-container-bg);
+    padding: calc(var(--spacing-l) * 1.5);
+    gap: calc(var(--spacing-l) * 1.5);
+  }
+
+  .main-modal {
+    @include update-border-colors(
+      8px,
+      $grimdark-bottomright,
+      $grimdark-topleft
+    );
+
+    .content-container {
+      @include update-border-colors(
+        8px,
+        $grimdark-topleft,
+        $grimdark-bottomright
+      );
+    }
+  }
+
+  .content-container {
+    @include update-border-colors(
+      8px,
+      $grimdark-topleft,
+      $grimdark-bottomright
+    );
   }
 
   button:hover:enabled:not(:active) {
@@ -624,21 +902,33 @@ app-theme-selection a:hover {
 
   .player {
     @include update-background-color($grimdark-player-and-link-hover);
-    @include update-text-color($default-text-light);
+    // @include update-text-color($default-text-light);
   }
 
   .monster {
     @include update-background-color($grimdark-monster);
-    @include update-text-color($default-text-light);
+    // @include update-text-color($default-text-light);
   }
 
   .npc {
     @include update-background-color($grimdark-npc);
-    @include update-text-color($default-text-light);
+    // @include update-text-color($default-text-light);
   }
 
   .default {
     @include update-background-color($grimdark-container-bg);
     @include update-text-color($grimdark-page-bg-nav-text-and-outline);
+  }
+
+  .home-text {
+    .player-text {
+      @include update-text-color($grimdark-player-and-link-hover);
+    }
+    .monster-text {
+      @include update-text-color($grimdark-monster);
+    }
+    .npc-text {
+      @include update-text-color($grimdark-npc);
+    }
   }
 }

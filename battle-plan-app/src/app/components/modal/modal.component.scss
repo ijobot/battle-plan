@@ -9,22 +9,12 @@
   .main-modal {
     position: absolute;
     height: fit-content;
-    width: fit-content;
+    width: max-content;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: var(--spacing-xl);
-    border-top: solid 8px rgb(120, 120, 120);
-    border-right: solid 8px rgb(50, 50, 50);
-    border-bottom: solid 8px rgb(50, 50, 50);
-    border-left: solid 8px rgb(120, 120, 120);
+    padding: var(--spacing-l);
 
-    .content-container {
-      border-top: solid 8px rgb(50, 50, 50);
-      border-right: solid 8px rgb(120, 120, 120);
-      border-bottom: solid 8px rgb(120, 120, 120);
-      border-left: solid 8px rgb(50, 50, 50);
-    }
     .content {
       height: 100%;
       display: flex;

@@ -1,21 +1,28 @@
 <div class="nav-wrapper">
   <div class="main-nav">
     <!-- Logo -->
-    <div class="column">
+    <div class="nav-column">
       <p class="logo">Battle Plan</p>
     </div>
 
     <!-- Home and About Navigation -->
-    <div class="column">
+    <div class="nav-column">
       <div class="nav-menu">
-        <a (click)="navigate('/')">Home</a>
-        <a (click)="navigate('/battlefield')">Battlefield</a>
-        <a (click)="navigate('/about')">About</a>
+        <a
+          routerLink="/"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Home</a
+        >
+        <a routerLink="/battlefield" routerLinkActive="active-link"
+          >Battlefield</a
+        >
+        <a routerLink="/about" routerLinkActive="active-link">About</a>
       </div>
     </div>
 
     <!-- Theme Selections -->
-    <div class="column">
+    <div class="nav-column">
       <app-dropdown></app-dropdown>
     </div>
   </div>
