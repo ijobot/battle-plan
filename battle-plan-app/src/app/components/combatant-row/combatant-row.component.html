@@ -3,7 +3,7 @@
   <div class="row-item">
     <button
       [ngClass]="combatant.type.toLowerCase()"
-      class="light"
+      class="light row-font-size"
       (click)="
         handleUpdateCombatant(modalText.updateName, modalContent.updateName)
       "
@@ -16,7 +16,7 @@
   <div class="row-item">
     <button
       [ngClass]="combatant.type.toLowerCase()"
-      class="light"
+      class="light row-font-size"
       (click)="
         handleUpdateCombatant(modalText.updateType, modalContent.updateType)
       "
@@ -29,7 +29,7 @@
   <div class="row-item" *ngIf="initiative$ | async">
     <button
       [ngClass]="combatant.type.toLowerCase()"
-      class="light"
+      class="light row-font-size"
       (click)="
         handleUpdateCombatant(modalText.updateScore, modalContent.updateScore)
       "

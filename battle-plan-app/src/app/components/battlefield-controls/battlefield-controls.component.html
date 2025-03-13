@@ -1,14 +1,14 @@
 <div class="main-button-menu">
   <!-- PLAYER/MONSTER/NPC BUTTONS -->
-  <div>
+  <div class="buttons-array combatant-add-buttons">
     <button
-      class="player light"
+      class="player light button-font-size"
       (click)="handleAddCombatantClick(combatantType.player, modalText.player)"
     >
       Add Player
     </button>
     <button
-      class="monster light"
+      class="monster light button-font-size"
       (click)="
         handleAddCombatantClick(combatantType.monster, modalText.monster)
       "
@@ -16,7 +16,7 @@
       Add Monster
     </button>
     <button
-      class="npc light"
+      class="npc light button-font-size"
       (click)="handleAddCombatantClick(combatantType.npc, modalText.npc)"
     >
       Add NPC
@@ -24,18 +24,35 @@
   </div>
 
   <!-- SAVE/LOAD/CLEAR BUTTONS -->
-  <div>
-    <button blurAfterClick (click)="handleToggleInitiative()">
+  <div class="buttons-array function-buttons">
+    <button
+      class="button-font-size"
+      blurAfterClick
+      (click)="handleToggleInitiative()"
+    >
       Initiative {{ (initiative$ | async) ? "Off" : "On" }}
     </button>
-    <button blurAfterClick (click)="handleSavePartyClick()">Save Party</button>
     <button
+      class="button-font-size"
+      blurAfterClick
+      (click)="handleSavePartyClick()"
+    >
+      Save Party
+    </button>
+    <button
+      class="button-font-size"
       blurAfterClick
       (click)="handleLoadSavedPartyClick()"
       [disabled]="!(savedParty$ | async)?.length"
     >
       Load Party
     </button>
-    <button blurAfterClick (click)="handleClearAllClick()">Clear All</button>
+    <button
+      class="button-font-size"
+      blurAfterClick
+      (click)="handleClearAllClick()"
+    >
+      Clear All
+    </button>
   </div>
 </div>
