@@ -17,22 +17,23 @@
 $default-text-dark: #1a1919;
 $default-text-light: #e4e4e4;
 // Button Colors
-$default-button-bg: #c9c9c9;
+$default-button-bg: #b3b3b3;
 
 /* -------------------- */
 /* Default Theme Mixins */
 /* -------------------- */
 
 // Combatant, Modal, and Row Colors
-$default-player-and-link-hover: #fcbc1b;
-$default-monster: #219ebc;
-$default-npc: #fb6400;
+$default-player-and-link-hover: #21aabc;
+$default-monster: #fb6400;
+$default-npc: #fcbc1b;
 // Container Colors
-$default-page-bg-nav-text-and-outline: #e6eeff;
+$default-page-bg-nav-text-and-outline: #e4d9ba;
 $default-container-bg: #023047;
 // Border Colors
-$default-topleft: #7a7a7a;
-$default-bottomright: #dadada;
+$default-topleft: #7e7462;
+$default-bottomright: #daccb8;
+$cartoon-line: #303030;
 
 /* -------------------- */
 /* Fantasy Theme Mixins */
@@ -254,6 +255,30 @@ select:focus:enabled {
   width: 100%;
   gap: var(--spacing-l);
 
+  .controls-tab {
+    position: absolute;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    line-height: 1;
+    height: 60px;
+    width: 50px;
+    top: 50%;
+    left: -28px;
+    transform: translateY(-50%);
+    z-index: 100;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    @include update-text-color($default-page-bg-nav-text-and-outline);
+    @include update-background-color($default-container-bg);
+    @include update-border-colors(
+      4px,
+      $default-page-bg-nav-text-and-outline,
+      $default-page-bg-nav-text-and-outline
+    );
+  }
+
   .controls-grid-item {
     padding: var(--spacing-m);
     height: 100%;
@@ -286,10 +311,6 @@ select:focus:enabled {
       gap: var(--spacing-l);
     }
   }
-}
-
-.row-font-size {
-  font-size: 2.5rem;
 }
 
 .main-nav {
@@ -358,7 +379,7 @@ app-theme-selection a:hover {
   text-decoration: underline;
 }
 
-.logo {
+.nav-logo {
   @include update-text-color($default-page-bg-nav-text-and-outline);
   font-size: 3rem;
   line-height: 1;
@@ -374,7 +395,8 @@ app-theme-selection a:hover {
 }
 
 .row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr min-content;
   padding: var(--spacing-m);
   border-top: 4px solid rgba(0, 0, 0, 0.2);
   border-right: 4px solid rgba(0, 0, 0, 0.5);
@@ -382,6 +404,36 @@ app-theme-selection a:hover {
   border-left: 4px solid rgba(0, 0, 0, 0.2);
   align-items: stretch;
   gap: 0.5em;
+
+  .row-item {
+    button {
+      width: fit-content;
+      height: 100%;
+      border: 2px solid transparent;
+      padding: 0 var(--spacing-l);
+
+      &:hover {
+        border: 2px solid var(--button-bg-border);
+      }
+    }
+  }
+
+  .row-delete {
+    min-width: max-content;
+
+    button {
+      display: flex;
+      padding: 0;
+
+      mat-icon {
+        font-weight: 900;
+      }
+    }
+  }
+}
+
+.row-font-size {
+  font-size: 2.5rem;
 }
 
 .center-text {
@@ -468,7 +520,7 @@ app-theme-selection a:hover {
 
   .main-nav {
     .nav-column {
-      .logo {
+      .nav-logo {
         font-size: 2.5rem;
       }
 
@@ -487,10 +539,16 @@ app-theme-selection a:hover {
 
 @media only screen and (max-width: 800px) {
   .battlefield-container {
-    grid-template-columns: none;
-    grid-template-rows: min-content 1fr;
+    position: relative;
+    grid-template-columns: 1fr;
+    grid-template-areas: "combat-list";
+
+    .controls-tab {
+      display: flex;
+    }
 
     .controls-grid-item {
+      display: none;
       margin: 0 auto;
 
       .main-button-menu {
@@ -504,6 +562,7 @@ app-theme-selection a:hover {
     }
 
     .combatants-grid-item {
+      grid-area: combat-list;
       padding: var(--spacing-m);
 
       .combatants {
@@ -511,6 +570,46 @@ app-theme-selection a:hover {
       }
     }
   }
+
+  // .battlefield-container {
+  //   display: grid;
+  //   grid-template-columns: min-content 1fr;
+  //   width: 100%;
+  //   gap: var(--spacing-l);
+
+  //   .controls-grid-item {
+  //     padding: var(--spacing-m);
+  //     height: 100%;
+
+  //     .main-button-menu {
+  //       display: grid;
+  //       grid-template-rows: 1fr min-content;
+  //       height: 100%;
+  //       justify-content: space-between;
+
+  //       .buttons-array {
+  //         display: flex;
+  //         flex-direction: column;
+  //         gap: var(--spacing-m);
+
+  //         button {
+  //           padding-left: var(--spacing-m);
+  //           padding-right: var(--spacing-m);
+  //           min-width: max-content;
+  //         }
+  //       }
+  //     }
+  //   }
+
+  //   .combatants-grid-item {
+  //     .combatants {
+  //       display: flex;
+  //       flex-direction: column;
+  //       min-width: 100%;
+  //       gap: var(--spacing-l);
+  //     }
+  //   }
+  // }
 }
 
 @media only screen and (max-width: 700px) {
@@ -534,21 +633,48 @@ app-theme-selection a:hover {
     font-size: 1.5rem;
   }
 
-  .row-font-size {
-    font-size: 2rem;
-  }
-
   .main-nav {
     .nav-column {
       width: fit-content;
 
-      .logo {
+      .nav-logo {
         font-size: 2.25rem;
       }
 
       .nav-menu {
         gap: var(--spacing-m);
         justify-content: flex-start;
+      }
+    }
+  }
+
+  .row {
+    display: grid;
+    gap: 0;
+    grid-template-columns: 1fr min-content;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+      "name delete"
+      "type ."
+      "score .";
+
+    .row-name {
+      grid-area: name;
+    }
+
+    .row-type {
+      grid-area: type;
+    }
+
+    .row-score {
+      grid-area: score;
+    }
+
+    .row-delete {
+      grid-area: delete;
+
+      button {
+        justify-self: end;
       }
     }
   }
@@ -583,7 +709,7 @@ app-theme-selection a:hover {
 
   .main-nav {
     .nav-column {
-      .logo {
+      .nav-logo {
         font-size: 2rem;
       }
 
@@ -644,6 +770,7 @@ app-theme-selection a:hover {
 
   .main-modal {
     @include update-background-color($default-page-bg-nav-text-and-outline);
+    @include update-border-colors(4px, $default-bottomright, $default-topleft);
   }
 
   .content-container:not(.player, .monster, .npc) {
@@ -686,7 +813,7 @@ app-theme-selection a:hover {
     @include update-background-color($fantasy-container-bg);
     @include update-text-color($fantasy-page-bg-nav-text-and-outline);
 
-    .logo {
+    .nav-logo {
       @include update-text-color($fantasy-page-bg-nav-text-and-outline);
     }
 
@@ -772,6 +899,10 @@ app-theme-selection a:hover {
     @include update-outline-color($fantasy-page-bg-nav-text-and-outline);
   }
 
+  .title-text {
+    @include update-text-color($fantasy-player-and-link-hover);
+  }
+
   .credit-text {
     @include update-text-color($fantasy-page-bg-nav-text-and-outline);
   }
@@ -822,7 +953,7 @@ app-theme-selection a:hover {
     @include update-background-color($cyberpunk-container-bg);
     @include update-text-color($cyberpunk-page-bg-nav-text-and-outline);
 
-    .logo {
+    .nav-logo {
       @include update-text-color($cyberpunk-page-bg-nav-text-and-outline);
     }
 
@@ -916,6 +1047,10 @@ app-theme-selection a:hover {
     @include update-outline-color($cyberpunk-page-bg-nav-text-and-outline);
   }
 
+  .title-text {
+    @include update-text-color($cyberpunk-player-and-link-hover);
+  }
+
   .credit-text {
     @include update-text-color($cyberpunk-page-bg-nav-text-and-outline);
   }
@@ -966,7 +1101,7 @@ app-theme-selection a:hover {
     @include update-background-color($grimdark-container-bg);
     @include update-text-color($grimdark-page-bg-nav-text-and-outline);
 
-    .logo {
+    .nav-logo {
       @include update-text-color($grimdark-page-bg-nav-text-and-outline);
     }
 
@@ -1060,23 +1195,24 @@ app-theme-selection a:hover {
     @include update-outline-color($grimdark-page-bg-nav-text-and-outline);
   }
 
+  .title-text {
+    @include update-text-color($grimdark-player-and-link-hover);
+  }
+
   .credit-text {
     @include update-text-color($grimdark-page-bg-nav-text-and-outline);
   }
 
   .player {
     @include update-background-color($grimdark-player-and-link-hover);
-    // @include update-text-color($default-text-light);
   }
 
   .monster {
     @include update-background-color($grimdark-monster);
-    // @include update-text-color($default-text-light);
   }
 
   .npc {
     @include update-background-color($grimdark-npc);
-    // @include update-text-color($default-text-light);
   }
 
   .default {

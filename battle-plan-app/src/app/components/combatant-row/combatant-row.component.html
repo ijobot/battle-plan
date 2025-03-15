@@ -1,6 +1,6 @@
 <div class="row" [ngClass]="combatant.type.toLowerCase()">
   <!-- COMBATANT NAME -->
-  <div class="row-item">
+  <div class="row-item row-name center-text">
     <button
       [ngClass]="combatant.type.toLowerCase()"
       class="light row-font-size"
@@ -13,7 +13,7 @@
   </div>
 
   <!-- COMBATANT TYPE -->
-  <div class="row-item">
+  <div class="row-item row-type center-text hidden">
     <button
       [ngClass]="combatant.type.toLowerCase()"
       class="light row-font-size"
@@ -26,7 +26,7 @@
   </div>
 
   <!-- COMBATANT SCORE -->
-  <div class="row-item" *ngIf="initiative$ | async">
+  <div class="row-item row-score center-text" *ngIf="initiative$ | async">
     <button
       [ngClass]="combatant.type.toLowerCase()"
       class="light row-font-size"
@@ -39,7 +39,7 @@
   </div>
 
   <!-- DELETE ROW -->
-  <div class="delete">
+  <div class="row-delete">
     <button
       (click)="handleRemoveCombatant(index)"
       aria-label="remove combatant from list"
